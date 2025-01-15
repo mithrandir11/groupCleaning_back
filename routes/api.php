@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ServiceController;
@@ -28,3 +29,8 @@ Route::get('/services/{slug}', [ServiceController::class, 'findBySlug']);
 Route::get('/service_type/{service_id}', [ServiceTypeController::class, 'findByServiceId']);
 
 Route::get('/service_options/{service_id}', [ServiceOptionController::class, 'findByServiceId']);
+
+Route::get('/addresses/userAddresses', [AddressController::class, 'getUserAddresses'])->middleware('auth:sanctum');
+Route::post('/addresses/create', [AddressController::class, 'createAddress'])->middleware('auth:sanctum');
+Route::post('/addresses/edit/{id}', [AddressController::class, 'editAddress'])->middleware('auth:sanctum');
+Route::post('/addresses/delete/{id}', [AddressController::class, 'deleteAddress'])->middleware('auth:sanctum');
