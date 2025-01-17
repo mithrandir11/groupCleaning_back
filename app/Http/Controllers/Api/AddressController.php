@@ -28,4 +28,27 @@ class AddressController extends Controller
         $address = Address::create($validated);
         return Response::success(null, $address);
     }
+
+
+    public function editAddress(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:addresses,id',
+            'full_address' => ['required','string'],
+            'city' => ['required','string'],
+            'state' => ['required','string'],
+        ]);
+
+        $address = Address::find($request->id);
+
+        $address->update([
+            'state' => $request->state,
+            'city' => $request->city,
+            'full_address' => $request->full_address,
+        ]);
+
+        return Response::success(null, $address);
+    }
+
+
 }

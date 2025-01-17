@@ -150,4 +150,10 @@ class AuthController extends Controller
         $user = User::find(Auth::id());
         if($user) return Response::success(null, $user);
     }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return Response::success('logged out');
+    }
 }
