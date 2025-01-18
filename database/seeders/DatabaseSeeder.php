@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            MenuSeeder::class,
             ArticleSeeder::class,
             ServiceTypeSeeder::class,
             ServiceTypeValueSeeder::class,

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ServiceOptionController;
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
+Route::get('/menus', [MenuController::class, 'index']);
+Route::get('/menus/{path}', [MenuController::class, 'show'])->where('path', '.*');
+
 
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/check-otp', [AuthController::class, 'checkOtp']);
