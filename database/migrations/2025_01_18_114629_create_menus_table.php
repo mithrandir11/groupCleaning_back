@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name'); // نام منو
             $table->string('slug')->unique(); // اسلاگ برای لینک
+            $table->string('full_path');
             $table->text('text')->nullable();
             $table->foreignId('parent_id')->nullable()->constrained('menus')->onDelete('cascade'); // والد منو
             $table->timestamps();

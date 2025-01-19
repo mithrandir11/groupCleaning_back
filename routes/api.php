@@ -3,11 +3,13 @@
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ServiceOptionController;
 use App\Http\Controllers\Api\ServiceTypeController;
+use App\Http\Controllers\Api\SuggestedPageController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 Route::get('/menus', [MenuController::class, 'index']);
 Route::get('/menus/{path}', [MenuController::class, 'show'])->where('path', '.*');
+
+Route::get('/faqs/{menuId}', [FaqController::class, 'index']);
+Route::get('/suggested-pages/{menuId}', [SuggestedPageController::class, 'index']);
 
 
 Route::post('/auth/login', [AuthController::class, 'login']);
