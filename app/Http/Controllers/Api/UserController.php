@@ -13,12 +13,14 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'family' => 'required|string',
             // 'email' => 'required|email|unique:users',
         ]);
 
         // try {
             Auth()->user()->update([
                 'name' => $request->name,
+                'family' => $request->family,
                 // 'email' => $request->email
             ]);
 

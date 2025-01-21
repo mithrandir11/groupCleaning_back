@@ -14,4 +14,10 @@ if (!function_exists('convertPersianToEnglishNumbers')) {
 
         return str_replace($persian, $english, $number);
     }
+
+    function isActiveRoute($routes): bool
+    {
+        $routes = is_array($routes) ? $routes : explode('|', $routes);
+        return in_array(request()->route()->getName(), $routes);
+    }
 }

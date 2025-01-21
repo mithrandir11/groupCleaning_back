@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
         Service::create([
             'title' => 'cleaning',
@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            RoleUserSeeder::class,
             MenuSeeder::class,
             ArticleSeeder::class,
             ServiceTypeSeeder::class,
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             ServiceOptionSeeder::class,
             ServiceOptionValueSeeder::class,
             AddressSeeder::class,
+            
         ]);
     }
 }
