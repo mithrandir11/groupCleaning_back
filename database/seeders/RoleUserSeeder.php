@@ -23,6 +23,7 @@ class RoleUserSeeder extends Seeder
         $customer = User::create([
             'name' => 'کیارش',
             'family' => 'آهنگی',
+            'cellphone' => '09390880651',
             'password' => Hash::make('password'),
         ]);
         // $customer->roles()->attach($customerRole);

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Management\AdminController;
 use App\Http\Controllers\Management\Auth\LoginController;
+use App\Http\Controllers\Management\ManageFinanceController;
+use App\Http\Controllers\Management\ManageResumeController;
 use App\Http\Controllers\Management\ManageUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/user-management', [ManageUserController::class, 'index'])->name('admin.users');
     Route::get('/admin/user-management/edit/{user}', [ManageUserController::class, 'edit'])->name('admin.users.edit');
     Route::post('/admin/user-management/update/{user}', [ManageUserController::class, 'update'])->name('admin.users.update');
+
+
+    Route::get('/admin/financial-management/pricing', [ManageFinanceController::class, 'indexPricing'])->name('admin.finance.pricing');
+
+
+
+    Route::get('/admin/resume-management', [ManageResumeController::class, 'index'])->name('admin.resumes');
+    // Route::get('/admin/financial-management/payments', [ManageFinanceController::class, 'index'])->name('admin.users');
+    // Route::get('/admin/financial-management/reports', [ManageFinanceController::class, 'index'])->name('admin.users');
 
     // Route::middleware(['role:admin'])->group(function () {
     //     Route::get('/admin/users', [AdminController::class, 'manageUsers'])->name('admin.users');

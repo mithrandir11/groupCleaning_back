@@ -76,7 +76,7 @@
             
 
             <li>
-                <div x-data="{ isOpen: {{ isActiveRoute(['admin.users', 'b', 'c']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
+                <div x-data="{ isOpen: {{ isActiveRoute(['admin.finance.pricing', 'b', 'c']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
                     <button @click.prevent="isOpen = !isOpen" type="button" class="flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
@@ -91,7 +91,7 @@
                     </button>
 
                     <div x-show="isOpen" x-cloak class="grid pr-12">
-                        <a href="/a" class="{{ isActiveRoute('admin.users') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >قیمت گذاری</a>
+                        <a href="{{route('admin.finance.pricing')}}" class="{{ isActiveRoute('admin.finance.pricing') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >قیمت گذاری</a>
                         <a href="/b" class="text-gray-500 text-sm font-medium leading-snug px-3 py-2 " >پرداخت</a>
                         <a href="/c" class="text-gray-500 text-sm font-medium leading-snug px-3 py-1 " >گزارش</a>
                     </div>
@@ -152,7 +152,7 @@
 
             <li>
                 <div class="flex-col gap-1 flex">
-                    <div class="flex-col flex bg-white rounded-lg p-3">
+                    <a href="{{route('admin.resumes')}}" class="@if (isActiveRoute(['admin.resumes'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#343C54" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
@@ -162,7 +162,7 @@
                             </div>
                             <h2 class="text-gray-500 text-sm font-medium leading-snug">مدیریت رزومه ها</h2>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </li>
 

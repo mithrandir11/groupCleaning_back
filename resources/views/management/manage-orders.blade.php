@@ -99,7 +99,7 @@
 @php
 function statusClass($status) {
     $statusMap = [
-        'در انتظار بررسی' => 'text-yellow-600',
+        'در انتظار بررسی' => 'text-yellow-500',
         'انصراف' => 'text-red-500',
         'در حال انجام کار' => 'text-blue-500',
         'اتمام' => 'text-green-500',
