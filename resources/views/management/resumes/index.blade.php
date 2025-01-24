@@ -25,6 +25,9 @@
                     وضعیت
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    درصد کمیسیون
+                </th>
+                <th scope="col" class="px-6 py-3">
                     تاریخ ثبت روزمه
                 </th>
 
@@ -49,19 +52,17 @@
                 <td class="px-6 py-4">
                     {{ $resume->user->cellphone }}
                 </td>
-                {{-- <td class="px-6 py-4">
-                    @foreach($user->roles as $role)
-                        {{ $role->name }}@if(!$loop->last), @endif
-                    @endforeach
-                </td> --}}
                 <td class="px-6 py-4 {{ statusClass($resume->status) }}">
                     {{ $resume->status }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $resume->commission_rate }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $resume->created_at }}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <a href=""  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                    <a href="{{route('admin.resumes.show',$resume)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                         مشاهده
                     </a>
                 </td>

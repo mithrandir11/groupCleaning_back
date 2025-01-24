@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('residence_document_image');
             $table->text('work_experience')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->decimal('commission_rate', 5, 2)->default(0.00);
             $table->timestamps();
         });
     }

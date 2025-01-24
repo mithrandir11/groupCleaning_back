@@ -17,16 +17,18 @@ class RoleUserSeeder extends Seeder
     {
         $adminRole = Role::create(['name' => 'admin']);
         $operatorRole = Role::create(['name' => 'operator']);
-        $customerRole = Role::create(['name' => 'customer']);
+        Role::create(['name' => 'customer']);
+        $workerRole = Role::create(['name' => 'worker']);
 
         // ایجاد مشتری
         $customer = User::create([
             'name' => 'کیارش',
             'family' => 'آهنگی',
             'cellphone' => '09390880651',
-            'password' => Hash::make('password'),
+            'email' => 'user1@example.com',
+            'password' => Hash::make('1111'),
         ]);
-        // $customer->roles()->attach($customerRole);
+        $customer->roles()->attach($workerRole);
 
 
 
@@ -41,7 +43,7 @@ class RoleUserSeeder extends Seeder
         $admin = new User([
             'name' => 'ادمین',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('1111'),
         ]);
         $admin->assignCustomerRole = false; 
         $admin->save();
@@ -60,7 +62,7 @@ class RoleUserSeeder extends Seeder
         $operator = new User([
             'name' => 'اپراتور',
             'email' => 'operator@example.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('1111'),
         ]);
         $operator->assignCustomerRole = false; 
         $operator->save();

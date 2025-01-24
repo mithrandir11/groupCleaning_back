@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Morilog\Jalali\CalendarUtils;
 
@@ -18,15 +19,22 @@ class Order extends Model
         parent::boot();
 
         static::creating(function ($order) {
-            $persianDate = CalendarUtils::strftime('Ymd', strtotime(now()));
+            // $persianDate = CalendarUtils::strftime('Ymd', strtotime(now()));
+            $persianDate = CalendarUtils::strftime('Ym', strtotime(now()));
             $uniqueNumber = str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT);
-            $order->order_code = "{$persianDate}-{$uniqueNumber}";
+            // $order->order_code = "{$persianDate}-{$uniqueNumber}";
+            $order->order_code = "{$persianDate}{$uniqueNumber}";
         });
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function worker()
+    {
+        return $this->belongsTo(User::class, 'worker_id');
     }
 
 
@@ -43,25 +51,45 @@ class Order extends Model
         return CalendarUtils::strftime('Y/m/d', strtotime($value));
     }
 
-    public function getStatusAttribute($status)
+    public function getDeliveryDateAttribute($value)
     {
-        switch ($status) {
-            case 'pending':
-                $status = 'در انتظار بررسی';
-                break;
-            case 'completed':
-                $status = 'اتمام';
-                break;
-            case 'processing':
-                $status = 'در حال انجام کار';
-                break;
-            case 'cancelled':
-                $status = 'انصراف';
-                break;
-        }
-        return $status;
+        // return CalendarUtils::strftime('Y/m/d', strtotime($value));
+        return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
     }
 
+    // public function getStatusAttribute($status)
+    // {
+    //     switch ($status) {
+    //         case 'pending':
+    //             $status = 'در انتظار بررسی';
+    //             break;
+    //         case 'completed':
+    //             $status = 'اتمام';
+    //             break;
+    //         case 'processing':
+    //             $status = 'در حال انجام کار';
+    //             break;
+    //         case 'cancelled':
+    //             $status = 'انصراف';
+    //             break;
+    //     }
+    //     return $status;
+    // }
+
+
+    public function getCommissionAmountAttribute()
+    {
+        return $this->total_amount * ($this->worker->resume->commission_rate / 100);
+    }
+
+    public function scopeSearch(Builder $query, string $search): Builder
+    {
+        return $query->where(function ($query) use ($search) {
+            $query->where('order_code', 'like', "%{$search}%");
+                //   ->orWhere('family', 'like', "%{$search}%")
+                //   ->orWhere('cellphone', 'like', "%{$search}%");
+        });
+    }
 
 
 }

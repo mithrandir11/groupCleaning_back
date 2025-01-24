@@ -27,7 +27,7 @@ class ResumeSeeder extends Seeder
             'national_card_image' => 'national_card.jpg',
             'residence_document_image' => 'residence_document.jpg',
             'work_experience' => '5 years of experience in cleaning.',
-            'status' => 'pending',
+            'status' => 'approved',
         ]);
 
         // ایجاد توانایی‌ها

@@ -55,18 +55,18 @@
                     {{ $order->order_code }}
                 </td>
                 <td class="px-6 py-4">
-                    _____
+                    {{ $order->worker?->id }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $order->user->cellphone }} - {{ $order->user->name }} 
                 </td>
                 <td class="px-6 py-4">
                     <div class="{{ statusClass($order->status) }}">
-                        {{ $order->status }}
+                        {{ __('fa.status.' . $order->status) }}
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    _____
+                    
                 </td>
                 <td class="px-6 py-4 text-center">
 
@@ -99,10 +99,10 @@
 @php
 function statusClass($status) {
     $statusMap = [
-        'در انتظار بررسی' => 'text-yellow-500',
-        'انصراف' => 'text-red-500',
-        'در حال انجام کار' => 'text-blue-500',
-        'اتمام' => 'text-green-500',
+        'pending' => 'text-yellow-500',
+        'canceled' => 'text-red-500',
+        'processing' => 'text-blue-500',
+        'completed' => 'text-green-500', 
     ];
     return $statusMap[$status] ?? 'text-gray-500'; // رنگ پیش‌فرض
 }

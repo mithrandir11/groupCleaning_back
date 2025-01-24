@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.disabled{
+    opacity: 70%;
+    cursor: not-allowed;
+    @apply bg-gray-100;
+}

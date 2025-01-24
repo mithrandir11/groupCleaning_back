@@ -66,6 +66,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function resume()
+    {
+        return $this->hasOne(Resume::class);
+    }
+
     // بررسی اینکه کاربر دارای نقش خاصی است
     public function hasRole($role)
     {

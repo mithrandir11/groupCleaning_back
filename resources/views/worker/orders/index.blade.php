@@ -1,10 +1,10 @@
-@extends('layouts.admin')
+@extends('layouts.worker')
 
 @section('content')
 <div class=" overflow-x-auto  grow">
     <div class="max-w-sm ">   
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
-        <form action="{{route('admin.users')}}" method="GET" class="relative">
+        <form action="{{route('worker.orders')}}" method="GET" class="relative">
             
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -22,22 +22,22 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    نام
+                    کد سفارش
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    نام خانوادگی
+                    وضعیت سفارش
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    شماره موبایل
+                    تاریخ واگذاری
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    گروه کاربری
+                    تاریخ تحویل
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    وضعیت
+                    دستمزد
                 </th>
-                <th scope="col" class="px-6 py-3 ">
-                    تاریخ ثبت نام
+                <th scope="col" class="px-6 py-3">
+                    توضیحات اپراتور
                 </th>
                 <th scope="col" class="px-6 py-3 text-center">
                     عملیات
@@ -46,33 +46,33 @@
         </thead>
         
         <tbody>
-            @foreach ($users as $index => $user)
+            @foreach ($orders as $index => $order)
             <tr x-data="{ open: false }" v-for="(order, index) in data.data" class="odd:bg-white  even:bg-gray-50  border-b ">
                 <td class="px-6 py-4">
-                    {{ $user->name }}
+                    {{ $order->order_code }}
+                </td>
+                <td class="px-6 py-4 {{ statusClass($order->status) }}">
+                    {{ __('fa.status.' . $order->status) }}
+                    {{-- {{ $order->status }} --}}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $user->family }}
+                    {{ $order->delivery_date }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $user->cellphone }}
+                    {{ $order->delivery_date }}
                 </td>
                 <td class="px-6 py-4">
-                    @foreach($user->roles as $role)
-                        {{ __('fa.roles.' . $role->name) }}
-                    @endforeach
-                </td>
-                <td class="px-6 py-4 {{ statusClass($user->status) }}">
-                    {{ $user->status }}
+                    {{ number_format($order->commission_amount) }} <span class="text-xs">تومان</span>
                 </td>
                 <td class="px-6 py-4">
-                    {{ $user->created_at }}
+                    {{ $order->operator_notes }}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <a href="{{route('admin.users.edit', $user)}}"  type="button" class="bg-yellow-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
-                        ویرایش
+                    <a href="/"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                        مشاهده
                     </a>
                 </td>
+
             </tr>
             @endforeach        
            
@@ -80,10 +80,12 @@
     </table>  
 
     <div class="mt-4">
-        {{ $users->links() }}
+        {{ $orders->links() }}
     </div>      
 
 </div>
+
+
 
                                             
 @endsection
@@ -91,15 +93,12 @@
 
 @php
 function statusClass($status) {
-    return $status == 'فعال' ? 'text-green-500' : 'text-red-500';
-    // $statusMap = [
-    //     'در انتظار بررسی' => 'text-yellow-600',
-    //     'انصراف' => 'text-red-500',
-    //     'در حال انجام کار' => 'text-blue-500',
-    //     'اتمام' => 'text-green-500',
-    // ];
-    // return $statusMap[$status] ?? 'text-gray-500'; // رنگ پیش‌فرض
+    $statusMap = [
+        'pending' => 'text-yellow-500',
+        'canceled' => 'text-red-500',
+        'processing' => 'text-blue-500',
+        'completed' => 'text-green-500', 
+    ];
+    return $statusMap[$status] ?? 'text-gray-500'; // رنگ پیش‌فرض
 }
 @endphp
-
-
