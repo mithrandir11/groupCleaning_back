@@ -30,7 +30,12 @@ Route::middleware(['auth'])->group(function () {
     //panel worker
     Route::middleware(['role:worker'])->group(function(){
         Route::get('/worker/dashboard', [WorkerController::class, 'dashboard'])->name('worker.dashboard');
+
         Route::get('/worker/orders', [WorkerOrderController::class, 'index'])->name('worker.orders');
+        Route::get('/worker/orders/show/{order}', [WorkerOrderController::class, 'show'])->name('worker.orders.show');
+        Route::post('/worker/orders/{order}/accept', [WorkerOrderController::class, 'acceptOrder'])->name('worker.orders.accept');
+        Route::post('/worker/orders/{order}/complete', [WorkerOrderController::class, 'completeOrder'])->name('worker.orders.complete');
+
         Route::get('/worker/financial', [WorkerFinancialController::class, 'index'])->name('worker.finance');
     });
     

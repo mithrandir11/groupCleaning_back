@@ -46,29 +46,29 @@
         </thead>
         
         <tbody>
-            @foreach ($orders as $index => $order)
+            @foreach ($worker_orders as $index => $worker_order)
             <tr x-data="{ open: false }" v-for="(order, index) in data.data" class="odd:bg-white  even:bg-gray-50  border-b ">
                 <td class="px-6 py-4">
-                    {{ $order->order_code }}
+                    {{ $worker_order->order->order_code }}
                 </td>
-                <td class="px-6 py-4 {{ statusClass($order->status) }}">
-                    {{ __('fa.status.' . $order->status) }}
+                <td class="px-6 py-4 {{ statusClass($worker_order->status) }}">
+                    {{ __('fa.status.' . $worker_order->status) }}
                     {{-- {{ $order->status }} --}}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $order->delivery_date }}
+                    {{ $worker_order->created_at }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $order->delivery_date }}
+                    
                 </td>
-                <td class="px-6 py-4">
-                    {{ number_format($order->commission_amount) }} <span class="text-xs">تومان</span>
-                </td>
-                <td class="px-6 py-4">
+                {{-- <td class="px-6 py-4">
+                    {{ number_format($worker_order->order->commission_amount) }} <span class="text-xs">تومان</span>
+                </td> --}}
+                {{-- <td class="px-6 py-4">
                     {{ $order->operator_notes }}
-                </td>
+                </td> --}}
                 <td class="px-6 py-4 text-center">
-                    <a href="/"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                    <a href="{{route('worker.orders.show', $worker_order->order)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                         مشاهده
                     </a>
                 </td>
@@ -80,7 +80,7 @@
     </table>  
 
     <div class="mt-4">
-        {{ $orders->links() }}
+        {{ $worker_orders->links() }}
     </div>      
 
 </div>

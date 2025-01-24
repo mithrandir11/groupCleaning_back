@@ -10,8 +10,8 @@ return [
 
     'status' => [
         'pending' => 'در انتظار بررسی',
-        // 'assigned' => 'واگذار شده',
-        // 'accepted' => 'قبول شده',
+        'assigned' => 'ارجاع به متخصص',
+        'accepted' => 'قبول متخصص',
         'processing' => 'در حال انجام کار',
         'completed' => 'تکمیل شده',
         'canceled' => 'لغو شده',

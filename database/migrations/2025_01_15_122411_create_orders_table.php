@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('service_type');
             $table->json('service_options');
             $table->text('extra_details')->nullable();
-            $table->text('operator_notes')->nullable();
+            // $table->text('operator_notes')->nullable();
             $table->dateTime('delivery_date')->nullable();
             $table->string('total_amount')->nullable();
             $table->date('selected_date');
