@@ -77,6 +77,11 @@ class User extends Authenticatable
         return $this->roles->contains('name', $role);
     }
 
+    // public function orders()
+    // {
+    //     return $this->belongsToMany(Order::class, 'worker_orders', 'worker_id', 'order_id');
+    // }
+
 
     public function getStatusAttribute($status)
     {
@@ -97,6 +102,8 @@ class User extends Authenticatable
     {
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
     }
+
+    
 
     public function scopeSearch(Builder $query, string $search): Builder
     {

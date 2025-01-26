@@ -68,7 +68,7 @@
                     {{ $order->operator_notes }}
                 </td> --}}
                 <td class="px-6 py-4 text-center">
-                    <a href="{{route('worker.orders.show', $worker_order->order)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                    <a href="{{route('worker.orders.show', $worker_order)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                         مشاهده
                     </a>
                 </td>

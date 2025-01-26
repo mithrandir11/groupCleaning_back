@@ -3,6 +3,7 @@
 use App\Http\Controllers\Management\AdminController;
 use App\Http\Controllers\Management\Auth\LoginController;
 use App\Http\Controllers\Management\ManageFinanceController;
+use App\Http\Controllers\Management\ManageOrderController;
 use App\Http\Controllers\Management\ManageResumeController;
 use App\Http\Controllers\Management\ManageUserController;
 use App\Http\Controllers\Management\ManageWorkerController;
@@ -32,9 +33,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/worker/dashboard', [WorkerController::class, 'dashboard'])->name('worker.dashboard');
 
         Route::get('/worker/orders', [WorkerOrderController::class, 'index'])->name('worker.orders');
-        Route::get('/worker/orders/show/{order}', [WorkerOrderController::class, 'show'])->name('worker.orders.show');
-        Route::post('/worker/orders/{order}/accept', [WorkerOrderController::class, 'acceptOrder'])->name('worker.orders.accept');
-        Route::post('/worker/orders/{order}/complete', [WorkerOrderController::class, 'completeOrder'])->name('worker.orders.complete');
+        Route::get('/worker/orders/show/{worker_order}', [WorkerOrderController::class, 'show'])->name('worker.orders.show');
+        Route::post('/worker/orders/{worker_order}/accept', [WorkerOrderController::class, 'acceptOrder'])->name('worker.orders.accept');
+        Route::post('/worker/orders/{worker_order}/complete', [WorkerOrderController::class, 'completeOrder'])->name('worker.orders.complete');
 
         Route::get('/worker/financial', [WorkerFinancialController::class, 'index'])->name('worker.finance');
     });
@@ -45,10 +46,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('/admin/order-management', [AdminController::class, 'manageOrders'])->name('admin.orders');
-    Route::post('/admin/order-management/findByOrderCode', [AdminController::class, 'findOrderByOrderCode'])->name('admin.orders.findOrderByOrderCode');
-
-    
+    Route::get('/admin/order-management', [ManageOrderController::class, 'index'])->name('admin.orders');
+    Route::get('/admin/order-management/show/{order}', [ManageOrderController::class, 'show'])->name('admin.orders.show');
+    Route::get('/admin/order-management/show/{order}/assign-to-workers', [ManageOrderController::class, 'showAssignOrderToWorker'])->name('admin.orders.assignOrderToWorker.show');
+    Route::post('/admin/order-management/show/{order}/assign-to-workers', [ManageOrderController::class, 'assignToWorkers'])->name('admin.orders.assignToWorkers');
+    Route::post('/admin/order-management/{order}/accept', [ManageOrderController::class, 'acceptOrder'])->name('admin.orders.accept');
+    Route::post('/admin/order-management/{order}/setPrice', [ManageOrderController::class, 'setOrderPrice'])->name('admin.orders.setPrice');
+    // Route::post('/admin/order-management/findByOrderCode', [ManageOrderController::class, 'findOrderByOrderCode'])->name('admin.orders.findOrderByOrderCode');
     
     Route::get('/admin/user-management', [ManageUserController::class, 'index'])->name('admin.users');
     Route::get('/admin/user-management/edit/{user}', [ManageUserController::class, 'edit'])->name('admin.users.edit');

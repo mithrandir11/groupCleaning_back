@@ -4,7 +4,7 @@
 <div class=" overflow-x-auto  grow">
     <div class="max-w-sm ">   
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
-        <form action="{{route('admin.orders.findOrderByOrderCode')}}" method="POST" class="relative">
+        <form action="/" method="POST" class="relative">
             @csrf
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -55,7 +55,9 @@
                     {{ $order->order_code }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $order->worker?->id }}
+                    @foreach ($order->workers as $worker)
+                        {{$worker->id}} ,
+                    @endforeach
                 </td>
                 <td class="px-6 py-4">
                     {{ $order->user->cellphone }} - {{ $order->user->name }} 
@@ -69,7 +71,13 @@
                     
                 </td>
                 <td class="px-6 py-4 text-center">
+                    <a href="{{route('admin.orders.show', $order)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                        مشاهده
+                    </a>
+                </td>
+                {{-- <td class="px-6 py-4 text-center">
 
+                    
                   
                     <x-utils.modal title="جزییات سفارش" btnTitle="نمایش" btnColor="bg-blue-200">
                         <div>
@@ -77,7 +85,7 @@
                         </div>
                     </x-modal>
 
-                </td>
+                </td> --}}
             </tr>
             @endforeach        
            

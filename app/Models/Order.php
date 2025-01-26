@@ -32,9 +32,14 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function worker()
+    // public function workers()
+    // {
+    //     return $this->hasMany(User::class, 'worker_id');
+    // }
+
+    public function workers()
     {
-        return $this->belongsTo(User::class, 'worker_id');
+        return $this->belongsToMany(User::class, 'worker_orders', 'order_id', 'worker_id');
     }
 
 
@@ -77,10 +82,10 @@ class Order extends Model
     // }
 
 
-    public function getCommissionAmountAttribute()
-    {
-        return $this->total_amount * ($this->worker->resume->commission_rate / 100);
-    }
+    // public function getCommissionAmountAttribute()
+    // {
+    //     return $this->total_amount * ($this->worker->resume->commission_rate / 100);
+    // }
 
     public function scopeSearch(Builder $query, string $search): Builder
     {

@@ -20,4 +20,8 @@ if (!function_exists('convertPersianToEnglishNumbers')) {
         $routes = is_array($routes) ? $routes : explode('|', $routes);
         return in_array(request()->route()->getName(), $routes);
     }
+
+    function feeCalculation($total_amount, $commission_rate){
+        return $total_amount * ($commission_rate / 100);
+    }
 }

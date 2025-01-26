@@ -15,25 +15,31 @@ class AdminController extends Controller
         return view('management.dashboard');
     }
 
-    public function manageOrders()
-    {
-        $orders = Order::latest()->paginate(10);
-        return view('management.manage-orders', compact('orders'));
-    }
 
-    public function findOrderByOrderCode(Request $request){
-        $request->validate([
-            'order_code' => 'nullable|string'
-        ]);
+    // public function manageOrders()
+    // {
+    //     $orders = Order::latest()->paginate(10);
+    //     return view('management.manage-orders', compact('orders'));
+    // }
 
-        if($request->order_code){
-            $orders = Order::where('order_code', 'like', "%{$request->order_code}%")->paginate(10);
-        }else{
-            return redirect(route('admin.orders'));
-        }
+
+    // public function show(Order $order){
+    //     return view('management.orders.show', compact('order'));
+    // }
+
+    // public function findOrderByOrderCode(Request $request){
+    //     $request->validate([
+    //         'order_code' => 'nullable|string'
+    //     ]);
+
+    //     if($request->order_code){
+    //         $orders = Order::where('order_code', 'like', "%{$request->order_code}%")->paginate(10);
+    //     }else{
+    //         return redirect(route('admin.orders'));
+    //     }
         
-        return view('management.manage-orders', compact('orders'));
-    }
+    //     return view('management.manage-orders', compact('orders'));
+    // }
 
     
 

@@ -36,35 +36,26 @@ class WorkerOrderController extends Controller
         return view('worker.orders.index', compact('worker_orders'));
     }
 
-    public function show(Order $order){
-        return view('worker.orders.show', compact('order'));
+    public function show(WorkerOrder $worker_order){
+        $order = $worker_order->order;
+        $commission_amount = auth()->user()->resume?->commission_rate ?? 0;
+        return view('worker.orders.show', compact('order', 'worker_order','commission_amount'));
     }
 
-    public function acceptOrder(Order $order){
+    public function acceptOrder(WorkerOrder $worker_order){
         // $this->authorize('accept', $order);
 
-        // DB::transaction(function () use ($order) {
-            // به‌روزرسانی وضعیت سفارش
-            $order->update([
-                'status' => 'accepted',
-                // 'worker_id' => auth()->id(), // اختصاص سفارش به نیروی کار فعلی
-            ]);
-        // });
-
+        $worker_order->update([
+            'status' => 'accepted',
+        ]);
         return redirect()->route('worker.orders')->with('success', 'سفارش با موفقیت قبول شد.');
     }
 
-    public function completeOrder(Order $order){
+    public function completeOrder(WorkerOrder $worker_order){
         // $this->authorize('accept', $order);
-
-        // DB::transaction(function () use ($order) {
-            // به‌روزرسانی وضعیت سفارش
-            $order->update([
-                'status' => 'completed',
-                // 'worker_id' => auth()->id(), // اختصاص سفارش به نیروی کار فعلی
-            ]);
-        // });
-
+        $worker_order->update([
+            'status' => 'completed',
+        ]);
         return redirect()->route('worker.orders')->with('success', 'سفارش با موفقیت قبول شد.');
     }
 }
