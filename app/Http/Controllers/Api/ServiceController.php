@@ -9,6 +9,11 @@ use Illuminate\Http\Response;
 
 class ServiceController extends Controller
 {
+    public function index(){
+        $services = Service::get();
+        return Response::success(null, $services);   
+    }
+
     public function findBySlug($slug){
         $service = Service::where('slug', $slug)
             ->first();

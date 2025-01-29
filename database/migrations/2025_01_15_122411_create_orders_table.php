@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('order_code', 25)->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('service_id')->nullable()->constrained('services')->onDelete('set null');
             // $table->foreignId('worker_id')->nullable()->constrained('users')->onDelete('set null'); // نیروی کار
-            $table->enum('status', ['pending', 'assigned', 'accepted', 'completed', 'finalized', 'canceled'])->default('pending');
+            // $table->enum('status', ['pending', 'assigned', 'accepted', 'completed', 'finalized', 'canceled'])->default('pending');
+            $table->enum('status', ['pending', 'processing', 'completed', 'canceled'])->default('pending');
             // $table->enum('status', ['pending', 'completed', 'cancelled', 'processing'])->default('pending');
             $table->string('service_type');
             $table->json('service_options');

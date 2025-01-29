@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ResumeController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ServiceOptionController;
 use App\Http\Controllers\Api\ServiceTypeController;
@@ -38,6 +39,7 @@ Route::put('/users/info/edit', [UserController::class, 'editInfo'])->middleware(
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/{id}', [ArticleController::class, 'show']);
 
+Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/services/{slug}', [ServiceController::class, 'findBySlug']);
 
 Route::get('/service_type/{service_id}', [ServiceTypeController::class, 'findByServiceId']);
@@ -53,3 +55,6 @@ Route::post('/addresses/edit', [AddressController::class, 'editAddress'])->middl
 
 Route::post('/orders/store', [OrderController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/orders/userOrders', [OrderController::class, 'getUserOrders'])->middleware('auth:sanctum');
+
+
+Route::post('/resume/store', [ResumeController::class, 'store']);

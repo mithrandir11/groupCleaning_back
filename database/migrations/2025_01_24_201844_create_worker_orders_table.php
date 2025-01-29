@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->foreignId('worker_id')->constrained('users')->onDelete('cascade');
-            $table->enum('status', ['pending', 'assigned', 'accepted', 'completed', 'canceled'])->default('pending');
+            $table->enum('status', ['pending', 'accepted', 'completed', 'canceled'])->default('pending');
             $table->text('operator_notes')->nullable();
             $table->dateTime('assigned_at')->nullable(); // تاریخ واگذاری
             $table->dateTime('delivered_at')->nullable(); // تاریخ تحویل

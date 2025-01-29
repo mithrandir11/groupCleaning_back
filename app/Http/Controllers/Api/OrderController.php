@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ class OrderController extends Controller
     {
        
         $validated = $request->validate([
+            'service_id' => 'required|exists:services,id',
             'serviceType' => 'required|string|max:255',
             'serviceOptions' => 'required|array',
             'extraDetails' => 'nullable|string',
@@ -31,6 +33,7 @@ class OrderController extends Controller
             $fullAddress = $validated['address']['state'] . '-' . $validated['address']['city'] . '-' . $validated['address']['full_address'];
             $order = Order::create([
                 'user_id' => auth()->id(),
+                'service_id' => $validated['service_id'],
                 'service_type' => $validated['serviceType'],
                 'service_options' => $validated['serviceOptions'],
                 'extra_details' => $validated['extraDetails'] ?? null,
@@ -56,7 +59,20 @@ class OrderController extends Controller
             })
             ->paginate(10);
 
-        return Response::success(null, $orders);
+        // return response()->json(OrderResource::collection($orders));
+
+        return Response::success(null, OrderResource::collection($orders) ,
+            $pagination = [
+            'total' => $orders->total(),
+            'per_page' => $orders->perPage(),
+            'current_page' => $orders->currentPage(),
+            'last_page' => $orders->lastPage(),
+            'from' => $orders->firstItem(),
+            'to' => $orders->lastItem(),
+            ],
+        );
+
+        // return Response::success(null, $orders );
 
         // return response()->json($orders);
     }

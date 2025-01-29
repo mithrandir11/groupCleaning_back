@@ -96,14 +96,14 @@
 
                 <td class="px-6 py-4 text-center">
                     @if ($order->workers->contains($worker->id))
-                    <button type="submit" disabled class="bg-green-100 py-1 px-4 text-green-600 text-xs rounded-full font-semibold transition-all duration-200">
+                    <button type="submit" disabled class="bg-green-100 py-1 px-4 text-green-600 opacity-70 text-xs rounded-full font-semibold transition-all duration-200">
                         ارجاع شده
                     </button>
                     @else
                     <form action="{{route('admin.orders.assignToWorkers', $order)}}" method="POST">
                         @csrf
                         <input type="hidden" name="worker_id" value="{{$worker->id}}">
-                        <button type="submit" class="inline-flex gap-x-2  bg-blue-200 hover:bg-blue-300 duration-200 border border-blue-300  py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                        <button type="submit" class="inline-flex gap-x-2  bg-gray-200 hover:bg-gray-300 border border-gray-300  py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                             ارجاع
                             <svg class="" width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
                         </button>

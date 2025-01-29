@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/order-management/show/{order}/assign-to-workers', [ManageOrderController::class, 'showAssignOrderToWorker'])->name('admin.orders.assignOrderToWorker.show');
     Route::post('/admin/order-management/show/{order}/assign-to-workers', [ManageOrderController::class, 'assignToWorkers'])->name('admin.orders.assignToWorkers');
     Route::post('/admin/order-management/{order}/accept', [ManageOrderController::class, 'acceptOrder'])->name('admin.orders.accept');
+    Route::post('/admin/order-management/{order}/complete', [ManageOrderController::class, 'completeOrder'])->name('admin.orders.complete');
     Route::post('/admin/order-management/{order}/setPrice', [ManageOrderController::class, 'setOrderPrice'])->name('admin.orders.setPrice');
     // Route::post('/admin/order-management/findByOrderCode', [ManageOrderController::class, 'findOrderByOrderCode'])->name('admin.orders.findOrderByOrderCode');
     

@@ -10,11 +10,15 @@ return [
 
     'status' => [
         'pending' => 'در انتظار بررسی',
+        'completed' => 'اتمام شده',
+        'processing' => 'در حال انجام کار',
+        'canceled' => 'لغو شده',
+        
         'assigned' => 'ارجاع به متخصص',
         'accepted' => 'قبول متخصص',
-        'processing' => 'در حال انجام کار',
-        'completed' => 'تکمیل شده',
-        'canceled' => 'لغو شده',
+      
+        
+     
 
         'paid' => 'پرداخت شده',
         'unpaid' => 'پرداخت نشده',

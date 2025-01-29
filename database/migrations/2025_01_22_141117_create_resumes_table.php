@@ -22,9 +22,9 @@ return new class extends Migration
             $table->text('address');
             $table->string('cooperation_with_other_company')->nullable();
             // $table->string('other_company_name')->nullable();
-            $table->string('personal_image');
-            $table->string('national_card_image');
-            $table->string('residence_document_image');
+            $table->string('personal_image')->nullable();
+            $table->string('national_card_image')->nullable();
+            $table->string('residence_document_image')->nullable();
             $table->text('work_experience')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->decimal('commission_rate', 5, 2)->default(0.00);
