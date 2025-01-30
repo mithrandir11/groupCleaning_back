@@ -103,6 +103,12 @@ class User extends Authenticatable
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
     }
 
+
+    public function CommissionAmount($total_amount)
+    {
+        return $total_amount * ($this->resume->commission_rate / 100);
+    }
+
     
 
     public function scopeSearch(Builder $query, string $search): Builder

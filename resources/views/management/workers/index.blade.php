@@ -119,10 +119,10 @@
 @endsection
 
 
-@php
+{{-- @php
 function statusClass($status) {
     return $status == 'فعال' ? 'text-green-500' : 'text-red-500';
 }
-@endphp
+@endphp --}}
 
 

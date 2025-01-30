@@ -53,20 +53,21 @@
                 </td>
                 <td class="px-6 py-4 {{ statusClass($worker_order->status) }}">
                     {{ __('fa.status.' . $worker_order->status) }}
-                    {{-- {{ $order->status }} --}}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $worker_order->created_at }}
+                    {{ $worker_order->assigned_at }}
                 </td>
                 <td class="px-6 py-4">
-                    
+                    {{ $worker_order->delivered_at }}
                 </td>
-                {{-- <td class="px-6 py-4">
-                    {{ number_format($worker_order->order->commission_amount) }} <span class="text-xs">تومان</span>
-                </td> --}}
-                {{-- <td class="px-6 py-4">
-                    {{ $order->operator_notes }}
-                </td> --}}
+                <td class="px-6 py-4">
+                    {{ number_format(feeCalculation($worker_order->order->total_amount, $commission_amount)) }} <span class="text-xs">تومان</span>
+                </td>
+               
+               
+                <td class="px-6 py-4">
+                    {{ $worker_order->operator_notes }}
+                </td>
                 <td class="px-6 py-4 text-center">
                     <a href="{{route('worker.orders.show', $worker_order)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                         مشاهده
@@ -91,7 +92,7 @@
 @endsection
 
 
-@php
+{{-- @php
 function statusClass($status) {
     $statusMap = [
         'pending' => 'text-yellow-500',
@@ -101,4 +102,4 @@ function statusClass($status) {
     ];
     return $statusMap[$status] ?? 'text-gray-500'; // رنگ پیش‌فرض
 }
-@endphp
+@endphp --}}

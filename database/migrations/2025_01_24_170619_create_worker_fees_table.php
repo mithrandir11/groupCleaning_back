@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->onDelete('cascade'); // سفارش
             $table->foreignId('worker_id')->constrained('users')->onDelete('cascade'); // نیروی کار
             $table->string('amount'); // مبلغ حق‌الزحمه
+            $table->string('penalty_amount')->nullable(); // مبلغ جریمه
             $table->text('description')->nullable();
             $table->timestamps();
         });

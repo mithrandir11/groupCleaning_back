@@ -24,4 +24,18 @@ if (!function_exists('convertPersianToEnglishNumbers')) {
     function feeCalculation($total_amount, $commission_rate){
         return $total_amount * ($commission_rate / 100);
     }
+
+
+    
+    function statusClass($status) {
+        $statusMap = [
+            'pending' => 'text-yellow-500',
+            'canceled' => 'text-red-500',
+            'processing' => 'text-blue-500',
+            'accepted' => 'text-blue-500',
+            'completed' => 'text-green-500', 
+        ];
+        return $statusMap[$status] ?? null; 
+    }
+
 }

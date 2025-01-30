@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\Events\OrderCompleted;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\WorkerFee;
 use Illuminate\Http\Request;
 
 class ManageOrderController extends Controller
@@ -46,6 +48,8 @@ class ManageOrderController extends Controller
         $order->update([
             'status' => 'completed',
         ]);
+
+        OrderCompleted::dispatch($order);
         return redirect()->route('admin.orders')->with('success', 'سفارش با موفقیت قبول شد.');
     }
 
@@ -101,13 +105,15 @@ class ManageOrderController extends Controller
         // dd($request->all());
 
         $request->validate([
-            'worker_id' => 'required|exists:users,id', // id نیروی کار باید در جدول users وجود داشته باشد
+            'worker_id' => 'required|exists:users,id',
+            'operator_notes' => 'nullable|string',
         ]);
 
         // ارجاع سفارش به نیروی کار
         $order->workers()->attach($request->worker_id, [
-            // 'assigned_at' => now(),
+            'assigned_at' => now(),
             'status' => 'pending',
+            'operator_notes' => $request->operator_notes,
         ]);
 
         $order->status = 'processing';

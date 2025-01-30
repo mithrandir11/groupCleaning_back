@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Event::listen(OrderCompleted::class, CreateWorkerFee::class);
+
         Response::macro('success', function($message, $data, $pagination = null) {
             $response = [
                 'status' => 1,

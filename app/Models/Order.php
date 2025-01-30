@@ -39,7 +39,9 @@ class Order extends Model
 
     public function workers()
     {
-        return $this->belongsToMany(User::class, 'worker_orders', 'order_id', 'worker_id');
+        // return $this->belongsToMany(User::class, 'worker_orders', 'order_id', 'worker_id');
+        return $this->belongsToMany(User::class, 'worker_orders', 'order_id', 'worker_id')
+        ->withPivot(['status']);
     }
 
 

@@ -63,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
 
    
     Route::get('/admin/financial-management/pricing', [ManageFinanceController::class, 'indexPricing'])->name('admin.finance.pricing'); //قیمت گذاری
+    Route::get('/admin/financial-management/pricing/show/{fee}', [ManageFinanceController::class, 'showPricing'])->name('admin.finance.pricing.show'); //قیمت گذاری نمایش
+    Route::post('/admin/financial-management/pricing/applyPenalty/{fee}', [ManageFinanceController::class, 'applyPenalty'])->name('admin.finance.pricing.applyPenalty'); //قیمت گذاری نمایش
 
     Route::get('/admin/resume-management', [ManageResumeController::class, 'index'])->name('admin.resumes');
     Route::get('/admin/resume-management/show/{resume}', [ManageResumeController::class, 'show'])->name('admin.resumes.show');

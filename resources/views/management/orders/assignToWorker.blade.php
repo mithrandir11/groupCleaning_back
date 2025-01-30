@@ -100,14 +100,33 @@
                         ارجاع شده
                     </button>
                     @else
-                    <form action="{{route('admin.orders.assignToWorkers', $order)}}" method="POST">
+
+                    <x-utils.modal title="توضیحات اپراتور" btnTitle="ارجاع" btnColor="bg-gray-200">
+                        <div>
+                            <form action="{{route('admin.orders.assignToWorkers', $order)}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="worker_id" value="{{$worker->id}}">
+                                <textarea name="operator_notes" rows="4" class="w-full p-5 rounded-lg  bg-gray-50 text-gray-700 duration-200 border border-gray-200  focus:border-blue-300 outline-none text-lg"></textarea>
+                                
+                                <button type="submit" class="mr-auto mt-3 flex items-center gap-x-2 text-white bg-blue-500 hover:bg-blue-600 duration-200 rounded-lg text-sm px-4 py-2 ">
+                                    ارجاع
+                                    <svg class="fill-white" width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg> 
+                                </button>
+                                {{-- <button type="submit" class="inline-flex gap-x-2  bg-gray-200 hover:bg-gray-300 border border-gray-300  py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                                    ارجاع
+                                    <svg class="" width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+                                </button> --}}
+                            </form>
+                        </div>
+                    </x-modal>
+                    {{-- <form action="{{route('admin.orders.assignToWorkers', $order)}}" method="POST">
                         @csrf
                         <input type="hidden" name="worker_id" value="{{$worker->id}}">
                         <button type="submit" class="inline-flex gap-x-2  bg-gray-200 hover:bg-gray-300 border border-gray-300  py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                             ارجاع
                             <svg class="" width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
                         </button>
-                    </form>
+                    </form> --}}
                     @endif
                    
                     
@@ -139,12 +158,5 @@
 
                                             
 @endsection
-
-
-@php
-function statusClass($status) {
-    return $status == 'فعال' ? 'text-green-500' : 'text-red-500';
-}
-@endphp
 
 

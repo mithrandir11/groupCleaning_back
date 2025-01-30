@@ -6,7 +6,7 @@
     <p class="mb-6 text-xl font-bold text-gray-600 border-b pb-3">{{$order->service_type}}</p>
 
     @foreach($order->service_options as $key => $value)
-        <li class="mb-8 list-inside">
+        <li class="mb-8 list-none">
             <strong>{{ $key }}:</strong>
             @if(is_array($value))
                 <ul class="pr-5 space-y-2 pt-2">
@@ -20,42 +20,42 @@
         </li>
     @endforeach
 
-    <li class="mb-6 list-inside">
+    <li class="mb-6 list-none">
         <strong>توضیحات مشتری :</strong>
         {{ $order->extra_details }}
     </li>
 
-    <li class="mb-6 list-inside">
+    <li class="mb-6 list-none">
         <strong>توضیحات مدیریت :</strong>
         {{ $order->operator_notes }}
     </li>
 
-    <li class="mb-6 list-inside">
+    <li class="mb-6 list-none">
         <strong>توضیحات مدیریت :</strong>
         {{ $order->operator_notes }}
     </li>
 
-    <li class="mb-6 list-inside">
+    <li class="mb-6 list-none">
         <strong>تاریخ درخواستی :</strong>
         {{ $order->selected_date }}
     </li>
 
-    <li class="mb-6 list-inside">
+    <li class="mb-6 list-none">
         <strong>ساعت درخواستی :</strong>
         {{ $order->selected_time }}
     </li>
 
-    <li class="mb-6 list-inside">
+    <li class="mb-6 list-none">
         <strong>شماره تماس مشتری :</strong>
         {{ $order->contact_number }}
     </li>
 
-    <li class="mb-6 list-inside">
+    <li class="mb-6 list-none">
         <strong>آدرس مشتری :</strong>
         {{ $order->address }}
     </li>
 
-    <li class="mb-6 list-inside ">
+    <li class="mb-6 list-none ">
         <strong>دستمزد :</strong>
         <span class="text-2xl">{{ number_format(feeCalculation($order->total_amount, $commission_amount)) }}</span> تومان
     </li>
@@ -65,7 +65,7 @@
 
        
         @switch($worker_order->status)
-            @case('assigned')
+            @case('pending')
                 <form action="{{route('worker.orders.accept', $worker_order)}}" method="POST">
                     @csrf
                     <button type="submit" class="flex items-center gap-x-2 text-white bg-green-500 hover:bg-green-600 duration-200 rounded-lg text-sm px-4 py-2 ">

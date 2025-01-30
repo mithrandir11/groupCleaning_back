@@ -33,7 +33,9 @@ class WorkerOrderController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('worker.orders.index', compact('worker_orders'));
+        $commission_amount = auth()->user()->resume?->commission_rate ?? 0;
+
+        return view('worker.orders.index', compact('worker_orders','commission_amount'));
     }
 
     public function show(WorkerOrder $worker_order){
@@ -55,6 +57,7 @@ class WorkerOrderController extends Controller
         // $this->authorize('accept', $order);
         $worker_order->update([
             'status' => 'completed',
+            'delivered_at' => now(),
         ]);
         return redirect()->route('worker.orders')->with('success', 'سفارش با موفقیت قبول شد.');
     }

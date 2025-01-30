@@ -103,7 +103,7 @@
 @endsection
 
 
-@php
+{{-- @php
 function statusClass($status) {
     $statusMap = [
         'pending' => 'text-yellow-500',
@@ -113,4 +113,4 @@ function statusClass($status) {
     ];
     return $statusMap[$status] ?? 'text-gray-500'; // رنگ پیش‌فرض
 }
-@endphp
+@endphp --}}

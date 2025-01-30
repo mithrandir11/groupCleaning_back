@@ -70,7 +70,7 @@
 @endsection
 
 
-@php
+{{-- @php
 function statusClass($status) {
     return $status == 'paid' ? 'text-green-500' : 'text-red-500';
     // $statusMap = [
@@ -81,4 +81,4 @@ function statusClass($status) {
     // ];
     // return $statusMap[$status] ?? 'text-gray-500'; // رنگ پیش‌فرض
 }
-@endphp
+@endphp --}}

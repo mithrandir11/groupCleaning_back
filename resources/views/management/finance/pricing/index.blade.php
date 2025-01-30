@@ -52,7 +52,7 @@
                     {{ $fee->worker->id }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $fee->amount }}
+                    {{ number_format($fee->amount) }} <span class="text-xs">تومان</span>
                 </td>
                 <td class="px-6 py-4">
                     {{ $fee->created_at }}
@@ -61,7 +61,7 @@
                     {{ $fee->description }}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <a href="/"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                    <a href="{{route('admin.finance.pricing.show', $fee)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                         مشاهده
                     </a>
                 </td>
