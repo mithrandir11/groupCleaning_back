@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
     <title>{{ $title ?? 'پنل مدیریت' }}</title>
     @vite('resources/css/app.css')
@@ -12,7 +13,7 @@
      
 
 
-     <div class="px-1 lg:px-0 container mx-auto  ">
+     <div class="px-1 lg:px-4   ">
         {{-- @if ($showHeader ?? true)
         <Header/>
         @endif --}}
@@ -25,6 +26,8 @@
 
         
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
+        @stack('scripts')
         {{-- <Footer/> --}}
     </div>
 </body>

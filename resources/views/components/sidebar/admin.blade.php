@@ -89,7 +89,7 @@
             
 
             <li>
-                <div x-data="{ isOpen: {{ isActiveRoute(['admin.finance.pricing', 'b', 'c']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
+                <div x-data="{ isOpen: {{ isActiveRoute(['admin.finance.pricing', 'admin.finance.payments', 'c']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
                     <button @click.prevent="isOpen = !isOpen" type="button" class="flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
@@ -105,7 +105,7 @@
 
                     <div x-show="isOpen" x-cloak class="grid pr-12">
                         <a href="{{route('admin.finance.pricing')}}" class="{{ isActiveRoute('admin.finance.pricing') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >قیمت گذاری</a>
-                        <a href="/b" class="text-gray-500 text-sm font-medium leading-snug px-3 py-2 " >پرداخت</a>
+                        <a href="{{route('admin.finance.payments')}}" class="{{ isActiveRoute('admin.finance.payments') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >پرداخت ها</a>
                         <a href="/c" class="text-gray-500 text-sm font-medium leading-snug px-3 py-1 " >گزارش</a>
                     </div>
                 </div>

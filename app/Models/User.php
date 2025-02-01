@@ -111,13 +111,38 @@ class User extends Authenticatable
 
     
 
+    // public function scopeSearch(Builder $query, string $search): Builder
+    // {
+    //     return $query->where(function ($query) use ($search) {
+    //         $query->where('name', 'like', "%{$search}%")
+    //               ->orWhere('family', 'like', "%{$search}%")
+    //               ->orWhere('cellphone', 'like', "%{$search}%");
+    //     });
+    // }
+
     public function scopeSearch(Builder $query, string $search): Builder
     {
         return $query->where(function ($query) use ($search) {
-            $query->where('name', 'like', "%{$search}%")
-                  ->orWhere('family', 'like', "%{$search}%")
-                  ->orWhere('cellphone', 'like', "%{$search}%");
+            // اگر مقدار جستجو عددی است و با "0" شروع نمی‌شود، شرط id را اضافه می‌کنیم
+            if (substr($search, 0, 1) == '0') {
+                $query->where('cellphone', 'like', "%{$search}%");
+                // $query->orWhere('id', (int)$search);
+            }else{
+                $query
+                ->where('id',$search)
+                ->orWhere('name', 'like', "%{$search}%")
+                ->orWhere('family', 'like', "%{$search}%");
+                
+            }
+            
+            // همیشه روی نام، نام خانوادگی و شماره تماس جستجو شود
+            
         });
     }
+
+
+
+
+
     
 }

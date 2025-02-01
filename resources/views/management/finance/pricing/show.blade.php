@@ -3,7 +3,7 @@
 @section('content')
 <div class="grow">
     
-    <div class="space-y-8 space-y-reverse">
+    <div class="space-y-8 ">
 
         <div>
             <label for="order_code" class="block mb-2 text-sm font-medium text-gray-900">کد سفارش</label>

@@ -32,6 +32,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
     // public function workers()
     // {
     //     return $this->hasMany(User::class, 'worker_id');
