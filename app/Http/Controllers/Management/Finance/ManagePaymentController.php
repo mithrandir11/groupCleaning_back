@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Management\Finance;
 
+use App\Events\PaymentCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
+use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Morilog\Jalali\Jalalian;
@@ -61,6 +63,26 @@ class ManagePaymentController extends Controller
 
         Payment::create($validated);
 
+        $report = Report::firstOrCreate(['worker_id' => $request->worker_id]);
+        $total_paid_amount = $report->totalPaidAmountForWorker($request->worker_id);
+        $total_credit_amount = $report->totalCreditAmountForWorker($request->worker_id);
+
+        $status = 'balanced';
+        if($total_credit_amount > 0){
+            $status = 'creditor';
+        }elseif($total_credit_amount < 0){
+            $status = 'debtor';
+        }
+
+        $report->update([
+            'total_paid_amount' => $total_paid_amount,
+            'total_credit_amount' => $total_credit_amount,
+            'status' => $status,
+        ]);
+        // $report->increment('total_paid_amount', $request->amount);
+        // $report->decrement('total_credit_amount', $request->amount);
+        // PaymentCreated::dispatch($order);
+
         return redirect()->route('admin.finance.payments')->with('success', 'پرداخت با موفقیت ثبت شد.');
     }
 
@@ -82,6 +104,27 @@ class ManagePaymentController extends Controller
         $validated['payment_date'] = $gregorianDate;
 
         $payment->update($validated);
+
+        $report = Report::firstOrCreate(['worker_id' => $payment->worker_id]);
+        $total_paid_amount = $report->totalPaidAmountForWorker($payment->worker_id);
+        $total_credit_amount = $report->totalCreditAmountForWorker($payment->worker_id);
+
+        $status = 'balanced';
+        if($total_credit_amount > 0){
+            $status = 'creditor';
+        }elseif($total_credit_amount < 0){
+            $status = 'debtor';
+        }
+
+        $report->update([
+            'total_paid_amount' => $total_paid_amount,
+            'total_credit_amount' => $total_credit_amount,
+            'status' => $status,
+        ]);
+
+        // $report = Report::firstOrCreate(['worker_id' => $payment->worker_id]);
+        // $report->increment('total_paid_amount', $request->amount);
+        // $report->decrement('total_credit_amount', $request->amount);
 
         return redirect()->route('admin.finance.payments')->with('success', 'پرداخت با موفقیت ثبت شد.');
     }

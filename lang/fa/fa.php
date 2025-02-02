@@ -18,7 +18,9 @@ return [
         'accepted' => 'قبول متخصص',
       
         
-     
+        'balanced' => 'صاف',
+        'creditor' => 'بستانکار',
+        'debtor' => 'بدهکار',
 
         'paid' => 'پرداخت شده',
         'unpaid' => 'پرداخت نشده',

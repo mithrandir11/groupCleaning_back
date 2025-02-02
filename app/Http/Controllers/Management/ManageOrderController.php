@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Events\OrderCompleted;
 use App\Http\Controllers\Controller;
+use App\Listeners\CreateReport;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\WorkerFee;

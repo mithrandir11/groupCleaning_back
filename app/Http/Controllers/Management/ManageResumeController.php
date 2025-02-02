@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
+use App\Models\Report;
 use App\Models\Resume;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -55,6 +56,7 @@ class ManageResumeController extends Controller
             // if (!$resume->user->roles->contains($workerRole)) {
             //     $resume->user->roles()->attach($workerRole);
             // }
+            Report::create(['worker_id'=>$resume->user->id]);
 
             DB::commit();
 

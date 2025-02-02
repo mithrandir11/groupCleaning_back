@@ -3,6 +3,7 @@
 use App\Http\Controllers\Management\AdminController;
 use App\Http\Controllers\Management\Auth\LoginController;
 use App\Http\Controllers\Management\Finance\ManagePaymentController;
+use App\Http\Controllers\Management\Finance\ManageReportController;
 use App\Http\Controllers\Management\ManageFinanceController;
 use App\Http\Controllers\Management\ManageOrderController;
 use App\Http\Controllers\Management\ManageResumeController;
@@ -73,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/financial-management/payments/edit/{payment}', [ManagePaymentController::class, 'edit'])->name('admin.finance.payments.edit');
     Route::post('/admin/financial-management/payments/store', [ManagePaymentController::class, 'store'])->name('admin.finance.payments.store');
     Route::post('/admin/financial-management/payments/update/{payment}', [ManagePaymentController::class, 'update'])->name('admin.finance.payments.update');
+
+    Route::get('/admin/financial-management/reports', [ManageReportController::class, 'index'])->name('admin.finance.reports');
 
 
     Route::get('/admin/resume-management', [ManageResumeController::class, 'index'])->name('admin.resumes');
