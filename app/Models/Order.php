@@ -69,6 +69,12 @@ class Order extends Model
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
     }
 
+    public function getCreatedAtAttribute($value)
+    {
+        // return CalendarUtils::strftime('Y/m/d', strtotime($value));
+        return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
+    }
+
     // public function getStatusAttribute($status)
     // {
     //     switch ($status) {

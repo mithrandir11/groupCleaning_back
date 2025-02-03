@@ -7,15 +7,36 @@
     {{-- <div class="space-y-3"> --}}
         {{-- <p>کل مبلغ پرداخت شده : <span class="font-bold text-lg">{{$totalPaid}}</span></p>
         <p>کل مبلغ پرداخت نشده : <span class="font-bold text-lg">{{$totalUnpaid}}</span></p> --}}
-        <p>وضعیت تراز مالی : <span class="font-bold text-lg">{{$balance}}</span></p>
+        {{-- <p>وضعیت تراز مالی : <span class="font-bold text-lg">{{$balance}}</span></p> --}}
     {{-- </div> --}}
 
     
     
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 mt-10">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
             <tr>
                 <th scope="col" class="px-6 py-3">
+                    تاریخ
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    کد متخصص
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   کل تسویه شده
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    کل درآمد
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    کل بستانکاری
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    وضعیت متخصص
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    عملیات
+                </th>
+                {{-- <th scope="col" class="px-6 py-3">
                     تاریخ
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -29,38 +50,43 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     شرح
-                </th>
+                </th> --}}
             </tr>
         </thead>
         
         <tbody>
-            @foreach ($payments as $index => $payment)
             <tr class="odd:bg-white  even:bg-gray-50  border-b ">
                 <td class="px-6 py-4">
-                    {{ $payment->created_at }}
+                    {{ $report->updated_at }} 
                 </td>
                 <td class="px-6 py-4">
-                    {{ number_format($payment->amount) }} <span class="text-xs">تومان</span>
+                    {{ $report->worker_id }} 
                 </td>
                 <td class="px-6 py-4">
-                    سفارش <span class="mr-1">{{ $payment->order->order_code }}#</span>    
-                </td>
-                <td class="px-6 py-4 {{ statusClass($payment->status) }}">
-                    {{ __('fa.status.' . $payment->status) }}
+                    {{ number_format($report->total_paid_amount) }} <span class="text-xs">تومان</span>
                 </td>
                 <td class="px-6 py-4">
-                    {{ $payment->description }}
-                </td>        
-
-            </tr>
-            @endforeach        
+                    {{ number_format($report->total_income_amount) }} <span class="text-xs">تومان</span>
+                </td>
+                <td class="px-6 py-4">
+                    {{ number_format($report->total_credit_amount) }} <span class="text-xs">تومان</span>
+                </td>
+                <td class="px-6 py-4">
+                    {{ __('fa.status.'.$report->status) }}
+                </td>
+                <td class="px-6 py-4 text-center">
+                    <a href="{{route('worker.finance.details')}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                        مشاهده جزئیات
+                    </a>
+                </td>
+            </tr>      
            
         </tbody>
     </table>  
 
-    <div class="mt-4">
+    {{-- <div class="mt-4">
         {{ $payments->links() }}
-    </div>      
+    </div>       --}}
 
 </div>
 

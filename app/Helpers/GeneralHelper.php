@@ -34,6 +34,9 @@ if (!function_exists('convertPersianToEnglishNumbers')) {
             'processing' => 'text-blue-500',
             'accepted' => 'text-blue-500',
             'completed' => 'text-green-500', 
+
+            'paid' => 'text-green-500', 
+            'fee' => 'text-yellow-500',
         ];
         return $statusMap[$status] ?? null; 
     }

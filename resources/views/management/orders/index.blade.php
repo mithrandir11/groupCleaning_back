@@ -54,9 +54,10 @@
                     {{ $order->order_code }}
                 </td>
                 <td class="px-6 py-4">
-                    @foreach ($order->workers as $worker)
-                        {{$worker->id}} ,
-                    @endforeach
+                    {{  $order->workers->pluck('id')->implode(' - ') }}
+                    {{-- @foreach ($order->workers as $worker)
+                        {{$worker->id}} -
+                    @endforeach --}}
                 </td>
                 <td class="px-6 py-4">
                     {{ $order->user->cellphone }} - {{ $order->user->name }} 

@@ -2,10 +2,47 @@
 
 @section('content')
 <div class="grow">
-    
-    <p class="mb-6 text-xl font-bold text-gray-600 border-b pb-3">{{$order->service_type}}</p>
 
-    @foreach($order->service_options as $key => $value)
+    <div class="grid grid-cols-3 border border-gray-300 divide-x divide-x-reverse rounded-t-lg text-center">
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">وضعیت سفارش</p>
+          <p class="{{ statusClass($order->status) }}">{{ __('fa.status.'.$order->status) }}</p>
+        </div>
+    
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">کد سفارش</p>
+          <p>{{ $order->order_code }}</p>
+        </div>
+    
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">کد متخصص</p>
+          <p> {{  $order->workers->pluck('id')->implode(' - ') }}</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-3 border-x border-gray-300 divide-x divide-x-reverse  text-center">
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">قیمت خدمات</p>
+          <span class="">{{ number_format(feeCalculation($order->total_amount, $commission_amount)) }}</span> تومان
+        </div>
+    
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">تاریخ ثبت سفارش مشتری</p>
+          <p>{{ $order->created_at }}</p>
+        </div>
+    
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">زمان و تاریخ درخواستی</p>
+          <p>{{ $order->selected_date }} - {{ $order->selected_time }}</p>
+        </div>
+    </div>
+
+    <div class="border border-gray-300 px-6 py-8">
+        <strong>توضیحات مشتری : </strong> {{ $order->extra_details }}
+    </div>
+
+    <div class="border border-y-0 border-gray-300 px-6 py-4">
+        @foreach($order->service_options as $key => $value)
         <li class="mb-8 list-none">
             <strong>{{ $key }}:</strong>
             @if(is_array($value))
@@ -18,47 +55,21 @@
                 {{ $value }}
             @endif
         </li>
-    @endforeach
+        @endforeach
+        <li class="mb-6 list-none">
+            <strong>شماره تماس مشتری :</strong>
+            {{ $order->contact_number }}
+        </li>
+    
+        <li class="mb-6 list-none">
+            <strong>آدرس مشتری :</strong>
+            {{ $order->address }}
+        </li>
+    </div>
 
-    <li class="mb-6 list-none">
-        <strong>توضیحات مشتری :</strong>
-        {{ $order->extra_details }}
-    </li>
-
-    <li class="mb-6 list-none">
-        <strong>توضیحات مدیریت :</strong>
-        {{ $order->operator_notes }}
-    </li>
-
-    <li class="mb-6 list-none">
-        <strong>توضیحات مدیریت :</strong>
-        {{ $order->operator_notes }}
-    </li>
-
-    <li class="mb-6 list-none">
-        <strong>تاریخ درخواستی :</strong>
-        {{ $order->selected_date }}
-    </li>
-
-    <li class="mb-6 list-none">
-        <strong>ساعت درخواستی :</strong>
-        {{ $order->selected_time }}
-    </li>
-
-    <li class="mb-6 list-none">
-        <strong>شماره تماس مشتری :</strong>
-        {{ $order->contact_number }}
-    </li>
-
-    <li class="mb-6 list-none">
-        <strong>آدرس مشتری :</strong>
-        {{ $order->address }}
-    </li>
-
-    <li class="mb-6 list-none ">
-        <strong>دستمزد :</strong>
-        <span class="text-2xl">{{ number_format(feeCalculation($order->total_amount, $commission_amount)) }}</span> تومان
-    </li>
+    <div class="border  border-gray-300 px-6 py-8 rounded-b-lg">
+        <strong>توضیحات اپراتور :</strong> {{ $worker_order->operator_notes }}
+    </div>
    
     
     <div class="flex justify-end items-center gap-x-3 mt-16 ">

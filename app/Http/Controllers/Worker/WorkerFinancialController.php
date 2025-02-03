@@ -3,25 +3,39 @@
 namespace App\Http\Controllers\Worker;
 
 use App\Http\Controllers\Controller;
+use App\Models\Report;
 use App\Models\WorkerPayment;
 use Illuminate\Http\Request;
 
 class WorkerFinancialController extends Controller
 {
     public function index(){
-        $user_id = auth()->user()->id;
+        $report = Report::where('worker_id',auth()->user()->id)->first();
+        return view('worker.finance.index', compact('report'));
+    }
+
+    public function details(){
+        $worker = auth()->user();
+        $payments = $worker->payments->map(function ($payment) {
+            return [
+                'date' => $payment->created_at,
+                'amount' => $payment->amount,
+                'description' => $payment->description,
+                'type' => 'paid', 
+            ];
+        });
+
+        $fees = $worker->fees->map(function ($fee) {
+            return [
+                'date' => $fee->created_at,
+                'amount' => $fee->amount,
+                'description' => $fee->description,
+                'type' => 'fee', 
+            ];
+        });
         
-        $payments = WorkerPayment::with('worker')
-            ->where('worker_id', $user_id)
-            ->latest()
-            ->paginate(10);
+        $details = $fees->merge($payments)->sortByDesc('data');
 
-        $totalPaid = WorkerPayment::where('worker_id', $user_id)->where('status', 'paid')->sum('amount');
-        $totalUnpaid = WorkerPayment::where('worker_id', $user_id)->where('status', 'unpaid')->sum('amount');
-        $balance = $totalUnpaid > 0 ? 'بستانکار' : 'صاف';
-
-            // dd($payments);
-
-        return view('worker.finance.index', compact('payments','balance','totalPaid','totalUnpaid'));
+        return view('worker.finance.details', compact('details'));
     }
 }

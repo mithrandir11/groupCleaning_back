@@ -26,6 +26,11 @@ class WorkerOrder extends Model
 
     public function getDeliveredAtAttribute($value)
     {
-        return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
+        if($value){
+            return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
+        }else{
+            return null;
+        }
+        
     }
 }

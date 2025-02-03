@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/worker/orders/{worker_order}/complete', [WorkerOrderController::class, 'completeOrder'])->name('worker.orders.complete');
 
         Route::get('/worker/financial', [WorkerFinancialController::class, 'index'])->name('worker.finance');
+        Route::get('/worker/financial/details', [WorkerFinancialController::class, 'details'])->name('worker.finance.details');
     });
     
 
@@ -76,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/financial-management/payments/update/{payment}', [ManagePaymentController::class, 'update'])->name('admin.finance.payments.update');
 
     Route::get('/admin/financial-management/reports', [ManageReportController::class, 'index'])->name('admin.finance.reports');
+    Route::get('/admin/financial-management/reports/details/{worker}', [ManageReportController::class, 'details'])->name('admin.finance.reports.details');
 
 
     Route::get('/admin/resume-management', [ManageResumeController::class, 'index'])->name('admin.resumes');

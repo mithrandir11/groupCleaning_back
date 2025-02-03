@@ -71,6 +71,16 @@ class User extends Authenticatable
         return $this->hasOne(Resume::class);
     }
 
+    public function fees()
+    {
+        return $this->hasMany(WorkerFee::class, 'worker_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'worker_id');
+    }
+
     // بررسی اینکه کاربر دارای نقش خاصی است
     public function hasRole($role)
     {
