@@ -5,6 +5,7 @@ use App\Http\Controllers\Management\Auth\LoginController;
 use App\Http\Controllers\Management\Finance\ManagePaymentController;
 use App\Http\Controllers\Management\Finance\ManageReportController;
 use App\Http\Controllers\Management\ManageFinanceController;
+use App\Http\Controllers\Management\ManageMenuController;
 use App\Http\Controllers\Management\ManageMessageController;
 use App\Http\Controllers\Management\ManageNotificationController;
 use App\Http\Controllers\Management\ManageOrderController;
@@ -36,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     //panel worker
     Route::middleware(['role:worker'])->group(function(){
         Route::get('/worker/dashboard', [WorkerController::class, 'dashboard'])->name('worker.dashboard');
+        Route::get('/worker/info', [WorkerController::class, 'info'])->name('worker.info');
+        Route::post('/worker/info/update', [WorkerController::class, 'update'])->name('worker.info.update');
 
         Route::get('/worker/orders', [WorkerOrderController::class, 'index'])->name('worker.orders');
         Route::get('/worker/orders/show/{worker_order}', [WorkerOrderController::class, 'show'])->name('worker.orders.show');
@@ -55,6 +58,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
+    Route::get('/admin/menu-management', [ManageMenuController::class, 'index'])->name('admin.menu');
+    Route::get('/admin/menu-management/create', [ManageMenuController::class, 'create'])->name('admin.menu.create');
+    Route::post('/admin/menu-management/store', [ManageMenuController::class, 'store'])->name('admin.menu.store');
+    Route::delete('/admin/menu-management/delete/{menu}', [ManageMenuController::class, 'destroy'])->name('admin.menu.delete');
+    Route::get('/admin/menu-management/edit/{menu}', [ManageMenuController::class, 'edit'])->name('admin.menu.edit');
+    Route::PUT('/admin/menu-management/update/{menu}', [ManageMenuController::class, 'update'])->name('admin.menu.update');
+
+
+    
     Route::get('/admin/message-management', [ManageMessageController::class, 'index'])->name('admin.messages');
     Route::get('/admin/message-management/show/{conversation}', [ManageMessageController::class, 'show'])->name('admin.messages.show');
     Route::post('/admin/message-management/store/{conversation}', [ManageMessageController::class, 'store'])->name('admin.messages.store');
