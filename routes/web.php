@@ -5,12 +5,15 @@ use App\Http\Controllers\Management\Auth\LoginController;
 use App\Http\Controllers\Management\Finance\ManagePaymentController;
 use App\Http\Controllers\Management\Finance\ManageReportController;
 use App\Http\Controllers\Management\ManageFinanceController;
+use App\Http\Controllers\Management\ManageMessageController;
+use App\Http\Controllers\Management\ManageNotificationController;
 use App\Http\Controllers\Management\ManageOrderController;
 use App\Http\Controllers\Management\ManageResumeController;
 use App\Http\Controllers\Management\ManageUserController;
 use App\Http\Controllers\Management\ManageWorkerController;
 use App\Http\Controllers\Worker\WorkerController;
 use App\Http\Controllers\Worker\WorkerFinancialController;
+use App\Http\Controllers\Worker\WorkerMessageController;
 use App\Http\Controllers\Worker\WorkerOrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/worker/financial', [WorkerFinancialController::class, 'index'])->name('worker.finance');
         Route::get('/worker/financial/details', [WorkerFinancialController::class, 'details'])->name('worker.finance.details');
+
+        Route::get('/worker/messages', [WorkerMessageController::class, 'index'])->name('worker.messages');
+        Route::post('/worker/messages/store', [WorkerMessageController::class, 'store'])->name('worker.messages.store');
     });
     
 
@@ -48,6 +54,18 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::get('/admin/message-management', [ManageMessageController::class, 'index'])->name('admin.messages');
+    Route::get('/admin/message-management/show/{conversation}', [ManageMessageController::class, 'show'])->name('admin.messages.show');
+    Route::post('/admin/message-management/store/{conversation}', [ManageMessageController::class, 'store'])->name('admin.messages.store');
+
+
+
+    Route::get('/admin/notification-management', [ManageNotificationController::class, 'index'])->name('admin.notifications');
+    Route::get('/admin/notification-management/show/send', [ManageNotificationController::class, 'showSend'])->name('admin.notifications.show.send');
+    Route::post('/admin/notification-management/send', [ManageNotificationController::class, 'send'])->name('admin.notifications.send');
+
+
 
     Route::get('/admin/order-management', [ManageOrderController::class, 'index'])->name('admin.orders');
     Route::get('/admin/order-management/show/{order}', [ManageOrderController::class, 'show'])->name('admin.orders.show');
@@ -86,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/resume-management/{resume}/approve', [ManageResumeController::class, 'approve'])->name('admin.resumes.approve');
     Route::post('/admin/resume-management/{resume}/reject', [ManageResumeController::class, 'reject'])->name('admin.resumes.reject');
     Route::delete('/admin/resume-management/{resume}', [ManageResumeController::class, 'destroy'])->name('admin.resumes.destroy');
+
 
 
 

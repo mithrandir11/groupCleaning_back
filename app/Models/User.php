@@ -60,6 +60,11 @@ class User extends Authenticatable
         ];
     }
 
+    // public function notifications(){
+    //     return Notification::whereHas('role', function($query) {
+    //         $query->where('name', $this->role->name);
+    //     })->latest()->get();
+    // }
 
     public function roles()
     {

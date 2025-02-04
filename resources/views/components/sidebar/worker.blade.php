@@ -74,7 +74,7 @@
            
             <li>
                 <div class="flex-col gap-1 flex">
-                    <div class="flex-col flex bg-white rounded-lg p-3">
+                    <a href="{{route('worker.messages')}}" class="@if (isActiveRoute(['worker.messages'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#343C54" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
@@ -84,7 +84,7 @@
                             </div>
                             <h2 class="text-gray-500 text-sm font-medium leading-snug">ارتباط با مدیریت</h2>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </li>
 

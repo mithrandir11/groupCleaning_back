@@ -12,7 +12,7 @@
      
 
 
-     <div class="px-1 lg:px-0 container mx-auto  ">
+    <div class="px-1 lg:px-4   ">
 
         <div class="py-12 flex gap-x-6">
             @if ($showSidebar ?? true)

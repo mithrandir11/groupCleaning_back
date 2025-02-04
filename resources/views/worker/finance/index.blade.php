@@ -55,6 +55,7 @@
         </thead>
         
         <tbody>
+            @if ($report)
             <tr class="odd:bg-white  even:bg-gray-50  border-b ">
                 <td class="px-6 py-4">
                     {{ $report->updated_at }} 
@@ -79,7 +80,9 @@
                         مشاهده جزئیات
                     </a>
                 </td>
-            </tr>      
+            </tr> 
+            @endif
+                 
            
         </tbody>
     </table>  

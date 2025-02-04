@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'roles' => [
+    'role' => [
         'admin' => 'ادمین',
         'operator' => 'اپراتور',
         'customer' => 'مشتری',
-        'worker' => 'نیروی کار',
+        'worker' => 'متخصص',
     ],
 
     'status' => [

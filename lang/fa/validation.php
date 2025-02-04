@@ -192,6 +192,7 @@ return [
 
         'national_code' => 'کد ملی',
         'sheba_number' => 'شماره شبا',
+        'message' => 'پیام',
     
 
     ],
