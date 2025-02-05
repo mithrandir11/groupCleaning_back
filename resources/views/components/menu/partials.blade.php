@@ -23,11 +23,14 @@
                   <span class="text-blue-500 hover:text-blue-600 ">
                       {{ $menu->name }}
                   </span>
-                  @if($menu->text)
+                  <span class="text-sm text-gray-500 mr-2">
+                    ({{($menu->slug) }})
+                  </span>
+                  {{-- @if($menu->text)
                       <span class="text-sm text-gray-500 mr-2">
-                          ({{ Str::limit($menu->text, 30) }})
+                          ({!! Str::limit($menu->text, 10) !!})
                       </span>
-                  @endif
+                  @endif --}}
               </div>
               <div>
                   <a href="{{route('admin.menu.edit', $menu)}}"  type="button" class="bg-yellow-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200 ml-2 inline-flex gap-x-1">

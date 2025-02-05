@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-<div>
-    sdfsd
+<div class="container">
+    {!! $menu->text !!}
 </div>
                                             
 @endsection

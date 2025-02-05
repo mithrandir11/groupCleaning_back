@@ -58,8 +58,9 @@
                     {{ $user->cellphone }}
                 </td>
                 <td class="px-6 py-4">
+                    
                     @foreach($user->roles as $role)
-                        {{ __('fa.roles.' . $role->name) }}
+                        {{ __('fa.role.' . $role->name) }} |
                     @endforeach
                 </td>
                 <td class="px-6 py-4 {{ statusClass($user->status) }}">
@@ -88,18 +89,5 @@
                                             
 @endsection
 
-
-{{-- @php
-function statusClass($status) {
-    return $status == 'فعال' ? 'text-green-500' : 'text-red-500';
-    // $statusMap = [
-    //     'در انتظار بررسی' => 'text-yellow-600',
-    //     'انصراف' => 'text-red-500',
-    //     'در حال انجام کار' => 'text-blue-500',
-    //     'اتمام' => 'text-green-500',
-    // ];
-    // return $statusMap[$status] ?? 'text-gray-500'; // رنگ پیش‌فرض
-}
-@endphp --}}
 
 

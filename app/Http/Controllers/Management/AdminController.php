@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
+use App\Models\Menu;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,9 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('management.dashboard');
+        $menu = Menu::where('id',11)->first();
+        // dd($menu);
+        return view('management.dashboard' , compact('menu'));
     }
 
 

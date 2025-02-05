@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Management\AdminController;
 use App\Http\Controllers\Management\Auth\LoginController;
 use App\Http\Controllers\Management\Finance\ManagePaymentController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Management\ManageOrderController;
 use App\Http\Controllers\Management\ManageResumeController;
 use App\Http\Controllers\Management\ManageUserController;
 use App\Http\Controllers\Management\ManageWorkerController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\Worker\WorkerController;
 use App\Http\Controllers\Worker\WorkerFinancialController;
 use App\Http\Controllers\Worker\WorkerMessageController;
@@ -30,6 +32,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 // Route::post('/register', [RegisterController::class, 'register']);
 
+
+
+Route::post('/upload-image', [ImageController::class, 'upload']);
+Route::post('/upload-media', [MediaController::class, 'upload']);
 
 Route::middleware(['auth'])->group(function () {
 
@@ -53,8 +59,8 @@ Route::middleware(['auth'])->group(function () {
     });
     
 
-
-
+    // Route::post('/upload-image', [ImageController::class, 'upload']);
+    
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
