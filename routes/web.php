@@ -5,6 +5,7 @@ use App\Http\Controllers\Management\AdminController;
 use App\Http\Controllers\Management\Auth\LoginController;
 use App\Http\Controllers\Management\Finance\ManagePaymentController;
 use App\Http\Controllers\Management\Finance\ManageReportController;
+use App\Http\Controllers\Management\ManageArticleController;
 use App\Http\Controllers\Management\ManageFinanceController;
 use App\Http\Controllers\Management\ManageMenuController;
 use App\Http\Controllers\Management\ManageMessageController;
@@ -63,6 +64,12 @@ Route::middleware(['auth'])->group(function () {
     
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+
+    Route::get('/admin/article-management', [ManageArticleController::class, 'index'])->name('admin.articles');
+    Route::get('/admin/article-management/create', [ManageArticleController::class, 'create'])->name('admin.articles.create');
+    Route::post('/admin/article-management/store', [ManageArticleController::class, 'store'])->name('admin.articles.store');
+
 
     Route::get('/admin/menu-management', [ManageMenuController::class, 'index'])->name('admin.menu');
     Route::get('/admin/menu-management/create', [ManageMenuController::class, 'create'])->name('admin.menu.create');
