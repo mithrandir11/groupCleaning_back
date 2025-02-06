@@ -12,6 +12,7 @@ use App\Http\Controllers\Management\ManageMessageController;
 use App\Http\Controllers\Management\ManageNotificationController;
 use App\Http\Controllers\Management\ManageOrderController;
 use App\Http\Controllers\Management\ManageResumeController;
+use App\Http\Controllers\Management\ManageSuggestedPageController;
 use App\Http\Controllers\Management\ManageUserController;
 use App\Http\Controllers\Management\ManageWorkerController;
 use App\Http\Controllers\MediaController;
@@ -69,7 +70,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/article-management', [ManageArticleController::class, 'index'])->name('admin.articles');
     Route::get('/admin/article-management/create', [ManageArticleController::class, 'create'])->name('admin.articles.create');
     Route::post('/admin/article-management/store', [ManageArticleController::class, 'store'])->name('admin.articles.store');
+    Route::get('/admin/article-management/edit/{article}', [ManageArticleController::class, 'edit'])->name('admin.articles.edit');
+    Route::PUT('/admin/article-management/update/{article}', [ManageArticleController::class, 'update'])->name('admin.articles.update');
+    Route::delete('/admin/article-management/delete/{article}', [ManageArticleController::class, 'destroy'])->name('admin.articles.delete');
 
+
+    Route::get('/admin/suggestedPage-management', [ManageSuggestedPageController::class, 'index'])->name('admin.suggestedPages');
+    Route::get('/admin/suggestedPage-management/show/{menu}', [ManageSuggestedPageController::class, 'show'])->name('admin.suggestedPages.show');
+    Route::get('/admin/suggestedPage-management/create', [ManageSuggestedPageController::class, 'create'])->name('admin.suggestedPages.create');
+    Route::post('/admin/suggestedPage-management/store', [ManageSuggestedPageController::class, 'store'])->name('admin.suggestedPages.store');
+    Route::delete('/admin/suggestedPage-management/delete/{menu}', [ManageSuggestedPageController::class, 'destroy'])->name('admin.suggestedPages.delete');
+    Route::get('/admin/suggestedPage-management/edit/{menu}', [ManageSuggestedPageController::class, 'edit'])->name('admin.suggestedPages.edit');
+    Route::PUT('/admin/suggestedPage-management/update/{menu}', [ManageSuggestedPageController::class, 'update'])->name('admin.suggestedPages.update');
 
     Route::get('/admin/menu-management', [ManageMenuController::class, 'index'])->name('admin.menu');
     Route::get('/admin/menu-management/create', [ManageMenuController::class, 'create'])->name('admin.menu.create');

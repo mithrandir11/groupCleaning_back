@@ -68,9 +68,18 @@
                
 
                 <td class="px-6 py-4 text-center">
-                    <a href="/"  type="button" class="bg-yellow-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                    <a href="{{route('admin.articles.edit', $article)}}" class="bg-yellow-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                         ویرایش
                     </a>
+
+                    <form action="{{route('admin.articles.delete', $article)}}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('آیا از حذف این آیتم مطمئن هستید؟')" class="bg-red-100 mr-2 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                            حذف
+                        </button>
+                    </form>
+                   
                 </td>
             </tr>
             @endforeach        

@@ -5,7 +5,7 @@
     <h1 class="text-2xl font-bold mb-4 text-right">ایجاد مقاله جدید</h1>
     
 
-    <form action="{{route('admin.articles.store')}}" method="POST" class="space-y-8" enctype="multipart/form-data">
+    <form action="{{route('admin.articles.store')}}" method="POST" class="space-y-12" enctype="multipart/form-data">
         @csrf
         <div>
             <label class="block text-right mb-1" for="title">عنوان</label>
@@ -89,7 +89,7 @@
 
 
         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-            ثبت منو
+            ثبت مقاله
         </button>
     </form>
 </div>

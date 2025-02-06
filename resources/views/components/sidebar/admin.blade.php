@@ -113,7 +113,7 @@
 
 
             <li>
-                <div x-data="{ isOpen: {{ isActiveRoute(['admin.menu', 'admin.articles']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
+                <div x-data="{ isOpen: {{ isActiveRoute(['admin.menu', 'admin.articles', 'admin.suggestedPages']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
                     <button @click.prevent="isOpen = !isOpen" type="button" class="flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
@@ -130,6 +130,7 @@
                     <div x-show="isOpen" x-cloak class="grid pr-12">
                         <a href="{{route('admin.menu')}}" class="{{ isActiveRoute('admin.menu') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >منو</a>
                         <a href="{{route('admin.articles')}}" class="{{ isActiveRoute('admin.articles') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >مقالات</a>
+                        <a href="{{route('admin.suggestedPages')}}" class="{{ isActiveRoute('admin.suggestedPages') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >صفحات پیشنهادی</a>
                         {{-- <a href="{{route('admin.finance.payments')}}" class="{{ isActiveRoute('admin.finance.payments') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >پرداخت ها</a>
                         <a href="{{ route('admin.finance.reports') }}" class="{{ isActiveRoute('admin.finance.reports') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg  text-sm font-medium leading-snug px-3 py-1 " >گزارش</a> --}}
                     </div>

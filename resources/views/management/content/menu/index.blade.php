@@ -16,13 +16,13 @@
 
     
 
-    <div class="container mx-auto p-4 mt-10" dir="rtl">
-        <h1 class="text-2xl font-bold mb-4 text-right">منوهای سایت</h1>
+    {{-- <div class="container mx-auto p-4 mt-10" dir="rtl"> --}}
+        <h1 class="text-2xl font-bold mb-4 text-right mt-10">منوهای سایت</h1>
         <div class=" p-4">
             {{-- فرض کنید متغیر $menus شامل منوهای سطح بالا (بدون والد) است --}}
             <x-menu.partials :menus="$menus"/>
         </div>
-    </div>
+    {{-- </div> --}}
 
 
 
