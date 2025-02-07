@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ManageFinanceController extends Controller
 {
-    public function indexPricing(){
+    public function index(){
         // $fees = WorkerFee::get();
         // $fees = WorkerFee::whereHas('order', function ($query) {
         //     $query->where('status', 'completed'); // فقط سفارش‌های تایید‌شده

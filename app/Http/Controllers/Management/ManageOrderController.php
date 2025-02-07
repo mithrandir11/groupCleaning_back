@@ -17,12 +17,11 @@ class ManageOrderController extends Controller
        
         $search = $request->input('search');
         $orders = Order::with('workers')
-            
-            ->when($search, function ($query, $search) {
-                return $query->search($search);
-            })
-            ->latest()
-            ->paginate(10);
+        ->when($search, function ($query, $search) {
+            return $query->search($search);
+        })
+        ->latest()
+        ->paginate(10);
         // $orders = Order::latest()->paginate(10);
         return view('management.orders.index', compact('orders'));
     }

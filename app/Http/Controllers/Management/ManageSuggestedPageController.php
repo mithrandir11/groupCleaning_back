@@ -39,27 +39,26 @@ class ManageSuggestedPageController extends Controller
 
         SuggestedPage::create($validated);
 
-        return redirect()->route('admin.suggestedPages', )->with('success', ' با موفقیت ایجاد شد.');
+        return redirect()->route('admin.suggestedPages')->with('success', ' با موفقیت ایجاد شد.');
     }
 
-    public function destroy(Menu $menu){
-        $menu->delete();
-        return redirect()->route('admin.menu')->with('success', 'منو با موفقیت حذف شد.');
+    public function destroy(SuggestedPage $suggested_page){
+        $suggested_page->delete();
+        return redirect()->route('admin.suggestedPages.show', $suggested_page->menu_id)->with('success', 'آیتم با موفقیت حذف شد.');
     }
 
-    public function edit(Menu $menu){
+    public function edit(SuggestedPage $suggested_page){
         $allMenus = Menu::all();
-        return view('management.content.menu.edit', compact('menu', 'allMenus'));
+        return view('management.content.suggested-pages.edit', compact('suggested_page', 'allMenus'));
     }
 
-    public function update(Request $request, Menu $menu){
+    public function update(Request $request, SuggestedPage $suggested_page){
         $validated = $request->validate([
-            'name'      => 'required|string|max:255',
-            'slug'      => "required|string|max:255|unique:menus,slug,".$menu->id,
-            'parent_id' => 'nullable|exists:menus,id',
-            'text'      => 'nullable|string',
+            'title'      => 'required|string|max:255',
+            'url'      => 'required|string|max:255',
+            'menu_id' => 'required|exists:menus,id',
         ]);
-        $menu->update($validated);
-        return redirect()->route('admin.menu')->with('success', 'منو با موفقیت بروزرسانی شد.');
+        $suggested_page->update($validated);
+        return redirect()->route('admin.suggestedPages.show', $suggested_page->menu_id)->with('success', 'آیتم با موفقیت بروزرسانی شد.');
     }
 }

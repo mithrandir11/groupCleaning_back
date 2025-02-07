@@ -37,6 +37,9 @@ if (!function_exists('convertPersianToEnglishNumbers')) {
 
             'paid' => 'text-green-500', 
             'fee' => 'text-yellow-500',
+
+            'active' => 'text-green-500', 
+            'inactive' => 'text-red-500', 
         ];
         return $statusMap[$status] ?? null; 
     }

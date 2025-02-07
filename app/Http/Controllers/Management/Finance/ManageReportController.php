@@ -15,9 +15,6 @@ class ManageReportController extends Controller
     }
 
     public function details(User $worker){
-        // $fees = $worker->fees;
-        // $payments = $worker->payments;
-
         $payments = $worker->payments->map(function ($payment) {
             return [
                 'date' => $payment->created_at,
@@ -35,12 +32,8 @@ class ManageReportController extends Controller
                 'type' => 'fee', 
             ];
         });
-        
-        
-        
-        // ترکیب دو مجموعه و مرتب‌سازی بر اساس جدیدترین‌ها
+
         $details = $fees->merge($payments)->sortByDesc('data');
-        // dd($details);
         return view('management.finance.reports.details', compact('details'));
     }
 }

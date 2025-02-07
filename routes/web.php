@@ -79,9 +79,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/suggestedPage-management/show/{menu}', [ManageSuggestedPageController::class, 'show'])->name('admin.suggestedPages.show');
     Route::get('/admin/suggestedPage-management/create', [ManageSuggestedPageController::class, 'create'])->name('admin.suggestedPages.create');
     Route::post('/admin/suggestedPage-management/store', [ManageSuggestedPageController::class, 'store'])->name('admin.suggestedPages.store');
-    Route::delete('/admin/suggestedPage-management/delete/{menu}', [ManageSuggestedPageController::class, 'destroy'])->name('admin.suggestedPages.delete');
-    Route::get('/admin/suggestedPage-management/edit/{menu}', [ManageSuggestedPageController::class, 'edit'])->name('admin.suggestedPages.edit');
-    Route::PUT('/admin/suggestedPage-management/update/{menu}', [ManageSuggestedPageController::class, 'update'])->name('admin.suggestedPages.update');
+    Route::delete('/admin/suggestedPage-management/delete/{suggested_page}', [ManageSuggestedPageController::class, 'destroy'])->name('admin.suggestedPages.delete');
+    Route::get('/admin/suggestedPage-management/edit/{suggested_page}', [ManageSuggestedPageController::class, 'edit'])->name('admin.suggestedPages.edit');
+    Route::PUT('/admin/suggestedPage-management/update/{suggested_page}', [ManageSuggestedPageController::class, 'update'])->name('admin.suggestedPages.update');
 
     Route::get('/admin/menu-management', [ManageMenuController::class, 'index'])->name('admin.menu');
     Route::get('/admin/menu-management/create', [ManageMenuController::class, 'create'])->name('admin.menu.create');
@@ -99,8 +99,11 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/admin/notification-management', [ManageNotificationController::class, 'index'])->name('admin.notifications');
-    Route::get('/admin/notification-management/show/send', [ManageNotificationController::class, 'showSend'])->name('admin.notifications.show.send');
-    Route::post('/admin/notification-management/send', [ManageNotificationController::class, 'send'])->name('admin.notifications.send');
+    Route::get('/admin/notification-management/create', [ManageNotificationController::class, 'create'])->name('admin.notifications.create');
+    Route::post('/admin/notification-management/store', [ManageNotificationController::class, 'store'])->name('admin.notifications.store');
+    Route::get('/admin/notification-management/edit/{notification}', [ManageNotificationController::class, 'edit'])->name('admin.notifications.edit');
+    Route::PUT('/admin/notification-management/update/{notification}', [ManageNotificationController::class, 'update'])->name('admin.notifications.update');
+    Route::delete('/admin/notification-management/delete/{notification}', [ManageNotificationController::class, 'destroy'])->name('admin.notifications.delete');
 
 
 
@@ -120,7 +123,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/worker-management', [ManageWorkerController::class, 'index'])->name('admin.workers');
 
    
-    Route::get('/admin/financial-management/pricing', [ManageFinanceController::class, 'indexPricing'])->name('admin.finance.pricing'); //قیمت گذاری
+    Route::get('/admin/financial-management/pricing', [ManageFinanceController::class, 'index'])->name('admin.finance.pricing'); //قیمت گذاری
     Route::get('/admin/financial-management/pricing/show/{fee}', [ManageFinanceController::class, 'showPricing'])->name('admin.finance.pricing.show'); //قیمت گذاری نمایش
     Route::post('/admin/financial-management/pricing/applyPenalty/{fee}', [ManageFinanceController::class, 'applyPenalty'])->name('admin.finance.pricing.applyPenalty'); //قیمت گذاری نمایش
 

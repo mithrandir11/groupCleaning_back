@@ -9,14 +9,6 @@ use Illuminate\Http\Request;
 class ManageUserController extends Controller
 {
     public function index(Request $request){
-        // $users = User::with('roles')
-        // ->whereDoesntHave('roles', function ($query) {
-        //     $query->whereIn('name', ['admin', 'operator']);
-        // })
-        // ->latest()
-        // ->paginate(10);
-
-
         $search = $request->input('search');
         $users = User::with('roles')
             ->whereDoesntHave('roles', function ($query) {

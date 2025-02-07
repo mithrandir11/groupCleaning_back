@@ -55,9 +55,6 @@
                 </td>
                 <td class="px-6 py-4">
                     {{  $order->workers->pluck('id')->implode(' - ') }}
-                    {{-- @foreach ($order->workers as $worker)
-                        {{$worker->id}} -
-                    @endforeach --}}
                 </td>
                 <td class="px-6 py-4">
                     {{ $order->user->cellphone }} - {{ $order->user->name }} 
@@ -75,17 +72,6 @@
                         مشاهده
                     </a>
                 </td>
-                {{-- <td class="px-6 py-4 text-center">
-
-                    
-                  
-                    <x-utils.modal title="جزییات سفارش" btnTitle="نمایش" btnColor="bg-blue-200">
-                        <div>
-                            {{$order}}
-                        </div>
-                    </x-modal>
-
-                </td> --}}
             </tr>
             @endforeach        
            

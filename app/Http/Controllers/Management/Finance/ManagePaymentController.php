@@ -13,10 +13,6 @@ use Morilog\Jalali\Jalalian;
 class ManagePaymentController extends Controller
 {
     public function index(){
-        // $fees = WorkerFee::get();
-        // $fees = WorkerFee::whereHas('order', function ($query) {
-        //     $query->where('status', 'completed'); // فقط سفارش‌های تایید‌شده
-        // })->latest()->paginate(10);
         $payments = Payment::with('worker')->latest()->paginate(10);
         return view('management.finance.payments.index', compact('payments'));
     }

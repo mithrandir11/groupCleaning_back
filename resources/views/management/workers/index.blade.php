@@ -4,7 +4,7 @@
 <div class=" overflow-x-auto  grow">
     <div class="max-w-sm ">   
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
-        <form action="{{route('admin.users')}}" method="GET" class="relative">
+        <form action="{{route('admin.workers')}}" method="GET" class="relative">
             
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -31,8 +31,6 @@
                     نام خانوادگی
                 </th>
                 <th scope="col" class="flex gap-x-1 items-center">
-
-                    
                     <form class="max-w-lg flex">
                         <input name="search" type="text" id="default-search" class="block  p-2 text-xs text-gray-900 border border-gray-300 rounded-r-lg outline-none  focus:border-blue-500"  placeholder="مهارت ها ..." />
                         <button class="border border-r-0 border-gray-300 rounded-l-lg px-2 bg-gray-100 duration-200  hover:bg-gray-200" >
@@ -43,12 +41,6 @@
                                 
                         </button>
                     </form>
-
-                    
-                    {{-- <form action="{{route('admin.users')}}" method="GET" class="relative">
-                        <input name="search" type="text" id="default-search" class="block  p-2 text-xs text-gray-900 border border-gray-300 rounded-lg outline-none  focus:border-blue-500"  placeholder="مهارت ها ..." />
-                        <button type="submit" class="text-white absolute end-2 bottom-1.5 bg-gray-500 hover:bg-gray-600 duration-200  outline-none  font-medium rounded-lg text-xs px-2 py-1">جستجو</button>
-                    </form> --}}
                 </th>
                 <th scope="col" class="px-6 py-3">
                     وضعیت
@@ -87,20 +79,20 @@
                     
                 </td>
                 <td class="px-6 py-4 {{ statusClass($user->status) }}">
-                    {{ $user->status }}
+                    {{ __('fa.status.'.$user->status ) }}
                 </td>
                 
                 
                 <td class="px-6 py-4">
-                    9/10
+                    {{ $user->average_rating }}
                 </td>
 
                 <td class="px-6 py-4">
-                    2
+                    {{ $user->accepted_orders_count }}
                 </td>
 
                 <td class="px-6 py-4">
-                    5
+                    {{ $user->completed_orders_count }}
                 </td>
                 
             </tr>
@@ -110,7 +102,7 @@
     </table>  
 
     <div class="mt-4">
-        {{-- {{ $users->links() }} --}}
+        {{ $users->links() }}
     </div>      
 
 </div>

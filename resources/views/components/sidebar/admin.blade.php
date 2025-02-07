@@ -57,7 +57,7 @@
 
             <li>
                 <div class="flex-col gap-1 flex">
-                    <a href="{{route('admin.users')}}" class="@if (isActiveRoute(['admin.users'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
+                    <a href="{{route('admin.users')}}" class="@if (isActiveRoute(['admin.users', 'admin.users.edit'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
                                 <svg width="22" height="22" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
@@ -89,7 +89,9 @@
             
 
             <li>
-                <div x-data="{ isOpen: {{ isActiveRoute(['admin.finance.pricing', 'admin.finance.payments', 'admin.finance.reports']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
+                <div x-data="{ isOpen: 
+                {{ isActiveRoute(['admin.finance.reports.details', 'admin.finance.pricing', 'admin.finance.payments', 'admin.finance.reports', 'admin.finance.pricing.show', 'admin.finance.payments.showWorkers', 'admin.finance.payments.create', 'admin.finance.payments.edit']) ? 'true' : 'false' }} }" 
+                 class="flex-col gap-1 flex ">
                     <button @click.prevent="isOpen = !isOpen" type="button" class="flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
@@ -104,16 +106,16 @@
                     </button>
 
                     <div x-show="isOpen" x-cloak class="grid pr-12">
-                        <a href="{{route('admin.finance.pricing')}}" class="{{ isActiveRoute('admin.finance.pricing') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >قیمت گذاری</a>
-                        <a href="{{route('admin.finance.payments')}}" class="{{ isActiveRoute('admin.finance.payments') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >پرداخت ها</a>
-                        <a href="{{ route('admin.finance.reports') }}" class="{{ isActiveRoute('admin.finance.reports') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg  text-sm font-medium leading-snug px-3 py-1 " >گزارش</a>
+                        <a href="{{route('admin.finance.pricing')}}" class="{{ isActiveRoute(['admin.finance.pricing', 'admin.finance.pricing.show']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >قیمت گذاری</a>
+                        <a href="{{route('admin.finance.payments')}}" class="{{ isActiveRoute(['admin.finance.payments','admin.finance.payments.showWorkers', 'admin.finance.payments.create', 'admin.finance.payments.edit']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >پرداخت ها</a>
+                        <a href="{{ route('admin.finance.reports') }}" class="{{ isActiveRoute(['admin.finance.reports', 'admin.finance.reports.details']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg  text-sm font-medium leading-snug px-3 py-1 " >گزارش</a>
                     </div>
                 </div>
             </li>
 
 
             <li>
-                <div x-data="{ isOpen: {{ isActiveRoute(['admin.menu', 'admin.articles', 'admin.suggestedPages']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
+                <div x-data="{ isOpen: {{ isActiveRoute(['admin.suggestedPages.show', 'admin.suggestedPages.edit', 'admin.menu', 'admin.articles', 'admin.suggestedPages', 'admin.menu.create', 'admin.articles.create', 'admin.articles.edit', 'admin.suggestedPages.create']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
                     <button @click.prevent="isOpen = !isOpen" type="button" class="flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
@@ -128,34 +130,20 @@
                     </button>
 
                     <div x-show="isOpen" x-cloak class="grid pr-12">
-                        <a href="{{route('admin.menu')}}" class="{{ isActiveRoute('admin.menu') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >منو</a>
-                        <a href="{{route('admin.articles')}}" class="{{ isActiveRoute('admin.articles') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >مقالات</a>
-                        <a href="{{route('admin.suggestedPages')}}" class="{{ isActiveRoute('admin.suggestedPages') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >صفحات پیشنهادی</a>
+                        <a href="{{route('admin.menu')}}" class="{{ isActiveRoute(['admin.menu', 'admin.menu.create']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >منو</a>
+                        <a href="{{route('admin.articles')}}" class="{{ isActiveRoute(['admin.articles', 'admin.articles.create', 'admin.articles.edit']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >مقالات</a>
+                        <a href="{{route('admin.suggestedPages')}}" class="{{ isActiveRoute(['admin.suggestedPages', 'admin.suggestedPages.create', 'admin.suggestedPages.show', 'admin.suggestedPages.edit']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >صفحات پیشنهادی</a>
                         {{-- <a href="{{route('admin.finance.payments')}}" class="{{ isActiveRoute('admin.finance.payments') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >پرداخت ها</a>
                         <a href="{{ route('admin.finance.reports') }}" class="{{ isActiveRoute('admin.finance.reports') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg  text-sm font-medium leading-snug px-3 py-1 " >گزارش</a> --}}
                     </div>
                 </div>
             </li>
             
-            {{-- <li>
-                <div class="flex-col gap-1 flex">
-                    <NuxtLink :to="{name: 'profile.addresses'}" activeClass="bg-gray-200" class="flex-col flex rounded-lg p-3">
-                        <div class="h-5 gap-3 flex">
-                            <div class="relative">
-                                <svg width="22" height="22" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.8609 4.96887C12.3192 4.7747 11.727 4.7747 11.1853 4.96887L2.91085 7.935C1.73804 8.35542 1.73806 10.014 2.91085 10.4344L11.1853 13.4006C11.727 13.5948 12.3192 13.5948 12.8609 13.4006L21.1354 10.4344C22.3082 10.014 22.3082 8.35542 21.1354 7.93501L12.8609 4.96887ZM11.6915 6.38089C11.9059 6.30403 12.1403 6.30403 12.3547 6.38089L20.1764 9.18473L12.3547 11.9886C12.1403 12.0654 11.9059 12.0654 11.6915 11.9886L3.86977 9.18473L11.6915 6.38089Z" fill="#343C54"/>
-                                    <path d="M2.91085 13.5646L5.05398 12.7964L7.27658 13.5931L3.86977 14.8144L11.6915 17.6182C11.9059 17.6951 12.1403 17.6951 12.3547 17.6182L20.1764 14.8144L16.7695 13.5931L18.9921 12.7964L21.1354 13.5646C22.3082 13.9851 22.3082 15.6437 21.1354 16.0641L12.8609 19.0302C12.3192 19.2244 11.727 19.2244 11.1853 19.0302L2.91085 16.0641C1.73806 15.6437 1.73804 13.9851 2.91085 13.5646Z" fill="#343C54"/>
-                                </svg>
-                            </div>
-                            <h2 class="text-gray-500 text-sm font-medium leading-snug">مدیریت صفحات</h2>
-                        </div>
-                    </NuxtLink>
-                </div>
-            </li> --}}
+           
 
             <li>
                 <div class="flex-col gap-1 flex">
-                    <a href="{{route('admin.notifications')}}" class="@if (isActiveRoute(['admin.notifications'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
+                    <a href="{{route('admin.notifications')}}" class="@if (isActiveRoute(['admin.notifications', 'admin.notifications.create', 'admin.notifications.edit'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#343C54" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
@@ -171,7 +159,7 @@
 
             <li>
                 <div class="flex-col gap-1 flex">
-                    <a href="{{route('admin.messages')}}" class="@if (isActiveRoute(['admin.messages'])) bg-gray-200 @endif flex-col flex  rounded-lg p-3">
+                    <a href="{{route('admin.messages')}}" class="@if (isActiveRoute(['admin.messages','admin.messages.show'])) bg-gray-200 @endif flex-col flex  rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">

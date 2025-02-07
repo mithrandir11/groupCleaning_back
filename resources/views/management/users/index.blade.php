@@ -64,7 +64,7 @@
                     @endforeach
                 </td>
                 <td class="px-6 py-4 {{ statusClass($user->status) }}">
-                    {{ $user->status }}
+                    {{ __('fa.status.'.$user->status ) }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $user->created_at }}

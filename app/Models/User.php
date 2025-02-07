@@ -97,21 +97,53 @@ class User extends Authenticatable
     //     return $this->belongsToMany(Order::class, 'worker_orders', 'worker_id', 'order_id');
     // }
 
-
-    public function getStatusAttribute($status)
-    {
-        switch ($status) {
-            case 'active':
-                $status = 'فعال';
-                break;
-            case 'inactive':
-                $status = 'غیرفعال';
-                break;
-            default:
-                return $status;
-        }
-        return $status;
+    public function workerOrders(){
+        return $this->hasMany(WorkerOrder::class, 'worker_id');
     }
+
+    // public function acceptedOrders(){
+    //     return $this->workerOrders()
+    //         ->where('status', 'accepted');
+    // }
+
+    public function getAcceptedOrdersCountAttribute(){
+        return $this->workerOrders()
+            ->where('status', 'accepted')
+            ->count();
+    }
+
+    public function getCompletedOrdersCountAttribute(){
+        return $this->workerOrders()
+            ->where('status', 'completed')
+            ->count();
+    }
+
+
+    public function givenRatings(){
+        return $this->hasMany(Rating::class, 'worker_id');
+    }
+
+    public function getAverageRatingAttribute($query){
+        return $this->givenRatings()
+        ->pluck('rating')
+        ->avg();
+    }
+
+
+    // public function getStatusAttribute($status)
+    // {
+    //     switch ($status) {
+    //         case 'active':
+    //             $status = 'فعال';
+    //             break;
+    //         case 'inactive':
+    //             $status = 'غیرفعال';
+    //             break;
+    //         default:
+    //             return $status;
+    //     }
+    //     return $status;
+    // }
 
     public function getCreatedAtAttribute($value)
     {
