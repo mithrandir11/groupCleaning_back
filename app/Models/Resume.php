@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Morilog\Jalali\CalendarUtils;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class Resume extends Model
 {
@@ -40,5 +41,12 @@ class Resume extends Model
                 return $status;
         }
         return $status;
+    }
+
+    public function scopeSearch(Builder $query, string $search): Builder
+    {
+        return $query->where(function ($query) use ($search) {
+            $query->where('national_code',$search);
+        });
     }
 }

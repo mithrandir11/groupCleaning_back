@@ -39,18 +39,47 @@
             @enderror
         </div>
 
+        <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="role_id">وضعیت کاربر</label>
+            <div class="flex gap-x-12">
+                <div class="flex items-center">
+                    <input @checked($user->status == 'active') id="radio-active" type="radio" value="active" name="status" class="w-4 h-4">
+                    <label for="radio-active" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">فعال</label>
+                </div>
         
-        <div class="flex gap-x-12">
-            <div class="flex items-center">
-                <input @checked($user->status == 'active') id="radio-active" type="radio" value="active" name="status" class="w-4 h-4">
-                <label for="radio-active" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">فعال</label>
-            </div>
-    
-            <div class="flex items-center">
-                <input @checked($user->status == 'inactive') id="radio-inactive" type="radio" value="inactive" name="status" class="w-4 h-4">
-                <label for="radio-inactive" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">غیر فعال</label>
+                <div class="flex items-center">
+                    <input @checked($user->status == 'inactive') id="radio-inactive" type="radio" value="inactive" name="status" class="w-4 h-4">
+                    <label for="radio-inactive" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">غیر فعال</label>
+                </div>
             </div>
         </div>
+        
+
+        <div class="bg-yellow-50 max-w-sm w-full p-3 rounded-lg">
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="role_id">فعال کردن اپراتور</label>
+            <div class="flex gap-x-12">
+                <div class="flex items-center">
+                    <input @checked($user->hasRole('operator')) id="radio-active-operator" type="radio" value="1" name="is_operator" class="w-4 h-4">
+                    <label for="radio-active-operator" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">فعال</label>
+                </div>
+        
+                <div class="flex items-center">
+                    <input @checked(!$user->hasRole('operator')) id="radio-inactive-operator" type="radio" value="0" name="is_operator" class="w-4 h-4">
+                    <label for="radio-inactive-operator" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">غیر فعال</label>
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <label class="block mb-2 text-sm font-medium text-gray-900" for="role_id">نقش های فعلی</label>
+                <ul>
+                    @foreach ($user->roles as $role)
+                    <li class="text-gray-500 text-sm">  {{ __('fa.role.'.$role->name) }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+      
 
         <button type="submit" class="flex items-center justify-center text-white bg-blue-500 hover:bg-blue-600 duration-200 rounded-lg text-sm px-4 py-2 ">
             ذخیره تغییرات   

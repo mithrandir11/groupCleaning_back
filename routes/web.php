@@ -6,6 +6,7 @@ use App\Http\Controllers\Management\Auth\LoginController;
 use App\Http\Controllers\Management\Finance\ManagePaymentController;
 use App\Http\Controllers\Management\Finance\ManageReportController;
 use App\Http\Controllers\Management\ManageArticleController;
+use App\Http\Controllers\Management\ManageFAQController;
 use App\Http\Controllers\Management\ManageFinanceController;
 use App\Http\Controllers\Management\ManageMenuController;
 use App\Http\Controllers\Management\ManageMessageController;
@@ -75,6 +76,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/article-management/delete/{article}', [ManageArticleController::class, 'destroy'])->name('admin.articles.delete');
 
 
+    Route::get('/admin/faqs-management', [ManageFAQController::class, 'index'])->name('admin.faqs');
+    Route::get('/admin/faqs-management/create', [ManageFAQController::class, 'create'])->name('admin.faqs.create');
+    Route::post('/admin/faqs-management/store', [ManageFAQController::class, 'store'])->name('admin.faqs.store');
+    Route::get('/admin/faqs-management/show/{menu}', [ManageFAQController::class, 'show'])->name('admin.faqs.show');
+    Route::delete('/admin/faqs-management/delete/{faq}', [ManageFAQController::class, 'destroy'])->name('admin.faqs.delete');
+    Route::get('/admin/faqs-management/edit/{faq}', [ManageFAQController::class, 'edit'])->name('admin.faqs.edit');
+    Route::PUT('/admin/faqs-management/update/{faq}', [ManageFAQController::class, 'update'])->name('admin.faqs.update');
+    
     Route::get('/admin/suggestedPage-management', [ManageSuggestedPageController::class, 'index'])->name('admin.suggestedPages');
     Route::get('/admin/suggestedPage-management/show/{menu}', [ManageSuggestedPageController::class, 'show'])->name('admin.suggestedPages.show');
     Route::get('/admin/suggestedPage-management/create', [ManageSuggestedPageController::class, 'create'])->name('admin.suggestedPages.create');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ManageUserController extends Controller
         $search = $request->input('search');
         $users = User::with('roles')
             ->whereDoesntHave('roles', function ($query) {
-                $query->whereIn('name', ['admin', 'operator']);
+                $query->whereIn('name', ['admin']);
             })
             ->when($search, function ($query, $search) {
                 return $query->search($search);
@@ -24,7 +25,8 @@ class ManageUserController extends Controller
     }
 
     public function edit(User $user){
-        return view('management.users.edit', compact('user'));
+        $roles = Role::where('name', 'operator')->get();
+        return view('management.users.edit', compact('user','roles'));
     }
 
 
@@ -34,9 +36,20 @@ class ManageUserController extends Controller
             'family' => 'nullable|string|max:100',
             'cellphone' => 'required|numeric|unique:users,cellphone,' . $user->id,
             'status' => 'required',
+            'is_operator' => 'nullable|boolean',
+            // 'role_id' => 'nullable|exists:roles,id',
         ]);
 
+    //   dd($request->all());
+      
         try {
+            if($request->is_operator && $request->is_operator == '1'){
+                $role = Role::where('name','operator')->first();
+                $user->roles()->syncWithoutDetaching([$role->id]);    
+            }else{
+                $role = Role::where('name','operator')->first();
+                $user->roles()->detach($role->id);
+            }
             $user->update($validated);
             return redirect()->route('admin.users')->with('success', 'اطلاعات کاربر با موفقیت به‌روزرسانی شد.');
         } catch (\Exception  $e) {

@@ -12,9 +12,7 @@ use Illuminate\Http\Request;
 
 class ManageOrderController extends Controller
 {
-    public function index(Request $request)
-    {
-       
+    public function index(Request $request){
         $search = $request->input('search');
         $orders = Order::with('workers')
         ->when($search, function ($query, $search) {
@@ -22,7 +20,7 @@ class ManageOrderController extends Controller
         })
         ->latest()
         ->paginate(10);
-        // $orders = Order::latest()->paginate(10);
+        
         return view('management.orders.index', compact('orders'));
     }
 

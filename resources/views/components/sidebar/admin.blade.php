@@ -115,7 +115,7 @@
 
 
             <li>
-                <div x-data="{ isOpen: {{ isActiveRoute(['admin.suggestedPages.show', 'admin.suggestedPages.edit', 'admin.menu', 'admin.articles', 'admin.suggestedPages', 'admin.menu.create', 'admin.articles.create', 'admin.articles.edit', 'admin.suggestedPages.create']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
+                <div x-data="{ isOpen: {{ isActiveRoute(['admin.faqs.show', 'admin.faqs.edit', 'admin.faqs.create', 'admin.faqs', 'admin.suggestedPages.show', 'admin.suggestedPages.edit', 'admin.menu', 'admin.articles', 'admin.suggestedPages', 'admin.menu.create', 'admin.articles.create', 'admin.articles.edit', 'admin.suggestedPages.create']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
                     <button @click.prevent="isOpen = !isOpen" type="button" class="flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
@@ -133,6 +133,7 @@
                         <a href="{{route('admin.menu')}}" class="{{ isActiveRoute(['admin.menu', 'admin.menu.create']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >منو</a>
                         <a href="{{route('admin.articles')}}" class="{{ isActiveRoute(['admin.articles', 'admin.articles.create', 'admin.articles.edit']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >مقالات</a>
                         <a href="{{route('admin.suggestedPages')}}" class="{{ isActiveRoute(['admin.suggestedPages', 'admin.suggestedPages.create', 'admin.suggestedPages.show', 'admin.suggestedPages.edit']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >صفحات پیشنهادی</a>
+                        <a href="{{route('admin.faqs')}}" class="{{ isActiveRoute(['admin.faqs', 'admin.faqs.create', 'admin.faqs.edit', 'admin.faqs.show']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >سوالات متداول</a>
                         {{-- <a href="{{route('admin.finance.payments')}}" class="{{ isActiveRoute('admin.finance.payments') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >پرداخت ها</a>
                         <a href="{{ route('admin.finance.reports') }}" class="{{ isActiveRoute('admin.finance.reports') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg  text-sm font-medium leading-snug px-3 py-1 " >گزارش</a> --}}
                     </div>

@@ -40,6 +40,9 @@
                     slug 
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    متن 
+                </th>
+                <th scope="col" class="px-6 py-3">
                     وضعیت
                 </th>
                 <th scope="col" class="px-6 py-3 text-center">
@@ -58,6 +61,10 @@
 
                 <td class="px-6 py-4">
                     {{ $article->slug }}
+                </td>
+
+                <td class="px-6 py-4">
+                    {{ Str::limit(strip_tags($article->text), 150) }}
                 </td>
 
                 <td class="px-6 py-4 @if($article->is_visible) text-green-500 @else text-red-500 @endif">

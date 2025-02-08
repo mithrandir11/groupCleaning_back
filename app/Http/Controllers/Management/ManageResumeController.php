@@ -12,11 +12,16 @@ use Illuminate\Support\Facades\DB;
 class ManageResumeController extends Controller
 {
     public function index(Request $request){
+        // $resumes = Resume::with('user')
+        // ->latest()
+        // ->paginate(10);
+        $search = $request->input('search');
         $resumes = Resume::with('user')
-        ->latest()
-        ->paginate(10);
-
-        // dd($resumes);
+            ->when($search, function ($query, $search) {
+                return $query->search($search);
+            })
+            ->latest()
+            ->paginate(10);
 
         return view('management.resumes.index', compact('resumes'));
     }

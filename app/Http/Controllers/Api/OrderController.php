@@ -76,5 +76,26 @@ class OrderController extends Controller
 
         // return response()->json($orders);
     }
+
+
+
+    public function show($id){
+
+        // $orders = Order::where('user_id', auth()->id())
+        //     ->when($orderCode, function ($query, $orderCode) {
+        //         return $query->where('order_code', 'like', "%{$orderCode}%");
+        //     })
+        //     ->paginate(10);
+        
+        $order = Order::where('id', $id)
+            ->with('workers')
+            ->first();
+
+        if (!$order) {
+            return Response::error('Article not found');
+        }
+
+        return Response::success(null, new OrderResource($order));
+    }
     
 }

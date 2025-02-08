@@ -55,6 +55,7 @@ Route::post('/addresses/edit', [AddressController::class, 'editAddress'])->middl
 
 Route::post('/orders/store', [OrderController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/orders/userOrders', [OrderController::class, 'getUserOrders'])->middleware('auth:sanctum');
+Route::get('/orders/{id}', [OrderController::class, 'show'])->middleware('auth:sanctum');
 
 
 Route::post('/resume/store', [ResumeController::class, 'store']);

@@ -30,7 +30,7 @@ class OrderResource extends JsonResource
             "selected_time" => $this->selected_time,
             "contact_number" => $this->contact_number,
             "address" => $this->address,
-            "total_amount" => $this->total_amount,
+            "total_amount" => number_format($this->total_amount),
             "created_at" => $this->created_at,
             
             
