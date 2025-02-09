@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\GhasedakSmsService;
+use App\Services\OtpService;
 use DateTimeImmutable;
 use Exception;
+use Ghasedak\DataTransferObjects\Request\BulkMessageDTO;
 use Ghasedak\DataTransferObjects\Request\InputDTO;
 use Ghasedak\DataTransferObjects\Request\OtpMessageDTO;
 use Ghasedak\DataTransferObjects\Request\ReceptorDTO;
@@ -19,35 +22,54 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
 
-    public function gg1(){
+    public function SendBulkSMS(){
         $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
         $sendDate = now();
         $lineNumber = '30005088';
-        $receptor = '09941831687';
-        $message = 'test لغو11';
-        // try {
+        $receptor = ['09941831687'];
+        $message = 'test';
+        try {
+            $response = $ghasedaksms->sendBulk(new BulkMessageDTO(
+                sendDate: $sendDate,
+                lineNumber: $lineNumber,
+                receptors: $receptor,
+                message: $message
+            ));
+            var_dump($response);
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
+    }
+        
+
+    public function SendSingleSMS(){
+        $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
+        $sendDate = now();
+        $lineNumber = '30005088';
+        $receptor = '09941831687';// برای مثال
+        $message = 'test لغو11';// برای مثال
+        try {
             $response = $ghasedaksms->sendSingle(new SingleMessageDTO(
                 sendDate: $sendDate,
                 lineNumber: $lineNumber,
                 receptor: $receptor,
                 message: $message
             ));
-            // var_dump($response);
-        // } catch (Exception $e) {
-            // var_dump($e->getMessage());
-        // }
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
     }
 
 
-    public function gg2(){
+    public function SendOtpSMS(){
         $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
         $sendDate = new DateTimeImmutable('now');
-        // try {
+        try {
             $response = $ghasedaksms->sendOtp(new OtpMessageDTO(
                 sendDate: $sendDate,
                 receptors: [
                     new ReceptorDTO(
-                        mobile: '09941831687',
+                        mobile: '09941831687', // برای مثال
                         clientReferenceId: '1'
                     )
                 ],
@@ -55,7 +77,7 @@ class AuthController extends Controller
                 inputs: [
                     new InputDTO(
                         param: 'Code',
-                        value: '334455'
+                        value: '334455'// برای مثال
                     ),
                     new InputDTO(
                         param: 'APP_NAME',
@@ -63,10 +85,9 @@ class AuthController extends Controller
                     )
                 ]
             ));
-            //   var_dump($response);
-        //   } catch (ExceptionsGhasedakSMSException $e) {
-        //       var_dump($e->getMessage());
-        //   }
+          } catch (Exception $e) {
+              var_dump($e->getMessage());
+          }
     }
 
 
@@ -74,12 +95,9 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // $this->gg2();
-
         $request->validate([
             'cellphone' => ['required', 'regex:/^(\+98|0)?9\d{9}$/']
         ]);
-
         $user = User::where('cellphone', $request->cellphone)->first();
         $OTPCode = mt_rand(100000, 999999);
         $loginToken = Hash::make('DCDCojncd@cdjn%!!ghnjrgtn&&');
@@ -96,7 +114,8 @@ class AuthController extends Controller
                 'login_token' => $loginToken
             ]);
         }
-        // $user->notify(new OTPSms($OTPCode));
+
+        (new OtpService(new GhasedakSmsService))->sendOtp($user, $OTPCode);
         return Response::success(null, ['login_token' => $loginToken]);
     }
 

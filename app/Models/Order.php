@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Observers\OrderObserver;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Morilog\Jalali\CalendarUtils;
 
+#[ObservedBy([OrderObserver::class])]
 class Order extends Model
 {
     protected $guarded = [];
