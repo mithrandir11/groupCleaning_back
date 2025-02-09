@@ -38,6 +38,7 @@ Route::put('/users/info/edit', [UserController::class, 'editInfo'])->middleware(
 
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/{id}', [ArticleController::class, 'show']);
+Route::get('/articles/tag/{slug}', [ArticleController::class, 'showByTag']);
 
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/services/{slug}', [ServiceController::class, 'findBySlug']);

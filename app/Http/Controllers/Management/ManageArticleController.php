@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +16,8 @@ class ManageArticleController extends Controller
     }
 
     public function create(){
-        return view('management.content.articles.create');
+        $tags = Tag::get();
+        return view('management.content.articles.create', compact('tags'));
     }
 
     public function store(Request $request){
@@ -30,6 +32,9 @@ class ManageArticleController extends Controller
             'seo.description' => 'nullable|string',
             'seo.keywords' => 'nullable|string',
             'seo.canonical_url' => 'nullable|url',
+
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
             // 'seo.open_graph' => 'nullable|json',
             // 'seo.json_ld' => 'nullable|json',
         ]);
@@ -49,12 +54,17 @@ class ManageArticleController extends Controller
         if (isset($validated['seo'])) {
             $article->seo()->create($validated['seo']);
         }
+
+        if (isset($validated['tags'])) {
+            $article->tags()->sync($validated['tags']);
+        }
         return redirect()->route('admin.articles')->with('success', 'مقاله با موفقیت ایجاد شد.');
     }
 
 
     public function edit(Article $article){
-        return view('management.content.articles.edit', compact('article'));
+        $tags = Tag::get();
+        return view('management.content.articles.edit', compact('article','tags'));
     }
 
     public function update(Request $request, Article $article){
@@ -69,6 +79,9 @@ class ManageArticleController extends Controller
             'seo.description' => 'nullable|string',
             'seo.keywords' => 'nullable|string',
             'seo.canonical_url' => 'nullable|url',
+
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
 
@@ -96,6 +109,12 @@ class ManageArticleController extends Controller
 
         // if (isset($validated['seo'])) $article->seo?->updateOrCreate([], $validated['seo']);
         if (isset($validated['seo'])) $article->seo()->updateOrCreate([], $validated['seo']);
+
+        if (isset($validated['tags'])) {
+            $article->tags()->sync($validated['tags']); // Sync تگ‌ها
+        } else {
+            $article->tags()->detach(); // حذف تمام تگ‌ها اگر هیچ تگی انتخاب نشده باشد
+        }
 
         return redirect()->route('admin.articles')->with('success', 'مقاله با موفقیت بروزرسانی شد.');
     }

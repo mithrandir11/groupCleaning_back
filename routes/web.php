@@ -16,6 +16,7 @@ use App\Http\Controllers\Management\ManageNotificationController;
 use App\Http\Controllers\Management\ManageOrderController;
 use App\Http\Controllers\Management\ManageResumeController;
 use App\Http\Controllers\Management\ManageSuggestedPageController;
+use App\Http\Controllers\Management\ManageTagController;
 use App\Http\Controllers\Management\ManageUserController;
 use App\Http\Controllers\Management\ManageWorkerController;
 use App\Http\Controllers\MediaController;
@@ -76,6 +77,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/article-management/edit/{article}', [ManageArticleController::class, 'edit'])->name('admin.articles.edit');
     Route::PUT('/admin/article-management/update/{article}', [ManageArticleController::class, 'update'])->name('admin.articles.update');
     Route::delete('/admin/article-management/delete/{article}', [ManageArticleController::class, 'destroy'])->name('admin.articles.delete');
+
+
+    Route::get('/admin/tag-management', [ManageTagController::class, 'index'])->name('admin.tags');
+    Route::get('/admin/tag-management/create', [ManageTagController::class, 'create'])->name('admin.tags.create');
+    Route::post('/admin/tag-management/store', [ManageTagController::class, 'store'])->name('admin.tags.store');
+    Route::get('/admin/tag-management/edit/{tag}', [ManageTagController::class, 'edit'])->name('admin.tags.edit');
+    Route::PUT('/admin/tag-management/update/{tag}', [ManageTagController::class, 'update'])->name('admin.tags.update');
+    Route::delete('/admin/tag-management/delete/{tag}', [ManageTagController::class, 'destroy'])->name('admin.tags.delete');
     
     // Route::get('/admin/article-management/seo/{article}', [ManageArticleController::class, 'index'])->name('admin.articles');
 

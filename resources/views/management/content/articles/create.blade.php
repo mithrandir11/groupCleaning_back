@@ -98,6 +98,16 @@
         </div>
 
 
+        <h5 class=" py-3 text-center bg-gray-100 font-bold">تگ ها</h5>
+        <div>
+            <label class="block text-right mb-1" for="seo_keywords">تگ ها (برای انتخاب چندگانه کلید ctrl رو نگهدارید و گزینه ها رو انتخاب کنید)</label>
+            <select name="tags[]" id="tags" multiple class="border rounded-lg w-full p-3 max-w-sm" >
+                @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                @endforeach
+            </select>
+        </div>
+
 
 
         <h5 class=" py-3 text-center bg-gray-100 font-bold">SEO</h5>
