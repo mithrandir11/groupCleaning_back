@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    {!! $menu->text !!}
+    {!! $article->text !!}
 </div>
                                             
 @endsection

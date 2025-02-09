@@ -58,6 +58,39 @@
             @enderror
         </div>
 
+        <h5 class=" py-3 text-center bg-gray-100 font-bold">SEO</h5>
+        <div>
+            <label class="block text-right mb-1" for="seo_title">عنوان (Title)</label>
+            <input type="text" name="seo[title]" id="seo_title" class="border rounded-lg w-full p-3 max-w-sm" value="{{ old('seo.title') }}" >
+            @error('seo.title')
+                <p class="text-red-600 text-sm ">{{ $message }}</p>
+            @enderror
+        </div>
+    
+        <div>
+            <label class="block text-right mb-1" for="seo_description">توضیحات (Description)</label>
+            <textarea  name="seo[description]" id="seo_description" class="border rounded-lg w-full p-3 max-w-sm">{{ old('seo.description') }}</textarea>
+            @error('seo.description')
+                <p class="text-red-600 text-sm ">{{ $message }}</p>
+            @enderror
+        </div>
+    
+        <div>
+            <label class="block text-right mb-1" for="seo_keywords">کلمات کلیدی (Keywords)</label>
+            <input type="text" name="seo[keywords]" id="seo_keywords" class="border rounded-lg w-full p-3 max-w-sm" value="{{ old('seo.keywords') }}" >
+            @error('seo.keywords')
+                <p class="text-red-600 text-sm ">{{ $message }}</p>
+            @enderror
+        </div>
+    
+        <div>
+            <label class="block text-right mb-1" for="seo_canonical_url">کانونیکال URL</label>
+            <input type="text" name="seo[canonical_url]" id="canonical_url" class="border rounded-lg w-full p-3 max-w-sm" value="{{ old('seo.canonical_url') }}" >
+            @error('seo.canonical_url')
+                <p class="text-red-600 text-sm ">{{ $message }}</p>
+            @enderror
+        </div>
+
 
         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
             ثبت منو

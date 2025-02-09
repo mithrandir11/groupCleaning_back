@@ -26,9 +26,23 @@ class ManageMenuController extends Controller
             'slug'      => 'required|string|max:255|unique:menus',
             'parent_id' => 'nullable|exists:menus,id',
             'text'      => 'nullable|string',
+
+            'seo.title' => 'nullable|string|max:255',
+            'seo.description' => 'nullable|string',
+            'seo.keywords' => 'nullable|string',
+            'seo.canonical_url' => 'nullable|url',
         ]);
 
-        Menu::create($validated);
+        $menu = Menu::create([
+            'name'      => $validated['name'],
+            'slug'      => $validated['slug'],
+            'parent_id' => $validated['parent_id'],
+            'text'      => $validated['text'],
+        ]);
+
+        if (isset($validated['seo'])) {
+            $menu->seo()->create($validated['seo']);
+        }
 
         return redirect()->route('admin.menu')->with('success', 'منو با موفقیت ایجاد شد.');
     }
@@ -41,6 +55,7 @@ class ManageMenuController extends Controller
     public function edit(Menu $menu){
         // همه منوها برای انتخاب والد
         $allMenus = Menu::all();
+        // dd($menu->seo);
         return view('management.content.menu.edit', compact('menu', 'allMenus'));
     }
 
@@ -51,10 +66,32 @@ class ManageMenuController extends Controller
             'slug'      => "required|string|max:255|unique:menus,slug,".$menu->id,
             'parent_id' => 'nullable|exists:menus,id',
             'text'      => 'nullable|string',
-        ]);
-        // dd($validated);
 
-        $menu->update($validated);
+            'seo.title' => 'nullable|string|max:255',
+            'seo.description' => 'nullable|string',
+            'seo.keywords' => 'nullable|string',
+            'seo.canonical_url' => 'nullable|url',
+        ]);
+        // dd($validated['seo']);
+
+        $menu->update([
+            'name'      => $validated['name'],
+            'slug'      => $validated['slug'],
+            'parent_id' => $validated['parent_id'],
+            'text'      => $validated['text'],
+        ]);
+
+        // dd($menu->seo);
+
+        if (isset($validated['seo'])) $menu->seo()->updateOrCreate([], $validated['seo']);
+        // if (isset($validated['seo'])) {
+        //     $menu->seo()->updateOrCreate(
+        //         ['seotable_id' => $menu->id, 'seotable_type' => get_class($menu)], // Conditions
+        //         $validated['seo'] // Values
+        //     );
+        // }
+
+        // $menu->update($validated);
 
         return redirect()->route('admin.menu')->with('success', 'منو با موفقیت بروزرسانی شد.');
     }

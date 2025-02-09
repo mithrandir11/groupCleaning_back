@@ -4,18 +4,26 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
+use App\Models\Article;
 use App\Models\Menu;
 use App\Models\Order;
 use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        $menu = Menu::where('id',11)->first();
-        // dd($menu);
-        return view('management.dashboard' , compact('menu'));
+        // $menu = Menu::where('id',11)->first();
+        $article = Article::with('seo')->where('id',23)->first();
+        SEOMeta::setTitle($article->seo->title);
+        SEOMeta::setDescription($article->seo->description);
+        SEOMeta::setCanonical($article->seo->canonical_url);
+        $keywordArray = explode(',', $article->seo->keywords);
+        SEOMeta::addKeyword($keywordArray);
+        
+        return view('management.dashboard' , compact('article'));
     }
 
 

@@ -64,7 +64,7 @@
                 </td>
 
                 <td class="px-6 py-4">
-                    {{ Str::limit(strip_tags($article->text), 150) }}
+                    {{ Str::limit(strip_tags($article->text), 100) }}
                 </td>
 
                 <td class="px-6 py-4 @if($article->is_visible) text-green-500 @else text-red-500 @endif">

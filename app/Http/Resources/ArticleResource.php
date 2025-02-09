@@ -17,16 +17,19 @@ class ArticleResource extends JsonResource
     {
         $data = [
             "id" => $this->id,
-            "author_name" => $this->user->name,
+            "author_name" => $this->user?->name,
             "title" => $this->title,
             "slug" => $this->slug,
             "image" => $this->image,
             'summary' => Str::limit(strip_tags($this->text), 130),
             "created_at" => $this->created_at,
+
+            // 'seo' => new SeoResource($this->whenLoaded('seo')), 
         ];
 
         if ($request->query('include_details', false)) {
             $data['text'] = $this->text;
+            $data['seo'] = new SeoResource($this->whenLoaded('seo'));
         }
 
         return $data;

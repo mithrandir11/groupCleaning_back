@@ -55,4 +55,9 @@ class Menu extends Model
     {
         return $this->hasMany(SuggestedPage::class);
     }
+
+    public function seo()
+    {
+        return $this->morphOne(SeoData::class, 'seotable');
+    }
 }

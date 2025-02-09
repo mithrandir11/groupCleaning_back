@@ -13,12 +13,19 @@ class ArticleController extends Controller
 {
     public function index(){
         // $articles = Article::latest()->with(['user'])->get();
-        $articles = Cache::remember('articles', now()->addMinutes(10), function () {
-            return Article::where('is_visible', true)
-            ->latest()
-            ->with(['user'])
-            ->get();
-        });
+        // $articles = Cache::remember('articles', now()->addMinutes(10), function () {
+        //     return Article::where('is_visible', true)
+        //     ->latest()
+        //     ->with(['user'])
+        //     ->get();
+        // });
+
+        // $articles = Cache::remember('articles', now()->addMinutes(10), function () {
+            $articles = Article::where('is_visible', true)
+                ->latest()
+                ->with(['user']) // لود کردن user و seo
+                ->get();
+        // });
         
         return Response::success(null, ArticleResource::collection($articles));
     }
@@ -35,7 +42,7 @@ class ArticleController extends Controller
     
         $article = Article::where('id', $id)
             ->where('is_visible', true)
-            ->with('user:id,name')
+            ->with(['user', 'seo'])
             ->first();
 
         if (!$article) {

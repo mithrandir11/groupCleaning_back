@@ -8,6 +8,8 @@ use App\Http\Controllers\Management\Finance\ManageReportController;
 use App\Http\Controllers\Management\ManageArticleController;
 use App\Http\Controllers\Management\ManageFAQController;
 use App\Http\Controllers\Management\ManageFinanceController;
+use App\Http\Controllers\Management\ManageFooterController;
+use App\Http\Controllers\Management\ManageFooterSymbolController;
 use App\Http\Controllers\Management\ManageMenuController;
 use App\Http\Controllers\Management\ManageMessageController;
 use App\Http\Controllers\Management\ManageNotificationController;
@@ -74,6 +76,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/article-management/edit/{article}', [ManageArticleController::class, 'edit'])->name('admin.articles.edit');
     Route::PUT('/admin/article-management/update/{article}', [ManageArticleController::class, 'update'])->name('admin.articles.update');
     Route::delete('/admin/article-management/delete/{article}', [ManageArticleController::class, 'destroy'])->name('admin.articles.delete');
+    
+    // Route::get('/admin/article-management/seo/{article}', [ManageArticleController::class, 'index'])->name('admin.articles');
 
 
     Route::get('/admin/faqs-management', [ManageFAQController::class, 'index'])->name('admin.faqs');
@@ -91,6 +95,22 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/suggestedPage-management/delete/{suggested_page}', [ManageSuggestedPageController::class, 'destroy'])->name('admin.suggestedPages.delete');
     Route::get('/admin/suggestedPage-management/edit/{suggested_page}', [ManageSuggestedPageController::class, 'edit'])->name('admin.suggestedPages.edit');
     Route::PUT('/admin/suggestedPage-management/update/{suggested_page}', [ManageSuggestedPageController::class, 'update'])->name('admin.suggestedPages.update');
+
+
+    Route::get('/admin/footer-management', [ManageFooterController::class, 'index'])->name('admin.footer');
+    Route::get('/admin/footer-management/create', [ManageFooterController::class, 'create'])->name('admin.footer.create');
+    Route::post('/admin/footer-management/store', [ManageFooterController::class, 'store'])->name('admin.footer.store');
+    Route::delete('/admin/footer-management/delete/{footer}', [ManageFooterController::class, 'destroy'])->name('admin.footer.delete');
+    Route::get('/admin/footer-management/edit/{footer}', [ManageFooterController::class, 'edit'])->name('admin.footer.edit');
+    Route::PUT('/admin/footer-management/update/{footer}', [ManageFooterController::class, 'update'])->name('admin.footer.update');
+
+    Route::get('/admin/footer-symbol-management/create', [ManageFooterSymbolController::class, 'create'])->name('admin.footerSymbol.create');
+    Route::post('/admin/footer-symbol-management/store', [ManageFooterSymbolController::class, 'store'])->name('admin.footerSymbol.store');
+    Route::delete('/admin/footer-symbol-management/delete/{symbol}', [ManageFooterSymbolController::class, 'destroy'])->name('admin.footerSymbol.delete');
+    Route::get('/admin/footer-symbol-management/edit/{symbol}', [ManageFooterSymbolController::class, 'edit'])->name('admin.footerSymbol.edit');
+    Route::PUT('/admin/footer-symbol-management/update/{symbol}', [ManageFooterSymbolController::class, 'update'])->name('admin.footerSymbol.update');
+
+
 
     Route::get('/admin/menu-management', [ManageMenuController::class, 'index'])->name('admin.menu');
     Route::get('/admin/menu-management/create', [ManageMenuController::class, 'create'])->name('admin.menu.create');

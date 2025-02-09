@@ -25,10 +25,30 @@ class ManageArticleController extends Controller
             'text'      => 'nullable|string',
             'is_visible'      => 'required|boolean',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+
+            'seo.title' => 'nullable|string|max:255',
+            'seo.description' => 'nullable|string',
+            'seo.keywords' => 'nullable|string',
+            'seo.canonical_url' => 'nullable|url',
+            // 'seo.open_graph' => 'nullable|json',
+            // 'seo.json_ld' => 'nullable|json',
         ]);
+
+        // dd($request->all());
         $path = $request->file('image')->store('articles/images', 'public');
         $validated['image'] = url('storage/' . str_replace('public/', '', $path));
-        Article::create($validated);
+        $article = Article::create([
+            'user_id' => auth()->user()->id,
+            'title' => $validated['title'],
+            'slug' => $validated['slug'],
+            'text' => $validated['text'],
+            'is_visible' => $validated['is_visible'],
+            'image' => $validated['image'],
+        ]);
+
+        if (isset($validated['seo'])) {
+            $article->seo()->create($validated['seo']);
+        }
         return redirect()->route('admin.articles')->with('success', 'مقاله با موفقیت ایجاد شد.');
     }
 
@@ -38,28 +58,19 @@ class ManageArticleController extends Controller
     }
 
     public function update(Request $request, Article $article){
-        // dd($request->all());
         $validated = $request->validate([
             'title'      => 'required|string|max:255',
             'slug'       => 'required|string|max:255|unique:articles,slug,'.$article->id,
             'text'      => 'nullable|string',
             'is_visible'      => 'required|boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            
+            'seo.title' => 'nullable|string|max:255',
+            'seo.description' => 'nullable|string',
+            'seo.keywords' => 'nullable|string',
+            'seo.canonical_url' => 'nullable|url',
         ]);
-        // dd($article->image);
 
-        // $lockfilePath = $this->lockFilePath('http://127.0.0.1:8000/images/1738742993.png234');
-        // Storage::disk('public')->delete('/images/1738742993.png');
-        // $g = Storage::exists('public/images/bg.png');
-        // $t = Storage::delete('http://127.0.0.1:8000/images/1738742993.png234');
-        // dd($g);
-
-        // $ff = Storage::delete( str_replace(url('/storage'), '/storage234', $article->image) );
-        // $g = Storage::exists('public/images/bg.png');
-        // $g = Storage::disk('public')->exists('images/bg.png');
-
-        // dd($g, '/public'.str_replace(url('/storage'), '/storage', $article->image));
-        // dd(str_replace(url('/storage'), 'public/storage', $article->image));
 
         if ($request->hasFile('image')) {
             if ($article->image) {
@@ -74,9 +85,17 @@ class ManageArticleController extends Controller
         
 
 
+        $article->update([
+            'title' => $validated['title'],
+            'slug' => $validated['slug'],
+            'text' => $validated['text'],
+            'is_visible' => $validated['is_visible'],
+            'image' => $validated['image'],
+        ]);
 
 
-        $article->update($validated);
+        // if (isset($validated['seo'])) $article->seo?->updateOrCreate([], $validated['seo']);
+        if (isset($validated['seo'])) $article->seo()->updateOrCreate([], $validated['seo']);
 
         return redirect()->route('admin.articles')->with('success', 'مقاله با موفقیت بروزرسانی شد.');
     }
