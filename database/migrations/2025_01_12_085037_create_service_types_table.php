@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('service_id')->nullable()->constrained('services')->onDelete('cascade');
             $table->string('title', 100);
-            // $table->boolean('is_multiple')->default(false);
-            // $table->boolean('is_required')->default(true);
             $table->timestamps();
         });
     }

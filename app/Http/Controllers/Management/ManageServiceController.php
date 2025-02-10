@@ -18,6 +18,7 @@ class ManageServiceController extends Controller
     }
 
     public function store(Request $request){
+        dd($request->all());
         $validated = $request->validate([
             'title'      => 'required|string|max:255',
             'title_fa'      => 'required|string|max:255',

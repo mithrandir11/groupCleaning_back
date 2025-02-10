@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ServiceTypeValue extends Model
 {
-    //
+    protected $guarded = [];
 }

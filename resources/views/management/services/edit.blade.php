@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mx-auto px-4" >
+<livewire:management.service-edit :id="$service->id">
+{{-- <div class="container mx-auto px-4" >
 
 
     <div class="flex justify-between items-center gap-x-3 mb-10 ">
@@ -55,7 +56,7 @@
             بروزرسانی
         </button>
     </form>
-</div>
+</div> --}}
 @endsection
 
 
