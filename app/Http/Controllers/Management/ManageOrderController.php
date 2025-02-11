@@ -116,6 +116,7 @@ class ManageOrderController extends Controller
 
         $order->status = 'processing';
         $order->save();
+        log_activity('ارجاع به متخصص', "سفارش با شناسه {$order->order_code} به متخصص با کد $request->worker_id ارجاع داده شد.");
 
         return redirect()->back()->with('success', 'عملیات با موفقیت انجام شد');
     }

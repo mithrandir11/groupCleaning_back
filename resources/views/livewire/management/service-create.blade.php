@@ -87,10 +87,16 @@
     
         <!-- گزینه‌های خدمت -->
         <div>
-            <h4 class="font-semibold mb-4 text-right">گزینه‌های خدمت:</h4>
+            <div class="flex gap-x-3 items-center mb-4">
+                <h4 class="font-semibold  text-right">گزینه‌های خدمت:</h4>
+                <button wire:click.prevent="addOption"
+                        class=" px-4 py-2 text-sm bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
+                    افزودن گزینه جدید
+                </button>
+            </div>
     
             @foreach ($options as $index => $option)
-                <div class="border  rounded-lg p-4 mb-6">
+                <div class="border bg-gray-50  rounded-lg p-4 mb-6">
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-1">عنوان گزینه:</label>
                         <input type="text" wire:model.defer="options.{{ $index }}.title"
@@ -152,10 +158,7 @@
                 </div>
             @endforeach
     
-            <button wire:click.prevent="addOption"
-                    class=" px-4 py-2 text-sm bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
-                افزودن گزینه جدید
-            </button>
+            
         </div>
 
 
@@ -219,14 +222,27 @@
 
 
 
+        <div class="flex justify-end items-center gap-x-3 mt-16 ">
+            
+            <!-- ذخیره خدمات -->
+            
+                <button wire:click.prevent="saveService"
+                        class="px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
+                    ذخیره خدمت
+                </button>
+        
+
+            <a href="{{route('admin.services')}}" class="flex items-center gap-x-2 border duration-200 rounded-lg text-sm px-4 py-2 ">
+                بارگشت
+                <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                    <path d="M3.57813 12.4981C3.5777 12.6905 3.65086 12.8831 3.79761 13.0299L9.7936 19.0301C10.0864 19.3231 10.5613 19.3233 10.8543 19.0305C11.1473 18.7377 11.1474 18.2629 10.8546 17.9699L6.13418 13.2461L20.3295 13.2461C20.7437 13.2461 21.0795 12.9103 21.0795 12.4961C21.0795 12.0819 20.7437 11.7461 20.3295 11.7461L6.14168 11.7461L10.8546 7.03016C11.1474 6.73718 11.1473 6.2623 10.8543 5.9695C10.5613 5.6767 10.0864 5.67685 9.79362 5.96984L3.84392 11.9233C3.68134 12.0609 3.57812 12.2664 3.57812 12.4961L3.57813 12.4981Z" fill="#343C54"/>
+                </svg>
+            </a>
+            
+    
+        </div>
 
     
-        <!-- ذخیره خدمات -->
-        <div class="mt-8 text-end">
-            <button wire:click.prevent="saveService"
-                    class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
-                ذخیره خدمت
-            </button>
-        </div>
+       
    
 </div>

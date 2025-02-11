@@ -40,7 +40,7 @@
 
             <li>
                 <div class="flex-col gap-1 flex">
-                    <a href="{{route('admin.services')}}" class="@if (isActiveRoute(['admin.services'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
+                    <a href="{{route('admin.services')}}" class="@if (isActiveRoute(['admin.services', 'admin.services.create', 'admin.services.edit'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
                                 <svg width="22" height="22" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">

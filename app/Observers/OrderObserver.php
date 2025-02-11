@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Activity;
 use App\Models\Order;
 use App\Models\User;
 use App\Services\GhasedakSmsService;
@@ -31,9 +32,11 @@ class OrderObserver
 
         $message = "سفارش جدید ثبت شد! \n کد سفارش: {$order->order_code}\n\nلغو 11";
 
-        foreach ($adminNumbers as $number) {
-            $this->smsService->sendSingleSms('09941831687', $message);
-        }
+        // foreach ($adminNumbers as $number) {
+        //     $this->smsService->sendSingleSms($number, $message);
+        // }
+
+        log_activity('ثبت سفارش', "سفارش با شناسه {$order->order_code} ثبت شد.");
     }
 
     /**

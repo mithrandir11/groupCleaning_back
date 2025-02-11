@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Management;
 
+use App\Models\Role;
 use App\Models\Service;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class ServiceEdit extends Component
@@ -40,17 +42,19 @@ class ServiceEdit extends Component
         }
     }
 
-    protected $rules = [
-        'title' => 'required|string|max:100',
-        'title_fa' => 'required|string|max:100',
-        'slug' => 'required|string|max:100',
-        'type.title' => 'nullable|string|max:100',
-        'type.values.*' => 'nullable|string|max:100',
-        'options.*.title' => 'nullable|string|max:100',
-        'options.*.is_multiple' => 'boolean',
-        'options.*.is_required' => 'boolean',
-        'options.*.values.*' => 'nullable|string|max:100',
-    ];
+    // protected $rules = [
+    //     'title' => 'required|string|max:100',
+    //     'title_fa' => 'required|string|max:100',
+    //     // 'slug' => 'required|string|max:100|',
+    //     // 'slug' => 'required|string|max:100|unique:services,slug,' . auth()->user()->id,
+    //     'slug' => ['required','string','max:100', Rule::unique('services', 'slug')->ignore($this->serviceId)],
+    //     'type.title' => 'nullable|string|max:100',
+    //     'type.values.*' => 'nullable|string|max:100',
+    //     'options.*.title' => 'nullable|string|max:100',
+    //     'options.*.is_multiple' => 'boolean',
+    //     'options.*.is_required' => 'boolean',
+    //     'options.*.values.*' => 'nullable|string|max:100',
+    // ];
 
     public function addOption()
     {
@@ -87,10 +91,25 @@ class ServiceEdit extends Component
 
     public function updateService()
     {
-        $this->validate();
+        // $this->validate();
+
+        $this->validate(
+            [
+                'title' => 'required|string|max:100',
+                'title_fa' => 'required|string|max:100',
+                'slug' => 'required|string|max:100|unique:services,slug,' . $this->serviceId,
+                // 'slug' => ['required','string','max:100', Rule::unique('services', 'slug')->ignore($this->serviceId)],
+                'type.title' => 'nullable|string|max:100',
+                'type.values.*' => 'nullable|string|max:100',
+                'options.*.title' => 'nullable|string|max:100',
+                'options.*.is_multiple' => 'boolean',
+                'options.*.is_required' => 'boolean',
+                'options.*.values.*' => 'nullable|string|max:100',
+            ]
+        ) ;
 
         // به‌روزرسانی خدمت
-        $service = \App\Models\Service::find($this->serviceId);
+        $service = Service::find($this->serviceId);
         $service->update([
             'title' => $this->title,
             'title_fa' => $this->title_fa,
@@ -98,7 +117,7 @@ class ServiceEdit extends Component
         ]);
 
         // به‌روزرسانی نوع خدمت
-        if ($service->type->isNotEmpty()) {
+        if ($service->type) {
             $type = $service->type;
             $type->update(['title' => $this->type['title']]);
             $type->values()->delete(); // حذف مقادیر قدیمی
@@ -136,7 +155,7 @@ class ServiceEdit extends Component
         }
 
         session()->flash('success', 'خدمت با موفقیت به‌روزرسانی شد.');
-        return redirect()->route('admin.services.index');
+        return redirect()->route('admin.services');
     }
     
     public function render()

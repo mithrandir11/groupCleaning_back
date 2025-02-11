@@ -73,9 +73,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/service-management', [ManageServiceController::class, 'index'])->name('admin.services');
     Route::get('/admin/service-management/create', [ManageServiceController::class, 'create'])->name('admin.services.create');
-    Route::post('/admin/service-management/store', [ManageServiceController::class, 'store'])->name('admin.services.store');
+    // Route::post('/admin/service-management/store', [ManageServiceController::class, 'store'])->name('admin.services.store');
     Route::get('/admin/service-management/edit/{service}', [ManageServiceController::class, 'edit'])->name('admin.services.edit');
-    Route::PUT('/admin/service-management/update/{service}', [ManageServiceController::class, 'update'])->name('admin.services.update');
+    // Route::PUT('/admin/service-management/update/{service}', [ManageServiceController::class, 'update'])->name('admin.services.update');
     Route::delete('/admin/service-management/delete/{service}', [ManageServiceController::class, 'destroy'])->name('admin.services.delete');
 
 

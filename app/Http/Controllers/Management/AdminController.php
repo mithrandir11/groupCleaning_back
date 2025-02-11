@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\Article;
 use App\Models\Order;
 use App\Models\User;
@@ -13,19 +14,13 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 
 class AdminController extends Controller
 {
-    public function dashboard()
-    {
-        $article = Article::with('seo')->where('id',23)->first();
-
-       
-        
+    public function dashboard(){
         // $order = $this->createOrder($data);
-
         // $user = User::where('cellphone', '09941831687')->first();
         // $OTPCode = mt_rand(100000, 999999);
         // (new OtpService(new GhasedakSmsService))->sendOtp($user, $OTPCode);
-        
-        return view('management.dashboard' , compact('article'));
+        $activities = Activity::latest()->paginate(10);
+        return view('management.dashboard' , compact('activities'));
     }
     
 

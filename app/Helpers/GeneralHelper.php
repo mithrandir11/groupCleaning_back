@@ -44,4 +44,14 @@ if (!function_exists('convertPersianToEnglishNumbers')) {
         return $statusMap[$status] ?? null; 
     }
 
+    
+    function log_activity(string $subject, string $description): void
+    {
+        \App\Models\Activity::create([
+            'subject' => $subject,
+            'description' => $description,
+        ]);
+    }
+    
+
 }
