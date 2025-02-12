@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Route::post('/upload-image', [ImageController::class, 'upload']);
     
-
+    
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('/admin/setting-management', [ManageSettingController::class, 'index'])->name('admin.settings');
@@ -169,6 +169,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/order-management/{order}/setPrice', [ManageOrderController::class, 'setOrderPrice'])->name('admin.orders.setPrice');
     // Route::post('/admin/order-management/findByOrderCode', [ManageOrderController::class, 'findOrderByOrderCode'])->name('admin.orders.findOrderByOrderCode');
     
+    Route::get('/users/export', [ManageUserController::class, 'export'])->name('admin.users.export');
     Route::get('/admin/user-management', [ManageUserController::class, 'index'])->name('admin.users');
     Route::get('/admin/user-management/edit/{user}', [ManageUserController::class, 'edit'])->name('admin.users.edit');
     Route::post('/admin/user-management/update/{user}', [ManageUserController::class, 'update'])->name('admin.users.update');
@@ -176,6 +177,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/worker-management', [ManageWorkerController::class, 'index'])->name('admin.workers');
 
    
+    Route::get('/fees/export', [ManageFinanceController::class, 'export'])->name('admin.fees.export');
     Route::get('/admin/financial-management/pricing', [ManageFinanceController::class, 'index'])->name('admin.finance.pricing'); //قیمت گذاری
     Route::get('/admin/financial-management/pricing/show/{fee}', [ManageFinanceController::class, 'showPricing'])->name('admin.finance.pricing.show'); //قیمت گذاری نمایش
     Route::post('/admin/financial-management/pricing/applyPenalty/{fee}', [ManageFinanceController::class, 'applyPenalty'])->name('admin.finance.pricing.applyPenalty'); //قیمت گذاری نمایش

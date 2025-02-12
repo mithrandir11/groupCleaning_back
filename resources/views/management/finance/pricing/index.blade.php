@@ -3,10 +3,31 @@
 @section('content')
 <div class=" overflow-x-auto  grow">
     
+    <form action="{{ route('admin.fees.export') }}" method="GET" >
+        <div class="flex items-end space-x-4">
+            <div>
+                <label for="start_date" class="block text-sm font-medium text-gray-700 mb-1">از تاریخ:</label>
+                <input type="date" name="start_date" id="start_date"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                       value="{{ request('start_date') }}">
+            </div>
+
+            <div>
+                <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">تا تاریخ:</label>
+                <input type="date" name="end_date" id="end_date"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                       value="{{ request('end_date') }}">
+            </div>
+
+            <button type="submit"
+                    class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none">
+                فیلتر و دانلود اکسل
+            </button>
+        </div>
+    </form>
     
     
-    
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 mt-10">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -41,7 +62,7 @@
         
         <tbody>
             @foreach ($fees as $index => $fee)
-            <tr x-data="{ open: false }" v-for="(order, index) in data.data" class="odd:bg-white  even:bg-gray-50  border-b ">
+            <tr class="odd:bg-white  even:bg-gray-50  border-b ">
                 <td class="px-6 py-4">
                     {{ $fee->order->order_code }} 
                 </td>

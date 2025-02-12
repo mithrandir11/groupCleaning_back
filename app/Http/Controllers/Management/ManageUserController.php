@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ManageUserController extends Controller
 {
+    public function export(){
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
     public function index(Request $request){
         $search = $request->input('search');
         $users = User::with('roles')

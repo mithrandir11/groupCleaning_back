@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers\Management;
 
+use App\Exports\FeesExport;
 use App\Http\Controllers\Controller;
 use App\Models\WorkerFee;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ManageFinanceController extends Controller
 {
+    public function export(Request $request){
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        return Excel::download(new FeesExport($start_date, $end_date), 'fees.xlsx');
+    }
+
+
     public function index(){
         // $fees = WorkerFee::get();
         // $fees = WorkerFee::whereHas('order', function ($query) {

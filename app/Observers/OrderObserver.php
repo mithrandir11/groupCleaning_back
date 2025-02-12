@@ -31,10 +31,16 @@ class OrderObserver
 
         $message = "سفارش جدید ثبت شد! \n کد سفارش: {$order->order_code}\n\nلغو 11";
 
-        $adminPhoneNumber = Setting::where('key', 'admin_phone_number')->value('value');
-        if($adminPhoneNumber) $this->smsService->sendSingleSms($adminPhoneNumber, $message);
+        
 
         log_activity('ثبت سفارش', "سفارش با شناسه {$order->order_code} ثبت شد.");
+
+        try {
+            $adminPhoneNumber = Setting::where('key', 'admin_phone_number')->value('value');
+            if($adminPhoneNumber) $this->smsService->sendSingleSms($adminPhoneNumber, $message);
+        } catch (\Exception $e) {
+            //throw $th;
+        }
     }
 
     /**

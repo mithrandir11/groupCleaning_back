@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\FaqController;
+use App\Http\Controllers\Api\FooterController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ResumeController;
@@ -60,3 +61,6 @@ Route::get('/orders/{id}', [OrderController::class, 'show'])->middleware('auth:s
 
 
 Route::post('/resume/store', [ResumeController::class, 'store']);
+
+
+Route::get('/footers', [FooterController::class, 'index']);
