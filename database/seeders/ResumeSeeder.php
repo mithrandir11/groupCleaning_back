@@ -28,6 +28,7 @@ class ResumeSeeder extends Seeder
             'residence_document_image' => 'residence_document.jpg',
             'work_experience' => '5 years of experience in cleaning.',
             'status' => 'approved',
+            'commission_rate' => 75.00,
         ]);
 
         // ایجاد توانایی‌ها

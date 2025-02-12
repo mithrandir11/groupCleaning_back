@@ -193,6 +193,10 @@ return [
         'national_code' => 'کد ملی',
         'sheba_number' => 'شماره شبا',
         'message' => 'پیام',
+
+        'personal_image' => 'تصویر پرسنلی',
+        'national_card_image' => 'تصویر کارت ملی',
+        'residence_document_image' => 'تصویر سند یا اجاره نامه محل سکونت'
     
 
     ],

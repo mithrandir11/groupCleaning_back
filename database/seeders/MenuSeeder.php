@@ -20,12 +20,12 @@ class MenuSeeder extends Seeder
         Menu::create(['name' => 'سوالات متداول', 'slug' => 'faq', 'text' => 'سوالات متداول']);
         Menu::create(['name' => 'ارتباط با ما', 'slug' => 'contact-us', 'text' => 'ارتباط با ما']);
 
-        $menuB = Menu::create(['name' => 'Menu B', 'slug' => 'menu-b', 'parent_id' => $menuA->id, 'text' => 'menu b']);
-        $menuB2 = Menu::create(['name' => 'Menu B.2', 'slug' => 'menu-b-2', 'parent_id' => $menuA->id, 'text' => 'menu b2']);
-        $menuB3 = Menu::create(['name' => 'Menu B.3', 'slug' => 'menu-b-3', 'parent_id' => $menuA->id, 'text' => 'menu b3']);
-        $menuB4 = Menu::create(['name' => 'Menu B.4', 'slug' => 'menu-b-4', 'parent_id' => $menuA->id, 'text' => 'menu b4']);
+        // $menuB = Menu::create(['name' => 'Menu B', 'slug' => 'menu-b', 'parent_id' => $menuA->id, 'text' => 'menu b']);
+        // $menuB2 = Menu::create(['name' => 'Menu B.2', 'slug' => 'menu-b-2', 'parent_id' => $menuA->id, 'text' => 'menu b2']);
+        // $menuB3 = Menu::create(['name' => 'Menu B.3', 'slug' => 'menu-b-3', 'parent_id' => $menuA->id, 'text' => 'menu b3']);
+        // $menuB4 = Menu::create(['name' => 'Menu B.4', 'slug' => 'menu-b-4', 'parent_id' => $menuA->id, 'text' => 'menu b4']);
 
-        Menu::create(['name' => 'Menu C', 'slug' => 'menu-c', 'parent_id' => $menuB->id, 'text' => 'menu c']);
+        // Menu::create(['name' => 'Menu C', 'slug' => 'menu-c', 'parent_id' => $menuB->id, 'text' => 'menu c']);
 
         //faq
         Faq::create([

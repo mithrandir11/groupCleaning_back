@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             ServiceOptionValueSeeder::class,
             AddressSeeder::class,
             ResumeSeeder::class,
+            SettingSeeder::class,
             
         ]);
     }

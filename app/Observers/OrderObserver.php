@@ -2,9 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\Activity;
 use App\Models\Order;
-use App\Models\User;
+use App\Models\Setting;
 use App\Services\GhasedakSmsService;
 
 class OrderObserver
@@ -23,18 +22,17 @@ class OrderObserver
      */
     public function created(Order $order): void
     {
-        $adminNumbers = User::with('roles')
-        ->whereHas('roles', function ($query) {
-            $query->where('name', 'admin');
-        })
-        ->pluck('cellphone')
-        ->toArray();
+        // $adminNumbers = User::with('roles')
+        // ->whereHas('roles', function ($query) {
+        //     $query->where('name', 'admin');
+        // })
+        // ->pluck('cellphone')
+        // ->toArray();
 
         $message = "سفارش جدید ثبت شد! \n کد سفارش: {$order->order_code}\n\nلغو 11";
 
-        // foreach ($adminNumbers as $number) {
-        //     $this->smsService->sendSingleSms($number, $message);
-        // }
+        $adminPhoneNumber = Setting::where('key', 'admin_phone_number')->value('value');
+        if($adminPhoneNumber) $this->smsService->sendSingleSms($adminPhoneNumber, $message);
 
         log_activity('ثبت سفارش', "سفارش با شناسه {$order->order_code} ثبت شد.");
     }

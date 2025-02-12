@@ -16,10 +16,12 @@ use App\Http\Controllers\Management\ManageNotificationController;
 use App\Http\Controllers\Management\ManageOrderController;
 use App\Http\Controllers\Management\ManageResumeController;
 use App\Http\Controllers\Management\ManageServiceController;
+use App\Http\Controllers\Management\ManageSettingController;
 use App\Http\Controllers\Management\ManageSuggestedPageController;
 use App\Http\Controllers\Management\ManageTagController;
 use App\Http\Controllers\Management\ManageUserController;
 use App\Http\Controllers\Management\ManageWorkerController;
+use App\Http\Controllers\Management\SettingController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\Worker\WorkerController;
 use App\Http\Controllers\Worker\WorkerFinancialController;
@@ -70,6 +72,11 @@ Route::middleware(['auth'])->group(function () {
     
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::get('/admin/setting-management', [ManageSettingController::class, 'index'])->name('admin.settings');
+    Route::get('/admin/setting-management/edit/{setting}', [ManageSettingController::class, 'edit'])->name('admin.settings.edit');
+    Route::PUT('/admin/setting-management/update/{setting}', [ManageSettingController::class, 'update'])->name('admin.settings.update');
+
 
     Route::get('/admin/service-management', [ManageServiceController::class, 'index'])->name('admin.services');
     Route::get('/admin/service-management/create', [ManageServiceController::class, 'create'])->name('admin.services.create');
