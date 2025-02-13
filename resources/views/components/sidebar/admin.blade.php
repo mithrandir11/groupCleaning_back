@@ -1,4 +1,7 @@
-<aside class="w-72 p-4 border border-gray-300 rounded-lg flex-col justify-start items-start gap-6 inline-flex self-start">
+@php
+    $pendingOrdersCount = \App\Models\Order::getPendingCount();
+@endphp
+<aside class="w-72 p-4 border bg-gray-50 border-gray-300 rounded-lg flex-col justify-start items-start gap-6 inline-flex self-start">
     <div class="w-full justify-between items-center gap-2.5 inline-flex ">
        
             <p class="font-bold">پروفایل مدیریت</p>
@@ -58,6 +61,11 @@
                     <a href="{{route('admin.orders')}}" class="@if (isActiveRoute(['admin.orders','admin.orders.show'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
+                                {{-- @if ($pendingOrdersCount > 0)
+                                    <span class="absolute -top-1 -left-1 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                        {{ $pendingOrdersCount }}
+                                    </span>
+                                @endif --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 20 20" fill="none">
                                     <g id="Cube 01">
                                         <path id="icon" d="M2.78223 5.83329C2.52965 6.27072 2.52543 6.80097 2.517 7.86146L2.5 9.99996L2.517 12.1385C2.52543 13.199 2.52965 13.7292 2.78223 14.1666C3.03481 14.6041 3.49196 14.8728 4.40627 15.4104L6.25 16.4943L8.11073 17.5489C9.03347 18.0718 9.49484 18.3333 10 18.3333M2.78223 5.83329C3.03481 5.39587 3.49196 5.12709 4.40627 4.58955L6.25 3.50557L8.11073 2.45104C9.03347 1.9281 9.49484 1.66663 10 1.66663C10.5052 1.66663 10.9665 1.9281 11.8893 2.45104L13.75 3.50557L15.5937 4.58955C16.508 5.12709 16.9652 5.39587 17.2178 5.83329M2.78223 5.83329L10 9.99996M10 18.3333C10.5052 18.3333 10.9665 18.0718 11.8893 17.5489L13.75 16.4943L15.5937 15.4104C16.508 14.8728 16.9652 14.6041 17.2178 14.1666C17.4704 13.7292 17.4746 13.199 17.483 12.1385L17.5 9.99996L17.483 7.86146C17.4746 6.80097 17.4704 6.27072 17.2178 5.83329M10 18.3333V9.99996M17.2178 5.83329L10 9.99996" stroke="#6B7280" stroke-width="1.6" />
@@ -65,6 +73,11 @@
                                 </svg>
                             </div>
                             <h2 class="text-gray-500 text-sm font-medium leading-snug">مدیریت سفارشات</h2>
+                            @if ($pendingOrdersCount > 0)
+                                <span class=" bg-blue-500 text-white text-sm font-bold px-2 pb-1 rounded-lg mr-auto">
+                                    {{ $pendingOrdersCount }}
+                                </span>
+                            @endif
                         </div>
                     </a>
                 </div>
@@ -249,3 +262,4 @@
         </ul>
     </div>  
 </aside>
+

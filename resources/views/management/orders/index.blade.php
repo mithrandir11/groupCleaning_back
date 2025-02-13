@@ -20,25 +20,25 @@
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 mt-10">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-3">
                     ردیف
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-3">
                     کد سفارش
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-3">
                     کد متخصص
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-3">
                     شماره مشتری و نام و نام‌خانوادگی
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-3">
                     وضعیت سفارش
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-2 py-3">
                     موضوع سفارش
                 </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="px-2 py-3 text-center">
                     جزئیات
                 </th>
             </tr>
@@ -47,27 +47,28 @@
         <tbody>
             @foreach ($orders as $index => $order)
             <tr x-data="{ open: false }" v-for="(order, index) in data.data" class="odd:bg-white  even:bg-gray-50  border-b ">
-                <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap ">
+                <th scope="row" class="px-2 py-4  text-gray-900 whitespace-nowrap ">
                     {{ $orders->total() - ($orders->perPage() * ($orders->currentPage() - 1) + $index) }}
                 </th>
-                <td class="px-6 py-4">
+                <td class="px-2 py-4">
                     {{ $order->order_code }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-2 py-4">
                     {{  $order->workers->pluck('id')->implode(' - ') }}
                 </td>
-                <td class="px-6 py-4">
-                    {{ $order->user->cellphone }} - {{ $order->user->name }} 
+                <td class="px-2 py-4">
+                    {{ $order->user->cellphone }} - {{ $order->user->name }} {{ $order->user->family }} 
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-2 py-4">
                     <div class="{{ statusClass($order->status) }}">
                         {{ __('fa.status.' . $order->status) }}
                     </div>
                 </td>
-                <td class="px-6 py-4">
-                    
+                <td class="px-2 py-4 max-w-lg">
+                    {{-- {{ Str::limit(strip_tags($order->extra_details), 100) }} --}}
+                    {{ $order->extra_details }}
                 </td>
-                <td class="px-6 py-4 text-center">
+                <td class="px-2 py-4 text-center">
                     <a href="{{route('admin.orders.show', $order)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                         مشاهده
                     </a>

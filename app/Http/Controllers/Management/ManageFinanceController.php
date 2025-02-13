@@ -17,12 +17,16 @@ class ManageFinanceController extends Controller
     }
 
 
-    public function index(){
-        // $fees = WorkerFee::get();
-        // $fees = WorkerFee::whereHas('order', function ($query) {
-        //     $query->where('status', 'completed'); // فقط سفارش‌های تایید‌شده
-        // })->latest()->paginate(10);
-        $fees = WorkerFee::latest()->paginate(10);
+    public function index(Request $request){
+        // $fees = WorkerFee::latest()->paginate(10);
+        $search = $request->input('search');
+        $fees = WorkerFee::with('order')
+        ->when($search, function ($query, $search) {
+            return $query->search($search);
+        })
+        ->latest()
+        ->paginate(10);
+
         return view('management.finance.pricing.index', compact('fees'));
     }
 

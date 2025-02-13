@@ -65,6 +65,7 @@ class ManageResumeController extends Controller
 
             DB::commit();
 
+            log_activity('پذیرش رزومه', "رزومه کاربر با کد ". $resume->user->id." مورد قبول واقع شد.");
             return redirect()->route('admin.resumes')->with('success', 'رزومه با موفقیت تایید شد.');
         } catch (\Exception $e) {
             DB::rollBack();

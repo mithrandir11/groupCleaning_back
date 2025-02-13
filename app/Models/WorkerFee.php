@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Morilog\Jalali\CalendarUtils;
 
@@ -21,5 +22,15 @@ class WorkerFee extends Model
     public function getCreatedAtAttribute($value)
     {
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
+    }
+
+    public function scopeSearch(Builder $query, string $search): Builder
+    {
+        return $query->where(function ($query) use ($search) {
+            // جستجو بر اساس کد سفارش مرتبط
+            $query->whereHas('order', function($q) use ($search) {
+                $q->where('order_code', 'like', "%{$search}%");
+            });
+        });
     }
 }

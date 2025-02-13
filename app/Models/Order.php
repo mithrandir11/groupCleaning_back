@@ -112,5 +112,18 @@ class Order extends Model
         });
     }
 
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
+    }
+
+    // شمارش سفارش‌های جدید با Cache
+    public static function getPendingCount()
+    {
+        // return Cache::remember('pending_orders_count', now()->addMinutes(5), function () {
+            return Order::pending()->count();
+        // });
+    }
+
 
 }

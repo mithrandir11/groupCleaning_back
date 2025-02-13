@@ -1,83 +1,84 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="grow">
-    
-    <p class="mb-6 text-xl font-bold   pb-3">{{$order->service_type}}</p>
-
-    <div class="flex justify-between border rounded-lg p-6">
-        <div>
-            @foreach($order->service_options as $key => $value)
-                <li class="mb-8 list-none">
-                    <strong>{{ $key }}:</strong>
-                    @if(is_array($value))
-                        <ul class="pr-5 space-y-2 pt-2">
-                            @foreach($value as $item)
-                                <li>{{ $item }}</li>
-                            @endforeach
-                        </ul>
-                    @else
-                        {{ $value }}
-                    @endif
-                </li>
-            @endforeach
-    
-            <li class="mb-6 list-none">
-                <strong>توضیحات مشتری :</strong>
-                {{ $order->extra_details }}
-            </li>
-    
-            <li class="mb-6 list-none">
-                <strong>توضیحات مدیریت :</strong>
-                {{ $order->operator_notes }}
-            </li>
-    
-            <li class="mb-6 list-none">
-                <strong>تاریخ درخواستی :</strong>
-                {{ $order->selected_date }}
-            </li>
-    
-            <li class="mb-6 list-none">
-                <strong>ساعت درخواستی :</strong>
-                {{ $order->selected_time }}
-            </li>
-    
-            <li class="mb-6 list-none">
-                <strong>شماره تماس مشتری :</strong>
-                {{ $order->contact_number }}
-            </li>
-    
-            <li class="mb-6 list-none">
-                <strong>آدرس مشتری :</strong>
-                {{ $order->address }}
-            </li>
+<div class="grow ">
+    <div class="grid grid-cols-3 border  divide-x divide-x-reverse rounded-t-lg text-center">
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">وضعیت سفارش</p>
+          <p class="{{ statusClass($order->status) }}">{{ __('fa.status.'.$order->status) }}</p>
         </div>
-
-        <div>
-            <div class="bg-gray-100 rounded-lg p-6  space-y-8">
-                <div>
-                    وضعیت سفارش : <span  class="{{ statusClass($order->status) }} font-bold mx-4 px-3 py-1 rounded-lg">{{__('fa.status.'.$order->status)}}</span>
-                </div>
-                <div>
-                    {{-- <svg class="mx-auto mb-3" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M160 0c17.7 0 32 14.3 32 32l0 35.7c1.6 .2 3.1 .4 4.7 .7c.4 .1 .7 .1 1.1 .2l48 8.8c17.4 3.2 28.9 19.9 25.7 37.2s-19.9 28.9-37.2 25.7l-47.5-8.7c-31.3-4.6-58.9-1.5-78.3 6.2s-27.2 18.3-29 28.1c-2 10.7-.5 16.7 1.2 20.4c1.8 3.9 5.5 8.3 12.8 13.2c16.3 10.7 41.3 17.7 73.7 26.3l2.9 .8c28.6 7.6 63.6 16.8 89.6 33.8c14.2 9.3 27.6 21.9 35.9 39.5c8.5 17.9 10.3 37.9 6.4 59.2c-6.9 38-33.1 63.4-65.6 76.7c-13.7 5.6-28.6 9.2-44.4 11l0 33.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-34.9c-.4-.1-.9-.1-1.3-.2l-.2 0s0 0 0 0c-24.4-3.8-64.5-14.3-91.5-26.3c-16.1-7.2-23.4-26.1-16.2-42.2s26.1-23.4 42.2-16.2c20.9 9.3 55.3 18.5 75.2 21.6c31.9 4.7 58.2 2 76-5.3c16.9-6.9 24.6-16.9 26.8-28.9c1.9-10.6 .4-16.7-1.3-20.4c-1.9-4-5.6-8.4-13-13.3c-16.4-10.7-41.5-17.7-74-26.3l-2.8-.7s0 0 0 0C119.4 279.3 84.4 270 58.4 253c-14.2-9.3-27.5-22-35.8-39.6c-8.4-17.9-10.1-37.9-6.1-59.2C23.7 116 52.3 91.2 84.8 78.3c13.3-5.3 27.9-8.9 43.2-11L128 32c0-17.7 14.3-32 32-32z"/></svg> --}}
-                    هزینه سفارش : 
-                    <span class="font-bold text-xl mx-4">{{number_format($order->total_amount)}}</span> تومان
-                </div>
-
-                <div>
-                    <p class="mb-4">متخصصین : </p>
-                    @foreach ($order->workers as $worker)
-                    <div class="flex items-center gap-x-3 mb-2">
-                        <img class="h-12 w-12 rounded-full" src="{{asset('images/user.jpg')}}" alt="">
-                        <span>{{$worker->name}}</span>
-                        <span class="{{ statusClass($worker->pivot->status) }}">{{ __('fa.status.'.$worker->pivot->status) }}</span>
-                    </div>
-                    @endforeach  
-                </div>
-            </div>
+    
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">کد سفارش</p>
+          <p>{{ $order->order_code }}</p>
+        </div>
+    
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">کد متخصص</p>
+          <p> {{  $order->workers->pluck('id')->implode(' - ') }}</p>
         </div>
     </div>
+
+    <div class="grid grid-cols-3 border-x  divide-x divide-x-reverse  text-center">
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">قیمت خدمات</p>
+          <span class="">{{ number_format($order->total_amount) }}</span> تومان
+        </div>
     
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">تاریخ ثبت سفارش مشتری</p>
+          <p>{{ $order->created_at }}</p>
+        </div>
+    
+        <div class=" p-3">
+          <p class="mb-2 font-semibold">زمان و تاریخ درخواستی</p>
+          <p>{{ $order->selected_date }} - {{ $order->selected_time }}</p>
+        </div>
+    </div>
+
+    <div class="border  px-6 py-8">
+        <strong>توضیحات مشتری : </strong> 
+        <div class="max-w-3xl  mt-2 ">
+            {{ $order->extra_details }}
+        </div>
+    </div>
+
+    <div class="border border-t-0 rounded-b-lg  px-6 py-4">
+        @foreach($order->service_options as $key => $value)
+        <li class="mb-8 list-none">
+            <strong>{{ $key }}:</strong>
+            @if(is_array($value))
+                <ul class="pr-5 space-y-2 pt-2">
+                    @foreach($value as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
+                </ul>
+            @else
+                {{ $value }}
+            @endif
+        </li>
+        @endforeach
+        <li class="mb-6 list-none">
+            <strong>شماره تماس مشتری :</strong>
+            {{ $order->contact_number }}
+        </li>
+    
+        <li class="mb-6 list-none">
+            <strong>آدرس مشتری :</strong>
+            {{ $order->address }}
+        </li>
+
+        <div class="border-t pt-6">
+            <strong class="mb-4">متخصصین : </strong>
+            @foreach ($order->workers as $worker)
+            <div class="flex items-center gap-x-3 mb-2">
+                <img class="h-12 w-12 rounded-full" src="{{asset('images/user.jpg')}}" alt="">
+                <span>{{$worker->name}} {{$worker->family}}</span>
+                <span class="{{ statusClass($worker->pivot->status) }}">{{ __('fa.status.'.$worker->pivot->status) }}</span>
+            </div>
+            @endforeach  
+        </div>
+    </div>
 
     @if ($order->status != 'completed')
         <form action="{{route('admin.orders.setPrice', $order)}}" method="POST" class="mt-16">
@@ -86,7 +87,7 @@
             <div class="flex gap-x-3  max-w-sm ">
                 <div class="w-full">
                     
-                    <input value="{{ $order->total_amount  }}" name="amount" type="number" class="text-gray-700 text-sm border border-gray-300 rounded-lg outline-none focus:border-blue-500 block w-full p-3">
+                    <input value="{{ $order->total_amount  }}" name="amount" type="number" class="text-gray-700 text-sm border  rounded-lg outline-none focus:border-blue-500 block w-full p-3">
                     @error('amount')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror

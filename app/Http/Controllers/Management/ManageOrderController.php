@@ -14,7 +14,7 @@ class ManageOrderController extends Controller
 {
     public function index(Request $request){
         $search = $request->input('search');
-        $orders = Order::with('workers')
+        $orders = Order::with(['workers','user'])
         ->when($search, function ($query, $search) {
             return $query->search($search);
         })
@@ -48,6 +48,7 @@ class ManageOrderController extends Controller
         ]);
 
         OrderCompleted::dispatch($order);
+        log_activity('اتمام سفارش', "سفارش با شناسه {$order->order_code}  به اتمام رسید.");
         return redirect()->route('admin.orders')->with('success', 'سفارش با موفقیت قبول شد.');
     }
 
@@ -59,6 +60,8 @@ class ManageOrderController extends Controller
         $order->update([
             'total_amount' => $request->amount,
         ]);
+
+        log_activity('تخصیص هزینه', "سفارش با کد $order->order_code به مبلغ $request->amount قیمت گذاری شد.");
 
         return redirect()->back()->with('success', 'عملیات با موفقیت انجام شد');
     }
