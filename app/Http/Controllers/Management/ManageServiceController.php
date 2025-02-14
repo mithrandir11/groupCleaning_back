@@ -17,32 +17,32 @@ class ManageServiceController extends Controller
         return view('management.services.create');
     }
 
-    public function store(Request $request){
-        dd($request->all());
-        $validated = $request->validate([
-            'title'      => 'required|string|max:255',
-            'title_fa'      => 'required|string|max:255',
-            'slug'       => 'required|string|max:255|unique:articles,slug',
-        ]);
+    // public function store(Request $request){
+    //     dd($request->all());
+    //     $validated = $request->validate([
+    //         'title'      => 'required|string|max:255',
+    //         'title_fa'      => 'required|string|max:255',
+    //         'slug'       => 'required|string|max:255|unique:articles,slug',
+    //     ]);
 
-        Service::create($validated);
+    //     Service::create($validated);
 
-        return redirect()->route('admin.services')->with('success', 'آیتم با موفقیت ایجاد شد.');
-    }
+    //     return redirect()->route('admin.services')->with('success', 'آیتم با موفقیت ایجاد شد.');
+    // }
 
     public function edit(Service $service){
         return view('management.services.edit', compact('service'));
     }
 
-    public function update(Request $request, Service $service){
-        $validated = $request->validate([
-            'title'      => 'required|string|max:255',
-            'title_fa'      => 'required|string|max:255',
-            'slug'       => 'required|string|max:255|unique:services,slug,'.$service->id,
-        ]);
-        $service->update($validated);
-        return redirect()->route('admin.services')->with('success', 'آیتم با موفقیت بروزرسانی شد.');
-    }
+    // public function update(Request $request, Service $service){
+    //     $validated = $request->validate([
+    //         'title'      => 'required|string|max:255',
+    //         'title_fa'      => 'required|string|max:255',
+    //         'slug'       => 'required|string|max:255|unique:services,slug,'.$service->id,
+    //     ]);
+    //     $service->update($validated);
+    //     return redirect()->route('admin.services')->with('success', 'آیتم با موفقیت بروزرسانی شد.');
+    // }
 
     public function destroy(Service $service){
         $service->delete();

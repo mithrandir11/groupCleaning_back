@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->string('cellphone', 20)->unique()->nullable();
             $table->string('otp', 10)->nullable();
+            $table->timestamp('otp_expires_at')->nullable();
             $table->string('login_token', 100)->nullable()->unique();
             
           

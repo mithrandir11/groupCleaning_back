@@ -44,6 +44,7 @@ class RoleUserSeeder extends Seeder
             'name' => 'ادمین',
             'email' => 'admin@example.com',
             'password' => Hash::make('1111'),
+            'cellphone' => '09390990777'
         ]);
         $admin->assignCustomerRole = false; 
         $admin->save();
@@ -63,6 +64,7 @@ class RoleUserSeeder extends Seeder
             'name' => 'اپراتور',
             'email' => 'operator@example.com',
             'password' => Hash::make('1111'),
+            'cellphone' => '09390990888'
         ]);
         $operator->assignCustomerRole = false; 
         $operator->save();

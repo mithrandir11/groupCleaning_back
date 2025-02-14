@@ -14,9 +14,10 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next, ...$role): Response
     {
-        if (!Auth::check() || !Auth::user()->hasRole($role)) {
+        // dd($role);
+        if (!Auth::check() || !Auth::user()->hasAnyRole($role)) {
             abort(403, 'شما مجوز دسترسی به این صفحه را ندارید.');
         }
         return $next($request);

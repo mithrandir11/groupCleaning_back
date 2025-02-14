@@ -22,79 +22,78 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
 
-    public function SendBulkSMS(){
-        $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
-        $sendDate = now();
-        $lineNumber = '30005088';
-        $receptor = ['09941831687'];
-        $message = 'test';
-        try {
-            $response = $ghasedaksms->sendBulk(new BulkMessageDTO(
-                sendDate: $sendDate,
-                lineNumber: $lineNumber,
-                receptors: $receptor,
-                message: $message
-            ));
-            var_dump($response);
-        } catch (Exception $e) {
-            var_dump($e->getMessage());
-        }
-    }
+    // public function SendBulkSMS(){
+    //     $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
+    //     $sendDate = now();
+    //     $lineNumber = '30005088';
+    //     $receptor = ['09941831687'];
+    //     $message = 'test';
+    //     try {
+    //         $response = $ghasedaksms->sendBulk(new BulkMessageDTO(
+    //             sendDate: $sendDate,
+    //             lineNumber: $lineNumber,
+    //             receptors: $receptor,
+    //             message: $message
+    //         ));
+    //         var_dump($response);
+    //     } catch (Exception $e) {
+    //         var_dump($e->getMessage());
+    //     }
+    // }
         
 
-    public function SendSingleSMS(){
-        $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
-        $sendDate = now();
-        $lineNumber = '30005088';
-        $receptor = '09941831687';// برای مثال
-        $message = 'test لغو11';// برای مثال
-        try {
-            $response = $ghasedaksms->sendSingle(new SingleMessageDTO(
-                sendDate: $sendDate,
-                lineNumber: $lineNumber,
-                receptor: $receptor,
-                message: $message
-            ));
-        } catch (Exception $e) {
-            var_dump($e->getMessage());
-        }
-    }
+    // public function SendSingleSMS(){
+    //     $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
+    //     $sendDate = now();
+    //     $lineNumber = '30005088';
+    //     $receptor = '09941831687';// برای مثال
+    //     $message = 'test لغو11';// برای مثال
+    //     try {
+    //         $response = $ghasedaksms->sendSingle(new SingleMessageDTO(
+    //             sendDate: $sendDate,
+    //             lineNumber: $lineNumber,
+    //             receptor: $receptor,
+    //             message: $message
+    //         ));
+    //     } catch (Exception $e) {
+    //         var_dump($e->getMessage());
+    //     }
+    // }
 
 
-    public function SendOtpSMS(){
-        $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
-        $sendDate = new DateTimeImmutable('now');
-        try {
-            $response = $ghasedaksms->sendOtp(new OtpMessageDTO(
-                sendDate: $sendDate,
-                receptors: [
-                    new ReceptorDTO(
-                        mobile: '09941831687', // برای مثال
-                        clientReferenceId: '1'
-                    )
-                ],
-                templateName: 'Ghasedak',
-                inputs: [
-                    new InputDTO(
-                        param: 'Code',
-                        value: '334455'// برای مثال
-                    ),
-                    new InputDTO(
-                        param: 'APP_NAME',
-                        value: env('APP_NAME')
-                    )
-                ]
-            ));
-          } catch (Exception $e) {
-              var_dump($e->getMessage());
-          }
-    }
+    // public function SendOtpSMS(){
+    //     $ghasedaksms = new GhasedaksmsApi('540a7c929db2d4783bb9f3826de71d3051fe5e145a6fd728e77f9fa1ba4918d2fpnZ9c5hjckhWPgN');
+    //     $sendDate = new DateTimeImmutable('now');
+    //     try {
+    //         $response = $ghasedaksms->sendOtp(new OtpMessageDTO(
+    //             sendDate: $sendDate,
+    //             receptors: [
+    //                 new ReceptorDTO(
+    //                     mobile: '09941831687', // برای مثال
+    //                     clientReferenceId: '1'
+    //                 )
+    //             ],
+    //             templateName: 'Ghasedak',
+    //             inputs: [
+    //                 new InputDTO(
+    //                     param: 'Code',
+    //                     value: '334455'// برای مثال
+    //                 ),
+    //                 new InputDTO(
+    //                     param: 'APP_NAME',
+    //                     value: env('APP_NAME')
+    //                 )
+    //             ]
+    //         ));
+    //       } catch (Exception $e) {
+    //           var_dump($e->getMessage());
+    //       }
+    // }
 
 
 
 
-    public function login(Request $request)
-    {
+    public function login(Request $request){
         $request->validate([
             'cellphone' => ['required', 'regex:/^(\+98|0)?9\d{9}$/']
         ]);
@@ -153,8 +152,6 @@ class AuthController extends Controller
                 'otp' => $OTPCode,
                 'login_token' => $loginToken
             ]);
-    
-            // $user->notify(new OTPSms($OTPCode));
             return Response::success(null, ['login_token' => $loginToken]);
         } catch (Exception $e) {
             return Response::error($e->getMessage());

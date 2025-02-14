@@ -34,6 +34,7 @@ class User extends Authenticatable
         'password',
         'cellphone',
         'otp',
+        'otp_expires_at',
         'login_token',
     ];
 
@@ -90,6 +91,15 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return $this->roles->contains('name', $role);
+    }
+
+    public function hasAnyRole($roles): bool
+    {
+        if (is_string($roles)) {
+            $roles = [$roles]; // اگر ورودی یک رشته باشد، به آرایه تبدیل می‌کنیم
+        }
+
+        return $this->roles()->whereIn('name', $roles)->exists();
     }
 
     // public function orders()

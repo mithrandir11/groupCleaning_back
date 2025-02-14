@@ -142,7 +142,7 @@
                 </div>
             </li>
 
-
+            {{-- @if (auth()->user()->hasRole('admin')) --}}
             <li>
                 <div x-data="{ isOpen: {{ isActiveRoute(['admin.tags.create', 'admin.tags.edit', 'admin.tags', 'admin.footerSymbol.create', 'admin.footerSymbol.edit', 'admin.footer.edit', 'admin.footer', 'admin.footer.create', 'admin.faqs.show', 'admin.faqs.edit', 'admin.faqs.create', 'admin.faqs', 'admin.suggestedPages.show', 'admin.suggestedPages.edit', 'admin.menu', 'admin.articles', 'admin.suggestedPages', 'admin.menu.create', 'admin.menu.edit', 'admin.articles.create', 'admin.articles.edit', 'admin.suggestedPages.create']) ? 'true' : 'false' }} }" class="flex-col gap-1 flex ">
                     <button @click.prevent="isOpen = !isOpen" type="button" class="flex-col flex rounded-lg p-3">
@@ -165,11 +165,11 @@
                         <a href="{{route('admin.faqs')}}" class="{{ isActiveRoute(['admin.faqs', 'admin.faqs.create', 'admin.faqs.edit', 'admin.faqs.show']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >سوالات متداول</a>
                         <a href="{{route('admin.footer')}}" class="{{ isActiveRoute(['admin.footerSymbol.create', 'admin.footerSymbol.edit', 'admin.footer', 'admin.footer.create', 'admin.footer.edit']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >فوتر</a>
                         <a href="{{route('admin.tags')}}" class="{{ isActiveRoute(['admin.tags.create', 'admin.tags.edit', 'admin.tags']) ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >تگ ها</a>
-                        {{-- <a href="{{route('admin.finance.payments')}}" class="{{ isActiveRoute('admin.finance.payments') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg text-sm font-medium leading-snug px-3 py-2 " >پرداخت ها</a>
-                        <a href="{{ route('admin.finance.reports') }}" class="{{ isActiveRoute('admin.finance.reports') ? 'bg-gray-200' : '' }} text-gray-500 rounded-lg  text-sm font-medium leading-snug px-3 py-1 " >گزارش</a> --}}
                     </div>
                 </div>
             </li>
+            {{-- @endif --}}
+           
             
            
 
