@@ -31,7 +31,7 @@
             @enderror
         </div>
 
-          <!-- نام پدر -->
+        <!-- نام پدر -->
         <div class="mb-4">
             <label for="father_name" class="block mb-2 text-sm font-medium text-gray-900">نام پدر</label>
             <input value="{{ $resume->father_name }}" name="father_name" type="text" disabled class="disabled max-w-sm text-gray-700 text-sm border border-gray-300 rounded-lg outline-none focus:border-blue-500 block w-full p-3">
@@ -138,7 +138,7 @@
 
     {{-- {{$resume->status}} --}}
 
-    @if ($resume->status == 'تایید شده')
+    {{-- @if ($resume->status == 'approved') --}}
     <form action="{{route('admin.resumes.updateCommission', $resume)}}" method="POST" class="mt-16">
         @csrf
         @method('PUT')
@@ -156,11 +156,11 @@
             </button>
         </div>
     </form>
-    @endif
+    {{-- @endif --}}
 
 
     <div class="flex justify-end items-center gap-x-3 mt-16 ">
-        @if ($resume->status == 'تایید شده') 
+        @if ($resume->status == 'approved') 
         <span class="text-sm px-4 py-2 rounded-lg bg-green-100 text-gray-600">این رزومه تایید شده است</span>
         @else
         <form action="{{route('admin.resumes.approve', $resume)}}" method="POST">

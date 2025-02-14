@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Worker;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class WorkerController extends Controller
@@ -18,7 +19,8 @@ class WorkerController extends Controller
 
     public function info()
     {
-        $user = auth()->user();
+        // $user = auth()->user();
+        $user = User::with('resume')->where('id', auth()->user()->id)->first();
         return view('worker.info', compact('user'));
     }
 

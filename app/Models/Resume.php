@@ -25,23 +25,23 @@ class Resume extends Model
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
     }
 
-    public function getStatusAttribute($status)
-    {
-        switch ($status) {
-            case 'pending':
-                $status = 'در انتظار بررسی';
-                break;
-            case 'approved':
-                $status = 'تایید شده';
-                break;
-            case 'rejected':
-                $status = 'رد شده';
-                break;
-            default:
-                return $status;
-        }
-        return $status;
-    }
+    // public function getStatusAttribute($status)
+    // {
+    //     switch ($status) {
+    //         case 'pending':
+    //             $status = 'در انتظار بررسی';
+    //             break;
+    //         case 'approved':
+    //             $status = 'تایید شده';
+    //             break;
+    //         case 'rejected':
+    //             $status = 'رد شده';
+    //             break;
+    //         default:
+    //             return $status;
+    //     }
+    //     return $status;
+    // }
 
     public function scopeSearch(Builder $query, string $search): Builder
     {

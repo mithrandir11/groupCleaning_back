@@ -23,7 +23,7 @@
             <div class="">
                 <div class="grid mb-2">
                     <h5 class="text-right text-gray-900 text-sm font-semibold leading-snug pb-1">شما</h5>
-                    <div class="px-3 py-2 bg-blue-600 rounded">
+                    <div class="px-3 py-2 bg-blue-600 rounded-lg">
                     <h2 class="text-white text-sm font-normal leading-snug max-w-lg text-right">{{$message->message}}</h2>
                     </div>
                     <div class="justify-start items-center inline-flex">
@@ -40,7 +40,7 @@
                 <div class="grid">
                     <h5 class="text-gray-900 text-sm font-semibold leading-snug pb-1">{{$message->user->name ?? ''}}</h5>
                     <div class="w-max grid">
-                    <div class="px-3.5 py-2 bg-gray-100 rounded justify-start  items-center gap-3 inline-flex">
+                    <div class="px-3.5 py-2 bg-gray-100 rounded-lg justify-start  items-center gap-3 inline-flex">
                         <h5 class="text-gray-900 text-sm font-normal leading-snug text-right">{{$message->message}}</h5>
                     </div>
                     <div class="justify-end items-center inline-flex mb-2.5">

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('total_paid_amount')->default(0);// مبلغ تسویه شده
             $table->string('total_income_amount')->default(0);// مبلغ درآمد (حق‌الزحمه)
             $table->string('total_credit_amount')->default(0);// مبلغ بستانکاری
-            $table->enum('status', ['debtor', 'creditor', 'balanced'])->default('balanced');
+            // $table->enum('status', ['debtor', 'creditor', 'balanced'])->default('balanced');
             $table->timestamps();
         });
     }

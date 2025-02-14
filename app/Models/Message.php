@@ -23,4 +23,11 @@ class Message extends Model
     {
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
     }
+
+    public static function getMessageCount()
+    {
+        // return Cache::remember('pending_orders_count', now()->addMinutes(5), function () {
+            return Message::where('read_at', null)->count();
+        // });
+    }
 }

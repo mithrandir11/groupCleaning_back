@@ -34,11 +34,28 @@ class Report extends Model
         return WorkerFee::where('worker_id', $workerId)->sum('amount');
     }
 
+    public function totalPenaltyAmountForWorker($workerId)
+    {
+        return WorkerFee::where('worker_id', $workerId)->sum('penalty_amount');
+    }
+
     public function totalCreditAmountForWorker($workerId)
     {
         $total_paid_amount = $this->totalPaidAmountForWorker($workerId);
         $total_income_amount = $this->totalIncomeAmountForWorker($workerId);
-        return $total_income_amount - $total_paid_amount;
+        $total_penalty_amount = $this->totalPenaltyAmountForWorker($workerId);
+        return $total_income_amount - $total_paid_amount - $total_penalty_amount;
+    }
+
+    public function balanceStatus($workerId){
+        $total_credit_amount = $this->totalCreditAmountForWorker($workerId);
+        if($total_credit_amount > 0){
+            return 'creditor';
+        }elseif($total_credit_amount < 0){
+            return 'debtor';
+        }else{
+            return 'balanced';
+        }
     }
 
     // public function getStatusAttribute($value)

@@ -31,10 +31,13 @@
                     کل درآمد
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    کل جریمه
+                </th>
+                <th scope="col" class="px-6 py-3">
                     کل بستانکاری
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    وضعیت متخصص
+                    وضعیت تراز مالی متخصص
                 </th>
                 <th scope="col" class="px-6 py-3 text-center">
                     عملیات
@@ -52,16 +55,19 @@
                     {{ $report->worker_id }} 
                 </td>
                 <td class="px-6 py-4">
-                    {{ number_format($report->total_paid_amount) }} <span class="text-xs">تومان</span>
+                    {{ number_format($report->totalPaidAmountForWorker($report->worker_id)) }} <span class="text-xs">تومان</span>
                 </td>
                 <td class="px-6 py-4">
-                    {{ number_format($report->total_income_amount) }} <span class="text-xs">تومان</span>
+                    {{ number_format($report->totalIncomeAmountForWorker($report->worker_id)) }} <span class="text-xs">تومان</span>
                 </td>
                 <td class="px-6 py-4">
-                    {{ number_format($report->total_credit_amount) }} <span class="text-xs">تومان</span>
+                    {{ number_format($report->totalPenaltyAmountForWorker($report->worker_id)) }} <span class="text-xs">تومان</span>
                 </td>
                 <td class="px-6 py-4">
-                    {{ __('fa.status.'.$report->status) }}
+                    {{ number_format($report->totalCreditAmountForWorker($report->worker_id)) }} <span class="text-xs">تومان</span>
+                </td>
+                <td class="px-6 py-4">
+                    {{ __('fa.status.'.$report->balanceStatus($report->worker_id)) }}
                 </td>
                 <td class="px-6 py-4 text-center">
                     <a href="{{route('admin.finance.reports.details', $report->worker)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">

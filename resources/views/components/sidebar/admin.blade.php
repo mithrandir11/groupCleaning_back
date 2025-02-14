@@ -1,5 +1,6 @@
 @php
     $pendingOrdersCount = \App\Models\Order::getPendingCount();
+    $messagesCount = \App\Models\Message::getMessageCount();
 @endphp
 <aside class="w-72 p-4 border bg-gray-50 border-gray-300 rounded-lg flex-col justify-start items-start gap-6 inline-flex self-start">
     <div class="w-full justify-between items-center gap-2.5 inline-flex ">
@@ -58,7 +59,7 @@
 
             <li>
                 <div class="flex-col gap-1 flex">
-                    <a href="{{route('admin.orders')}}" class="@if (isActiveRoute(['admin.orders','admin.orders.show'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
+                    <a href="{{route('admin.orders')}}" class="@if (isActiveRoute(['admin.orders','admin.orders.show', 'admin.orders.assignOrderToWorker.show'])) bg-gray-200 @endif flex-col flex rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
                                 {{-- @if ($pendingOrdersCount > 0)
@@ -202,6 +203,11 @@
 
                             </div>
                             <h2 class="text-gray-500 text-sm font-medium leading-snug">پیام ها</h2>
+                            @if ($messagesCount > 0)
+                                <span class=" bg-blue-500 text-white text-sm font-bold px-2 pb-1 rounded-lg mr-auto">
+                                    {{ $messagesCount }}
+                                </span>
+                            @endif
                         </div>
                     </a>
                 </div>
@@ -243,7 +249,7 @@
             <li>
                 <form action="{{route('logout')}}" method="POST" class="flex-col gap-1 flex">
                     @csrf
-                    <button type="submit" class="flex-col flex bg-white rounded-lg p-3">
+                    <button type="submit" class="flex-col flex  rounded-lg p-3">
                         <div class="h-5 gap-3 flex">
                             <div class="relative">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 20 20" fill="none">
@@ -252,7 +258,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <h2 class="text-gray-500 text-sm font-medium leading-snug">خروج</h2>
+                            <h2 class="text-red-500 text-sm font-medium leading-snug">خروج</h2>
                         </div>
                     </button>
                 </form>

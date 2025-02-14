@@ -40,6 +40,9 @@ if (!function_exists('convertPersianToEnglishNumbers')) {
 
             'active' => 'text-green-500', 
             'inactive' => 'text-red-500', 
+
+            'approved' => 'text-green-500', 
+            'rejected' => 'text-red-500', 
         ];
         return $statusMap[$status] ?? null; 
     }

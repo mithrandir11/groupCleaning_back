@@ -63,17 +63,17 @@ class ManagePaymentController extends Controller
         $total_paid_amount = $report->totalPaidAmountForWorker($request->worker_id);
         $total_credit_amount = $report->totalCreditAmountForWorker($request->worker_id);
 
-        $status = 'balanced';
-        if($total_credit_amount > 0){
-            $status = 'creditor';
-        }elseif($total_credit_amount < 0){
-            $status = 'debtor';
-        }
+        // $status = 'balanced';
+        // if($total_credit_amount > 0){
+        //     $status = 'creditor';
+        // }elseif($total_credit_amount < 0){
+        //     $status = 'debtor';
+        // }
 
         $report->update([
             'total_paid_amount' => $total_paid_amount,
             'total_credit_amount' => $total_credit_amount,
-            'status' => $status,
+            // 'status' => $status,
         ]);
         // $report->increment('total_paid_amount', $request->amount);
         // $report->decrement('total_credit_amount', $request->amount);
@@ -105,17 +105,17 @@ class ManagePaymentController extends Controller
         $total_paid_amount = $report->totalPaidAmountForWorker($payment->worker_id);
         $total_credit_amount = $report->totalCreditAmountForWorker($payment->worker_id);
 
-        $status = 'balanced';
-        if($total_credit_amount > 0){
-            $status = 'creditor';
-        }elseif($total_credit_amount < 0){
-            $status = 'debtor';
-        }
+        // $status = 'balanced';
+        // if($total_credit_amount > 0){
+        //     $status = 'creditor';
+        // }elseif($total_credit_amount < 0){
+        //     $status = 'debtor';
+        // }
 
         $report->update([
             'total_paid_amount' => $total_paid_amount,
             'total_credit_amount' => $total_credit_amount,
-            'status' => $status,
+            // 'status' => $status,
         ]);
 
         // $report = Report::firstOrCreate(['worker_id' => $payment->worker_id]);

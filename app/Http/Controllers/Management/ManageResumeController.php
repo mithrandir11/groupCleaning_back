@@ -46,25 +46,14 @@ class ManageResumeController extends Controller
     }
 
 
-    public function approve(Resume $resume)
-    {
+    public function approve(Resume $resume){
         DB::beginTransaction();
         try {
-            // تایید رزومه
             $resume->update(['status' => 'approved']);
             $workerRole = Role::where('name', 'worker')->first();
-            // $resume->user->roles()->attach($workerRole);
             $resume->user->roles()->syncWithoutDetaching([$workerRole->id]);
-
-            // $resume->update(['status' => 'approved']);
-            // $workerRole = Role::where('name', 'worker')->first();
-            // if (!$resume->user->roles->contains($workerRole)) {
-            //     $resume->user->roles()->attach($workerRole);
-            // }
-            Report::create(['worker_id'=>$resume->user->id]);
-
+            Report::firstOrCreate(['worker_id'=>$resume->user->id]);
             DB::commit();
-
             log_activity('پذیرش رزومه', "رزومه کاربر با کد ". $resume->user->id." مورد قبول واقع شد.");
             return redirect()->route('admin.resumes')->with('success', 'رزومه با موفقیت تایید شد.');
         } catch (\Exception $e) {
@@ -73,9 +62,8 @@ class ManageResumeController extends Controller
         }
     }
 
-    // رد رزومه
-    public function reject(Resume $resume)
-    {
+    
+    public function reject(Resume $resume){
         DB::beginTransaction();
         try {
             // رد رزومه

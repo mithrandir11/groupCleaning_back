@@ -28,5 +28,8 @@ return [
 
         'active' => 'فعال', 
         'inactive' => 'غیر فعال', 
+
+        'approved' => 'تایید شده', 
+        'rejected' => 'رد شده', 
     ]
 ];

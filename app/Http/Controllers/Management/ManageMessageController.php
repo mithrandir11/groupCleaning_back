@@ -58,4 +58,9 @@ class ManageMessageController extends Controller
 
         return redirect()->back()->with('success', 'Message sent successfully!');
     }
+
+    public function destroy(Conversation $conversation){
+        $conversation->delete();
+        return redirect()->route('admin.messages')->with('success', 'آیتم با موفقیت حذف شد.');
+    }
 }

@@ -8,9 +8,9 @@
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                {{-- <th scope="col" class="px-6 py-3">
                     ردیف
-                </th>
+                </th> --}}
                 <th scope="col" class="px-6 py-3">
                     عنوان
                 </th>
@@ -20,18 +20,18 @@
                 <th scope="col" class="px-6 py-3">
                     تاریخ
                 </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                {{-- <th scope="col" class="px-6 py-3 text-center">
                     جزئیات
-                </th>
+                </th> --}}
             </tr>
         </thead>
         
         <tbody>
             @foreach ($notifications as $index => $notification)
             <tr class="odd:bg-white  even:bg-gray-50  border-b ">
-                <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap ">
+                {{-- <th scope="row" class="px-6 py-4  text-gray-900 whitespace-nowrap ">
                     {{ $notifications->total() - ($notifications->perPage() * ($notifications->currentPage() - 1) + $index) }}
-                </th>
+                </th> --}}
                 <td class="px-6 py-4">
                     {{ $notification->title }}
                 </td>
@@ -42,13 +42,13 @@
                     {{ $notification->created_at }}
                 </td>
  
-                <td class="px-6 py-4 text-center">
+                {{-- <td class="px-6 py-4 text-center">
                     <x-utils.modal title="جزییات پیام" btnTitle="نمایش" btnColor="bg-blue-200">
                         <div>
                             {{$notification->message}}
                         </div>
                     </x-modal>
-                </td>
+                </td> --}}
 
             </tr>
             @endforeach        
@@ -56,9 +56,9 @@
         </tbody>
     </table>  
 
-    {{-- <div class="mt-4">
-        {{ $orders->links() }}
-    </div>       --}}
+    <div class="mt-4">
+        {{ $notifications->links() }}
+    </div>      
 
 </div>                                       
 @endsection

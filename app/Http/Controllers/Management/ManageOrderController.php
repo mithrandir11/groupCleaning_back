@@ -52,6 +52,17 @@ class ManageOrderController extends Controller
         return redirect()->route('admin.orders')->with('success', 'سفارش با موفقیت قبول شد.');
     }
 
+    public function cancelOrder(Order $order){
+        // $this->authorize('accept', $order);
+        $order->update([
+            'status' => 'canceled',
+        ]);
+
+        // OrderCompleted::dispatch($order);
+        log_activity('لغو سفارش', "سفارش با شناسه {$order->order_code}   لغو شد.");
+        return redirect()->route('admin.orders')->with('success', 'سفارش با موفقیت لغو شد.');
+    }
+
     public function setOrderPrice(Request $request, Order $order){
         $request->validate([
             'amount' => 'required|numeric|min:0',
@@ -70,7 +81,7 @@ class ManageOrderController extends Controller
 
 
     public function showAssignOrderToWorker(Order $order){
-        $order->load('workers');
+        // $order->load('workers');
         $workers = User::whereHas('roles', function ($query) {
             $query->where('name', 'worker');
         })

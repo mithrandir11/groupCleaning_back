@@ -59,6 +59,13 @@
                         <span class="bg-blue-500 text-white rounded-full px-2.5 py-1">{{ $conversation->unread_messages_count }}</span>
                         @endif
                     </a>
+                    <form action="{{route('admin.messages.delete', $conversation)}}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('آیا از حذف این آیتم مطمئن هستید؟')" class="bg-red-100 mr-2 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
+                            حذف
+                        </button>
+                    </form>
                 </td>
                 
 

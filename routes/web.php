@@ -148,6 +148,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/message-management', [ManageMessageController::class, 'index'])->name('admin.messages');
     Route::get('/admin/message-management/show/{conversation}', [ManageMessageController::class, 'show'])->name('admin.messages.show');
     Route::post('/admin/message-management/store/{conversation}', [ManageMessageController::class, 'store'])->name('admin.messages.store');
+    Route::delete('/admin/message-management/delete/{conversation}', [ManageMessageController::class, 'destroy'])->name('admin.messages.delete');
 
 
 
@@ -166,6 +167,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/order-management/show/{order}/assign-to-workers', [ManageOrderController::class, 'assignToWorkers'])->name('admin.orders.assignToWorkers');
     Route::post('/admin/order-management/{order}/accept', [ManageOrderController::class, 'acceptOrder'])->name('admin.orders.accept');
     Route::post('/admin/order-management/{order}/complete', [ManageOrderController::class, 'completeOrder'])->name('admin.orders.complete');
+    Route::post('/admin/order-management/{order}/cancel', [ManageOrderController::class, 'cancelOrder'])->name('admin.orders.cancel');
     Route::post('/admin/order-management/{order}/setPrice', [ManageOrderController::class, 'setOrderPrice'])->name('admin.orders.setPrice');
     // Route::post('/admin/order-management/findByOrderCode', [ManageOrderController::class, 'findOrderByOrderCode'])->name('admin.orders.findOrderByOrderCode');
     

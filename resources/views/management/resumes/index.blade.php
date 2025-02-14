@@ -66,7 +66,7 @@
                     {{ $resume->user->cellphone }}
                 </td>
                 <td class="px-6 py-4 {{ statusClass($resume->status) }}">
-                    {{ $resume->status }}
+                    {{ __('fa.status.' . $resume->status) }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $resume->commission_rate }}
