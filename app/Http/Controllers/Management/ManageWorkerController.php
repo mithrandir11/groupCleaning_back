@@ -10,7 +10,7 @@ class ManageWorkerController extends Controller
 {
     public function index(Request $request){
         $search = $request->input('search');
-        $users = User::with('roles')
+        $users = User::with(['roles','resume'])
             ->whereHas('roles', function ($query) {
                 $query->where('name', 'worker');
             })

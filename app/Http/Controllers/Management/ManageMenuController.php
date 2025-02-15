@@ -10,7 +10,7 @@ class ManageMenuController extends Controller
 {
     public function index(){
         $menus = Menu::whereNull('parent_id')
-        ->with('children') // بارگذاری فرزندان
+        ->with('children')
         ->get();
         return view('management.content.menu.index', compact('menus'));
     }
@@ -53,9 +53,7 @@ class ManageMenuController extends Controller
     }
 
     public function edit(Menu $menu){
-        // همه منوها برای انتخاب والد
         $allMenus = Menu::all();
-        // dd($menu->seo);
         return view('management.content.menu.edit', compact('menu', 'allMenus'));
     }
 
@@ -72,7 +70,6 @@ class ManageMenuController extends Controller
             'seo.keywords' => 'nullable|string',
             'seo.canonical_url' => 'nullable|url',
         ]);
-        // dd($validated['seo']);
 
         $menu->update([
             'name'      => $validated['name'],
@@ -81,17 +78,7 @@ class ManageMenuController extends Controller
             'text'      => $validated['text'],
         ]);
 
-        // dd($menu->seo);
-
         if (isset($validated['seo'])) $menu->seo()->updateOrCreate([], $validated['seo']);
-        // if (isset($validated['seo'])) {
-        //     $menu->seo()->updateOrCreate(
-        //         ['seotable_id' => $menu->id, 'seotable_type' => get_class($menu)], // Conditions
-        //         $validated['seo'] // Values
-        //     );
-        // }
-
-        // $menu->update($validated);
 
         return redirect()->route('admin.menu')->with('success', 'منو با موفقیت بروزرسانی شد.');
     }

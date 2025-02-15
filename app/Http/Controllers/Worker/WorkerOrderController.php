@@ -9,21 +9,8 @@ use Illuminate\Http\Request;
 
 class WorkerOrderController extends Controller
 {
-    // public function index()
-    // {
-    //     $orders = Order::where('worker_id', auth()->user()->id)->latest()->paginate(10);
-    //     return view('worker.orders.index', compact('orders'));
-    // }
-
     public function index(Request $request){
         $search = $request->input('search');
-        // $orders = Order::with('user')
-        //     ->where('worker_id', auth()->user()->id)
-        //     ->when($search, function ($query, $search) {
-        //         return $query->search($search);
-        //     })
-        //     ->latest()
-        //     ->paginate(10);
 
         $worker_orders = WorkerOrder::with('order')
             ->where('worker_id', auth()->user()->id)
@@ -45,8 +32,6 @@ class WorkerOrderController extends Controller
     }
 
     public function acceptOrder(WorkerOrder $worker_order){
-        // $this->authorize('accept', $order);
-
         $worker_order->update([
             'status' => 'accepted',
         ]);
@@ -54,7 +39,6 @@ class WorkerOrderController extends Controller
     }
 
     public function completeOrder(WorkerOrder $worker_order){
-        // $this->authorize('accept', $order);
         $worker_order->update([
             'status' => 'completed',
             'delivered_at' => now(),

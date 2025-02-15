@@ -43,10 +43,7 @@ class ManageUserController extends Controller
             'cellphone' => 'required|numeric|unique:users,cellphone,' . $user->id,
             'status' => 'required',
             'is_operator' => 'nullable|boolean',
-            // 'role_id' => 'nullable|exists:roles,id',
         ]);
-
-    //   dd($request->all());
       
         try {
             if($request->is_operator && $request->is_operator == '1'){

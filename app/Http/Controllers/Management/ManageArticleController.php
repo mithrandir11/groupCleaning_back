@@ -35,11 +35,8 @@ class ManageArticleController extends Controller
 
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
-            // 'seo.open_graph' => 'nullable|json',
-            // 'seo.json_ld' => 'nullable|json',
         ]);
 
-        // dd($request->all());
         $path = $request->file('image')->store('articles/images', 'public');
         $validated['image'] = url('storage/' . str_replace('public/', '', $path));
         $article = Article::create([
@@ -92,11 +89,8 @@ class ManageArticleController extends Controller
             $path = $request->file('image')->store('articles/images', 'public');
             $validated['image'] = url('storage/' . str_replace('public/', '', $path));
         } else {
-            // اگر تصویر جدیدی انتخاب نشده باشد، تصویر قبلی را حفظ کنید
             $validated['image'] = $article->image;
         }
-        
-
 
         $article->update([
             'title' => $validated['title'],
@@ -106,14 +100,12 @@ class ManageArticleController extends Controller
             'image' => $validated['image'],
         ]);
 
-
-        // if (isset($validated['seo'])) $article->seo?->updateOrCreate([], $validated['seo']);
         if (isset($validated['seo'])) $article->seo()->updateOrCreate([], $validated['seo']);
 
         if (isset($validated['tags'])) {
-            $article->tags()->sync($validated['tags']); // Sync تگ‌ها
+            $article->tags()->sync($validated['tags']); 
         } else {
-            $article->tags()->detach(); // حذف تمام تگ‌ها اگر هیچ تگی انتخاب نشده باشد
+            $article->tags()->detach();
         }
 
         return redirect()->route('admin.articles')->with('success', 'مقاله با موفقیت بروزرسانی شد.');

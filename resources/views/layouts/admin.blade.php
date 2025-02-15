@@ -15,24 +15,27 @@
 </head>
 <body>
      
+    
 
+    <div class="px-1 lg:px-4">
+        
+        @if (session()->has('error'))
+        <div class="bg-red-200 text-red-600 rounded p-3 mt-3">
+            {{ session('error') }}
+        </div>
+        @endif
 
-     <div class="px-1 lg:px-4   ">
-        {{-- @if ($showHeader ?? true)
-        <Header/>
-        @endif --}}
         <div class="py-12 flex gap-x-6">
             @if ($showSidebar ?? true)
                 <x-sidebar.admin/>
             @endif
             @yield('content')
         </div>
-
-        @livewireScripts
-        {{-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script> --}}
-        <script type="text/javascript" src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
-        @stack('scripts')
-        {{-- <Footer/> --}}
     </div>
+
+    @livewireScripts
+    <script type="text/javascript" src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
+    @stack('scripts')
+
 </body>
 </html>

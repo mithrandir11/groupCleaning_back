@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\DB;
 class ManageMessageController extends Controller
 {
     public function index(){
-        // $conversations = Conversation::with('messages')->paginate(10);
-      
         $conversations = Conversation::with('messages')
         ->orderByDesc(DB::raw('(
             SELECT MAX(messages.created_at)
@@ -30,9 +28,6 @@ class ManageMessageController extends Controller
     }
 
     public function show(Conversation $conversation){
-        // $conversation->load('messages');
-        // $messages = $conversation->messages->sortByDesc('created_at');
-
         DB::transaction(function () use ($conversation) {
             $conversation->messages()->whereNull('read_at')->update(['read_at' => now()]);
             $conversation->load(['messages' => function ($query) {

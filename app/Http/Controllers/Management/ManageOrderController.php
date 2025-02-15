@@ -26,39 +26,29 @@ class ManageOrderController extends Controller
 
 
     public function show(Order $order){
-        // dd($order->workers);
         return view('management.orders.show', compact('order'));
     }
 
     public function acceptOrder(Order $order){
-        // $this->authorize('accept', $order);
-
         $order->update([
             'status' => 'accepted',
         ]);
-
         return redirect()->back()->with('success', 'عملیات با موفقیت انجام شد');
-        // return redirect()->route('admin.orders')->with('success', 'سفارش با موفقیت قبول شد.');
     }
 
     public function completeOrder(Order $order){
-        // $this->authorize('accept', $order);
         $order->update([
             'status' => 'completed',
         ]);
-
         OrderCompleted::dispatch($order);
         log_activity('اتمام سفارش', "سفارش با شناسه {$order->order_code}  به اتمام رسید.");
         return redirect()->route('admin.orders')->with('success', 'سفارش با موفقیت قبول شد.');
     }
 
     public function cancelOrder(Order $order){
-        // $this->authorize('accept', $order);
         $order->update([
             'status' => 'canceled',
         ]);
-
-        // OrderCompleted::dispatch($order);
         log_activity('لغو سفارش', "سفارش با شناسه {$order->order_code}   لغو شد.");
         return redirect()->route('admin.orders')->with('success', 'سفارش با موفقیت لغو شد.');
     }
@@ -67,46 +57,35 @@ class ManageOrderController extends Controller
         $request->validate([
             'amount' => 'required|numeric|min:0',
         ]);
-
         $order->update([
             'total_amount' => $request->amount,
         ]);
-
         log_activity('تخصیص هزینه', "سفارش با کد $order->order_code به مبلغ $request->amount قیمت گذاری شد.");
-
         return redirect()->back()->with('success', 'عملیات با موفقیت انجام شد');
     }
 
 
 
 
-    public function showAssignOrderToWorker(Order $order){
-        // $order->load('workers');
+    public function showAssignOrderToWorker(Request $request, Order $order){
+        $search = $request->input('search');
         $workers = User::whereHas('roles', function ($query) {
             $query->where('name', 'worker');
         })
         ->with(['roles','resume']) 
+        ->when($search, function ($query, $search) {
+            return $query->search($search);
+        })
         ->latest()
         ->paginate(10);
-
         $assignedWorkerIds = $order->workers->pluck('id')->toArray();
-
         $workers->getCollection()->transform(function ($worker) use ($assignedWorkerIds) {
             $worker->has_order = in_array($worker->id, $assignedWorkerIds);
             return $worker;
         });
-
-            // اضافه کردن فیلد محاسباتی `has_order` به هر کارگر
-        // $workers->getCollection()->transform(function ($worker) use ($order) {
-        //     $worker->has_order = $order->workers->contains($worker->id);
-        //     return $worker;
-        // });
-
-        // مرتب‌سازی کارگران بر اساس `has_order` (کارگرانی که قبلاً ارجاع شده‌اند در بالای لیست)
         $workers->setCollection(
             $workers->getCollection()->sortByDesc('has_order')
         );
-
         return view('management.orders.assignToWorker', compact('workers', 'order'));
     }
 
@@ -114,14 +93,11 @@ class ManageOrderController extends Controller
 
     public function assignToWorkers(Request $request, Order $order)
     {
-        // dd($request->all());
-
         $request->validate([
             'worker_id' => 'required|exists:users,id',
             'operator_notes' => 'nullable|string',
         ]);
 
-        // ارجاع سفارش به نیروی کار
         $order->workers()->attach($request->worker_id, [
             'assigned_at' => now(),
             'status' => 'pending',

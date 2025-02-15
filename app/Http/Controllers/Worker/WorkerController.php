@@ -19,7 +19,6 @@ class WorkerController extends Controller
 
     public function info()
     {
-        // $user = auth()->user();
         $user = User::with('resume')->where('id', auth()->user()->id)->first();
         return view('worker.info', compact('user'));
     }

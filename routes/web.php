@@ -138,6 +138,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/tag-management/edit/{tag}', [ManageTagController::class, 'edit'])->name('admin.tags.edit');
         Route::PUT('/admin/tag-management/update/{tag}', [ManageTagController::class, 'update'])->name('admin.tags.update');
         Route::delete('/admin/tag-management/delete/{tag}', [ManageTagController::class, 'destroy'])->name('admin.tags.delete');
+
+        Route::get('/admin/setting-management', [ManageSettingController::class, 'index'])->name('admin.settings');
+        Route::get('/admin/setting-management/edit/{setting}', [ManageSettingController::class, 'edit'])->name('admin.settings.edit');
+        Route::PUT('/admin/setting-management/update/{setting}', [ManageSettingController::class, 'update'])->name('admin.settings.update');
     });
     
     
@@ -202,9 +206,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/admin/resume-management/{resume}/reject', [ManageResumeController::class, 'reject'])->name('admin.resumes.reject');
         Route::delete('/admin/resume-management/{resume}', [ManageResumeController::class, 'destroy'])->name('admin.resumes.destroy');
 
-        Route::get('/admin/setting-management', [ManageSettingController::class, 'index'])->name('admin.settings');
-        Route::get('/admin/setting-management/edit/{setting}', [ManageSettingController::class, 'edit'])->name('admin.settings.edit');
-        Route::PUT('/admin/setting-management/update/{setting}', [ManageSettingController::class, 'update'])->name('admin.settings.update');
+      
     });
    
 

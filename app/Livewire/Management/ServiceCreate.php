@@ -6,12 +6,16 @@ use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
 
 class ServiceCreate extends Component
 {
+    use WithFileUploads;
+    
     public $title = '';
     public $title_fa = '';
     public $slug = '';
+    public $image;
 
     public $type = ['title' => '', 'values' => []]; // فقط یک نوع خدمت
     public $options = []; // لیست گزینه‌ها
@@ -20,6 +24,7 @@ class ServiceCreate extends Component
         'title' => 'required|string|max:100',
         'title_fa' => 'required|string|max:100',
         'slug' => 'required|string|max:100|unique:services,slug',
+        'image' => 'image|max:5120',
         'type.title' => 'nullable|string|max:100',
         'type.values.*' => 'nullable|string|max:100', // مقادیر نوع
         'options.*.title' => 'nullable|string|max:100',
@@ -70,14 +75,19 @@ class ServiceCreate extends Component
     {
         // dd($this->type, $this->options);
         $this->validate();
+        
+        $path = $this->image->store('images/services', 'public');
+        $imageUrl = url('storage/' . str_replace('public/', '', $path));
 
-        // ذخیره خدمت
+        // $image = $this->image->store(path: 'photosTest');
+        // $image = $this->image->storePublicly(path: 'photos', 'public');
 
         DB::beginTransaction();
         $service = Service::create([
             'title' => $this->title,
             'title_fa' => $this->title_fa,
             'slug' => $this->slug,
+            'image' => $imageUrl,
         ]);
 
         // ذخیره نوع خدمت و مقادیر آن

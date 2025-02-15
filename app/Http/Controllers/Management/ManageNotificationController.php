@@ -28,17 +28,12 @@ class ManageNotificationController extends Controller
             'role_id' => 'required|string',
         ]);
 
-      
-
         $notification = Notification::create([
             'title' => $request->title,
             'message' => $request->message,
             'role_id' => $request->role_id,
             'sender_id' => auth()->id()
         ]);
-
-        // ارسال نوتیفیکیشن Real-Time
-        // event(new NewNotification($notification));
 
         return redirect()->route('admin.notifications')->with('success', 'پیام با موفقیت ارسال شد');
     }
@@ -57,7 +52,6 @@ class ManageNotificationController extends Controller
             'message' => 'required|string',
             'role_id' => 'required|string',
         ]);
-        // dd($validated);
 
         $notification->update($validated);
 

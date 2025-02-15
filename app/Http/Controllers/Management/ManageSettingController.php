@@ -22,37 +22,7 @@ class ManageSettingController extends Controller
             'value' => 'required|string|max:100',
             'description' => 'nullable|string|max:250',
         ]);
-        // dd($setting);
         $setting->update($validated);
         return redirect()->route('admin.settings')->with('success', 'آیتم با موفقیت بروزرسانی شد.');
     }
-
-    // public function edit()
-    // {
-    //     // دریافت تنظیم شماره ادمین
-    //     $setting = Setting::where('key', 'admin_phone_number')->first();
-
-    //     return view('admin.settings.edit-admin-phone', compact('setting'));
-    // }
-
-    // public function update(Request $request)
-    // {
-    //     // اعتبارسنجی ورودی
-    //     $validated = $request->validate([
-    //         'value' => 'required|string|digits:11|regex:/^09[0-9]{9}/', // شماره تلفن باید 11 رقمی و با 09 شروع شود
-    //     ]);
-
-    //     // به‌روزرسانی تنظیم شماره ادمین
-    //     $setting = Setting::where('key', 'admin_phone_number')->first();
-    //     if ($setting) {
-    //         $setting->update(['value' => $validated['value']]);
-    //     } else {
-    //         Setting::create([
-    //             'key' => 'admin_phone_number',
-    //             'value' => $validated['value'],
-    //         ]);
-    //     }
-
-    //     return redirect()->route('admin.settings.edit-admin-phone')->with('success', 'شماره ادمین با موفقیت به‌روزرسانی شد.');
-    // }
 }

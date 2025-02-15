@@ -6,13 +6,18 @@ use App\Models\Role;
 use App\Models\Service;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ServiceEdit extends Component
 {
+    use WithFileUploads; 
+    
     public $serviceId;
     public $title = '';
     public $title_fa = '';
     public $slug = '';
+    public $image;
+    public $previous_image;
     public $type = ['title' => '', 'values' => []];
     public $options = [];
 
@@ -24,6 +29,7 @@ class ServiceEdit extends Component
         $this->title = $service->title;
         $this->title_fa = $service->title_fa;
         $this->slug = $service->slug;
+        $this->previous_image = $service->image;
 
         // تنظیم نوع خدمت
         if ($service->type) {
@@ -108,12 +114,16 @@ class ServiceEdit extends Component
             ]
         ) ;
 
+        $path = $this->image->store('images/services', 'public');
+        $imageUrl = url('storage/' . str_replace('public/', '', $path));
+
         // به‌روزرسانی خدمت
         $service = Service::find($this->serviceId);
         $service->update([
             'title' => $this->title,
             'title_fa' => $this->title_fa,
             'slug' => $this->slug,
+            'image' => $imageUrl,
         ]);
 
         // به‌روزرسانی نوع خدمت

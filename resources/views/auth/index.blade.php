@@ -5,11 +5,6 @@
 
   <div class=" w-full  mx-auto  pt-12">
     <section class="flex justify-center gap-8  ">
-      {{-- @if (session()->has('error'))
-      <div class="bg-red-200 text-red-600 rounded p-3 mt-3">
-          {{ session('error') }}
-      </div>
-      @endif --}}
         <div class="max-w-md rounded-2xl w-full  self-start">
           <div class="lg:p-11 p-7 mx-auto">
 

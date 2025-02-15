@@ -25,7 +25,7 @@
         </div>
     
         <!-- Slug -->
-        <div class="">
+        <div class="mb-6">
             <label class="block text-sm font-medium text-gray-700 mb-1">Slug:</label>
             <input type="text" wire:model.defer="slug"
                    class="w-full max-w-lg px-4 py-3 border  rounded-lg focus:outline-none focus:border-blue-500 @error('slug') border-red-500 @enderror"
@@ -38,6 +38,19 @@
                 تولید Slug
             </button> --}}
         </div>
+
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-1">تصویر:</label>
+            <input type="file" wire:model="image">
+            @error('image')
+                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        @if ($image) 
+            <img src="{{ $image->temporaryUrl() }}" class="border rounded-lg h-24">
+        @endif
+        <div wire:loading wire:target="image" class="text-xs">در حال آپلود تصویر ...</div>
     
         <!-- نوع خدمت -->
         <div class="my-12 border-y border-dashed py-8 border-gray-300">

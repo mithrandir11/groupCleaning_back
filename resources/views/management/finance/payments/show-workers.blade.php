@@ -90,31 +90,6 @@
                     <a href="{{route('admin.finance.payments.create', $worker)}}"  type="button" class="bg-blue-100 py-1 px-4 text-black text-xs rounded-full font-semibold transition-all duration-200">
                         ثبت رسید پرداخت
                     </a>
-                    {{-- <x-utils.modal title="ثبت رسید پرداخت" btnTitle="ثبت رسید پرداخت" btnColor="bg-blue-200">
-                        <div class="text-right">
-                            <form action="{{route('admin.finance.payments.store')}}" method="POST">
-                                @csrf
-                                <input type="hidden" name="worker_id" value="{{$worker->id}}">
-                                <div class="mb-4">
-                                    <label class="block mb-2">مبلغ (تومان)</label>
-                                    <input type="number" name="amount" class="w-full p-2 border rounded" required>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block mb-2">کدپیگیری</label>
-                                    <input type="text" name="tracking_code" class="w-full p-2 border rounded" required>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block mb-2">تاریخ پرداخت</label>
-                                    <input data-jdp name="payment_date" class="w-full p-2 border rounded" required>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="block mb-2">توضیحات</label>
-                                    <textarea name="description" class="w-full p-2 border rounded"></textarea>
-                                </div>
-                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded mx-auto block">ثبت پرداخت</button>
-                            </form>
-                        </div>
-                    </x-modal>  --}}
                 </td>
                 
             </tr>

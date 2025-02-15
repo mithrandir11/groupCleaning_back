@@ -11,7 +11,7 @@ class ManageFAQController extends Controller
 {
     public function index(){
         $menus = Menu::whereNull('parent_id')
-        ->with('children') // بارگذاری فرزندان
+        ->with('children')
         ->get();
         return view('management.content.faqs.index', compact('menus'));
     }

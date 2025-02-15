@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\DB;
 class ManageResumeController extends Controller
 {
     public function index(Request $request){
-        // $resumes = Resume::with('user')
-        // ->latest()
-        // ->paginate(10);
         $search = $request->input('search');
         $resumes = Resume::with('user')
             ->when($search, function ($query, $search) {
@@ -32,11 +29,9 @@ class ManageResumeController extends Controller
 
     public function updateCommission(Request $request, Resume $resume)
     {
-        
         $request->validate([
             'commission_rate' => 'required|numeric|min:0|max:100',
         ]);
-        // dd($request->all());
 
         $resume->update([
             'commission_rate' => $request->commission_rate,
@@ -66,42 +61,30 @@ class ManageResumeController extends Controller
     public function reject(Resume $resume){
         DB::beginTransaction();
         try {
-            // رد رزومه
             $resume->update(['status' => 'rejected']);
-
-            // اگر کاربر نقش نیروی کار دارد، آن را حذف کنید
             $workerRole = Role::where('name', 'worker')->first();
             if ($resume->user->roles->contains($workerRole)) {
                 $resume->user->roles()->detach($workerRole);
             }
-
             DB::commit();
-
             return redirect()->route('admin.resumes')->with('success', 'رزومه با موفقیت رد شد و نقش نیروی کار حذف شد.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'خطا در رد رزومه.');
         }
-        // $resume->update(['status' => 'rejected']);
-        // return redirect()->route('admin.resumes')->with('success', 'رزومه با موفقیت رد شد.');
     }
 
-    // حذف رزومه
+
     public function destroy(Resume $resume)
     {
         DB::beginTransaction();
         try {
-            // اگر کاربر نقش نیروی کار دارد، آن را حذف کنید
             $workerRole = Role::where('name', 'worker')->first();
             if ($resume->user->roles->contains($workerRole)) {
                 $resume->user->roles()->detach($workerRole);
             }
-
-            // حذف رزومه
             $resume->delete();
-
             DB::commit();
-
             return redirect()->route('admin.resumes')->with('success', 'رزومه با موفقیت حذف شد و نقش نیروی کار حذف شد.');
         } catch (\Exception $e) {
             DB::rollBack();

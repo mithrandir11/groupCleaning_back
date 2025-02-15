@@ -18,7 +18,6 @@ class WorkerFinancialController extends Controller
 
     public function details()
     {
-        // کاربر فعلی
         $worker = auth()->user();
 
         $details = $worker->payments()
@@ -31,31 +30,5 @@ class WorkerFinancialController extends Controller
 
         return view('worker.finance.details', compact('details'));
     }
-
-    // public function details(){
-    //     $worker = auth()->user();
-    //     $payments = $worker->payments->map(function ($payment) {
-    //         return [
-    //             'date' => $payment->created_at,
-    //             'amount' => $payment->amount,
-    //             'description' => $payment->description,
-    //             'type' => 'paid', 
-    //         ];
-    //     });
-
-    //     $fees = $worker->fees->map(function ($fee) {
-    //         return [
-    //             'date' => $fee->created_at,
-    //             'amount' => $fee->amount,
-    //             'description' => $fee->description,
-    //             'type' => 'fee', 
-    //         ];
-    //     });
-        
-    //     $details = $fees->merge($payments)->sortByDesc('data');
-
-    //     return view('worker.finance.details', compact('details'));
-    // }
-
     
 }

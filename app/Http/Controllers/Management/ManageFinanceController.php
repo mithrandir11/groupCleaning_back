@@ -18,7 +18,6 @@ class ManageFinanceController extends Controller
 
 
     public function index(Request $request){
-        // $fees = WorkerFee::latest()->paginate(10);
         $search = $request->input('search');
         $fees = WorkerFee::with('order')
         ->when($search, function ($query, $search) {
@@ -26,7 +25,6 @@ class ManageFinanceController extends Controller
         })
         ->latest()
         ->paginate(10);
-
         return view('management.finance.pricing.index', compact('fees'));
     }
 

@@ -86,20 +86,5 @@
 
 </div>
 
-
-
                                             
 @endsection
-
-
-{{-- @php
-function statusClass($status) {
-    $statusMap = [
-        'pending' => 'text-yellow-500',
-        'canceled' => 'text-red-500',
-        'processing' => 'text-blue-500',
-        'completed' => 'text-green-500', 
-    ];
-    return $statusMap[$status] ?? 'text-gray-500'; // رنگ پیش‌فرض
-}
-@endphp --}}
