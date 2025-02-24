@@ -47,6 +47,7 @@ trait HandlesOtp
 
         // ذخیره login_token در Session
         Session::put('login_token', $loginToken);
+        Session::put('otp', $OTPCode);
 
         // dd($user->hasAnyRole(['admin','operator']));
         // try {

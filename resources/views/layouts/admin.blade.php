@@ -10,7 +10,8 @@
     <title>{{ $title ?? 'پنل مدیریت' }}</title>
 
     <x-head.tinymce-config/>
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
+    <link rel="stylesheet" href="{{asset('build/assets/app-O2QJp3Gb.css')}}">
     @livewireStyles
 </head>
 <body>

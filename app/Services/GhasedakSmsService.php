@@ -38,6 +38,17 @@ class GhasedakSmsService
         }
     }
 
+
+
+
+
+
+
+
+    
+
+
+
     public function sendOtp(string $mobile, string $code)
     {
         try {
@@ -56,6 +67,15 @@ class GhasedakSmsService
             $this->handleException($e);
         }
     }
+
+
+
+
+
+
+
+
+
 
     protected function handleException(Exception $e)
     {

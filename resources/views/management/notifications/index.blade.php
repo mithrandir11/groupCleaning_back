@@ -47,7 +47,7 @@
                 <td class="px-6 py-4">
                     {{ $notification->title }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-2 py-4 max-w-sm">
                     {{  $notification->message }}
                 </td>
                 <td class="px-6 py-4">

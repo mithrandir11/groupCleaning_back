@@ -36,9 +36,9 @@
                 <th scope="col" class="px-6 py-3">
                     عنوان
                 </th>
-                <th scope="col" class="px-6 py-3">
+                {{-- <th scope="col" class="px-6 py-3">
                     slug 
-                </th>
+                </th> --}}
                 <th scope="col" class="px-6 py-3">
                     متن 
                 </th>
@@ -59,12 +59,12 @@
                     {{ $article->title }}
                 </td>
 
-                <td class="px-6 py-4">
+                {{-- <td class="px-6 py-4">
                     {{ $article->slug }}
-                </td>
+                </td> --}}
 
                 <td class="px-6 py-4">
-                    {{ Str::limit(strip_tags($article->text), 100) }}
+                    {{ Str::limit(strip_tags($article->text), 70) }}
                 </td>
 
                 <td class="px-6 py-4 @if($article->is_visible) text-green-500 @else text-red-500 @endif">

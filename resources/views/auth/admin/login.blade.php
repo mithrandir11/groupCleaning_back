@@ -8,6 +8,8 @@
       <div class="mx-auto max-w-lg w-full px-6 lg:px-8  py-16 ">
         
         <div class="rounded-2xl bg-white border">
+         
+
           <form method="POST" action="{{ route('admin.send.otp') }}" class="lg:p-11 p-7 mx-auto">
             @csrf
             <img src="{{asset('images/logo_full.png')}}" alt="pagedone logo" class="mx-auto lg:mb-11 mb-8 object-cover">

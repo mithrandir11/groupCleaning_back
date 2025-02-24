@@ -8,6 +8,11 @@
       <div class="mx-auto max-w-lg w-full px-6 lg:px-8  py-16 ">
         
         <div class="rounded-2xl bg-white border lg:p-11 p-7">
+          @if (session()->has('otp'))
+          <div class="bg-green-200 text-green-800 rounded p-3 my-3">
+            کد ورود  : <strong>{{ session('otp') }}</strong>
+          </div>
+          @endif
           <form method="POST" action="{{ route('worker.verify.otp') }}" class=" mx-auto">
             @csrf
             <img src="{{asset('images/logo_full.png')}}" alt="pagedone logo" class="mx-auto lg:mb-11 mb-8 object-cover">

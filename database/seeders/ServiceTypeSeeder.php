@@ -23,7 +23,7 @@ class ServiceTypeSeeder extends Seeder
 
         ServiceType::create([
             'service_id' => 1,
-            'title' => 'نوع نظافت تست',
+            'title' => 'نوع نظافت',
         ]);
     }
 }

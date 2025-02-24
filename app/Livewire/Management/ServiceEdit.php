@@ -114,8 +114,13 @@ class ServiceEdit extends Component
             ]
         ) ;
 
-        $path = $this->image->store('images/services', 'public');
-        $imageUrl = url('storage/' . str_replace('public/', '', $path));
+        if($this->image){
+            $path = $this->image->store('images/services', 'public');
+            $imageUrl = url('storage/' . str_replace('public/', '', $path));
+        }else{
+            $imageUrl = null; 
+        }
+        
 
         // به‌روزرسانی خدمت
         $service = Service::find($this->serviceId);
@@ -123,7 +128,7 @@ class ServiceEdit extends Component
             'title' => $this->title,
             'title_fa' => $this->title_fa,
             'slug' => $this->slug,
-            'image' => $imageUrl,
+            'image' => $imageUrl ? $imageUrl : $service->image,
         ]);
 
         // به‌روزرسانی نوع خدمت

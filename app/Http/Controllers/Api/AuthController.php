@@ -115,7 +115,10 @@ class AuthController extends Controller
         }
 
         // (new OtpService(new GhasedakSmsService))->sendOtp($user, $OTPCode);
-        return Response::success(null, ['login_token' => $loginToken]);
+
+
+        // return Response::success(null, ['login_token' => $loginToken]);
+        return Response::success(null, ['login_token' => $loginToken, 'otp' => $OTPCode]);
     }
 
 

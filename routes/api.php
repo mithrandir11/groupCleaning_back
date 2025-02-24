@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\FooterController;
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ResumeController;
 use App\Http\Controllers\Api\ServiceController;
@@ -64,3 +65,5 @@ Route::post('/resume/store', [ResumeController::class, 'store']);
 
 
 Route::get('/footers', [FooterController::class, 'index']);
+
+Route::get('/notifications', [NotificationController::class, 'index']);
