@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Management\Finance;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ManageReportController extends Controller

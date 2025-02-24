@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('seo_data', function (Blueprint $table) {
             $table->id();
-            $table->morphs('seotable'); // Relation polymorphic برای اتصال به مدل‌های مختلف
-            $table->string('title')->nullable(); // عنوان صفحه
-            $table->text('description')->nullable(); // توضیحات Meta
-            $table->text('keywords')->nullable(); // کلمات کلیدی
-            $table->string('canonical_url')->nullable(); // URL کانونیکال
-            $table->json('open_graph')->nullable(); // تنظیمات Open Graph (به صورت JSON)
-            $table->json('json_ld')->nullable(); // تنظیمات JSON-LD (به صورت JSON)
+            $table->morphs('seotable'); 
+            $table->string('title')->nullable(); 
+            $table->text('description')->nullable(); 
+            $table->text('keywords')->nullable(); 
+            $table->string('canonical_url')->nullable(); 
+            $table->json('open_graph')->nullable(); 
+            $table->json('json_ld')->nullable(); 
             $table->timestamps();
         
-            // Indexing برای بهینه‌سازی
+           
             $table->index(['seotable_id', 'seotable_type']);
         });
     }

@@ -10,9 +10,7 @@ use Illuminate\Http\Response;
 class ServiceOptionController extends Controller
 {
     public function findByServiceId($service_id){
-        $service_options = ServiceOption::where('service_id', $service_id)
-            // ->with(['values'])
-            ->get();
+        $service_options = ServiceOption::where('service_id', $service_id)->get();
 
         if (!$service_options->first()) {
             return Response::error('گزینه های خدمات برای این خدمت یافت نشد !');

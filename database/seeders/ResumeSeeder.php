@@ -21,8 +21,6 @@ class ResumeSeeder extends Seeder
             'bank_name' => 'Bank Melli',
             'sheba_number' => 'IR123456789012345678901234',
             'address' => 'Tehran, Iran',
-            // 'cooperation_with_other_company' => true,
-            // 'other_company_name' => 'Company XYZ',
             'personal_image' => 'personal.jpg',
             'national_card_image' => 'national_card.jpg',
             'residence_document_image' => 'residence_document.jpg',
@@ -31,14 +29,11 @@ class ResumeSeeder extends Seeder
             'commission_rate' => 75.00,
         ]);
 
-        // ایجاد توانایی‌ها
+  
         $skill = Skill::create([
             'name' => 'نظافت'
-            // ['name' => 'شستشو'],
-            // ['name' => 'باغبانی'],
         ]);
 
-        // اتصال توانایی‌ها به رزومه
         $resume->skills()->attach($skill->id);
     }
 }

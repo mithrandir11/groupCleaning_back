@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->foreignId('tag_id')->constrained()->onDelete('cascade');
-            // $table->primary(['article_id', 'tag_id']); // ترکیب دو ستون به عنوان کلید اصلی
             $table->timestamps();
         });
     }

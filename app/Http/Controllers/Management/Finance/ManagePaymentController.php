@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Management\Finance;
 
-use App\Events\PaymentCreated;
+
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Models\Report;

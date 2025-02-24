@@ -21,7 +21,6 @@ class ServiceOptionSeeder extends Seeder
             'خدمات تکمیلی',
             'تعداد نیروی موردنیاز',
             'حیوان خانگی دارید؟',
-            // 'تاریخ و ساعت درخواستی',
         ];
         
         foreach ($service_options as $service_option) {

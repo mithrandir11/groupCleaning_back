@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('worker_id')->constrained('users')->onDelete('cascade'); // نیروی کار
-            $table->foreignId('order_id')->constrained()->onDelete('cascade'); // سفارش
-            $table->foreignId('customer_id')->constrained('users')->onDelete('cascade'); // مشتری
-            $table->tinyInteger('rating')->nullable(); // امتیاز (0-5)
-            $table->text('comment')->nullable(); // نظر اختیاری
+            $table->foreignId('worker_id')->constrained('users')->onDelete('cascade'); 
+            $table->foreignId('order_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('customer_id')->constrained('users')->onDelete('cascade'); 
+            $table->tinyInteger('rating')->nullable(); 
+            $table->text('comment')->nullable(); 
             $table->timestamps();
         
-            // Indexing برای بهینه‌سازی
+
             $table->index('worker_id');
             $table->index('order_id');
             $table->index('customer_id');

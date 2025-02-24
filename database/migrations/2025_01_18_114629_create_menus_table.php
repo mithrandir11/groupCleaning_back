@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // نام منو
-            $table->string('slug')->unique(); // اسلاگ برای لینک
+            $table->string('name'); 
+            $table->string('slug')->unique(); 
             $table->string('full_path');
             $table->text('text')->nullable();
-            $table->foreignId('parent_id')->nullable()->constrained('menus')->onDelete('cascade'); // والد منو
+            $table->foreignId('parent_id')->nullable()->constrained('menus')->onDelete('cascade'); 
             $table->timestamps();
         });
     }

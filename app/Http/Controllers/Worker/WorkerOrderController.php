@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Worker;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use App\Models\WorkerOrder;
 use Illuminate\Http\Request;
 

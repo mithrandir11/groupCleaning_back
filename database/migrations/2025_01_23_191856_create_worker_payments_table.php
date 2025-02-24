@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('worker_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('worker_id')->constrained('users')->onDelete('cascade'); // نیروی کار
-            $table->foreignId('order_id')->constrained()->onDelete('cascade'); // سفارش
-            $table->dateTime('payment_date')->nullable(); // تاریخ پرداخت
-            $table->string('amount'); // مبلغ دستمزد
-            $table->text('description')->nullable(); // توضیحات پرداخت
+            $table->foreignId('worker_id')->constrained('users')->onDelete('cascade'); 
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->dateTime('payment_date')->nullable(); 
+            $table->string('amount'); 
+            $table->text('description')->nullable();
             $table->enum('status', ['paid', 'unpaid'])->default('unpaid');
             $table->timestamps();
         });

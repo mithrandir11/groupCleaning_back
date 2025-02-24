@@ -61,12 +61,6 @@ class User extends Authenticatable
         ];
     }
 
-    // public function notifications(){
-    //     return Notification::whereHas('role', function($query) {
-    //         $query->where('name', $this->role->name);
-    //     })->latest()->get();
-    // }
-
     public function roles()
     {
         return $this->belongsToMany(Role::class);
@@ -87,7 +81,6 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class, 'worker_id');
     }
 
-    // بررسی اینکه کاربر دارای نقش خاصی است
     public function hasRole($role)
     {
         return $this->roles->contains('name', $role);
@@ -96,25 +89,15 @@ class User extends Authenticatable
     public function hasAnyRole($roles): bool
     {
         if (is_string($roles)) {
-            $roles = [$roles]; // اگر ورودی یک رشته باشد، به آرایه تبدیل می‌کنیم
+            $roles = [$roles]; 
         }
 
         return $this->roles()->whereIn('name', $roles)->exists();
     }
 
-    // public function orders()
-    // {
-    //     return $this->belongsToMany(Order::class, 'worker_orders', 'worker_id', 'order_id');
-    // }
-
     public function workerOrders(){
         return $this->hasMany(WorkerOrder::class, 'worker_id');
     }
-
-    // public function acceptedOrders(){
-    //     return $this->workerOrders()
-    //         ->where('status', 'accepted');
-    // }
 
     public function getAcceptedOrdersCountAttribute(){
         return $this->workerOrders()
@@ -139,22 +122,6 @@ class User extends Authenticatable
         ->avg();
     }
 
-
-    // public function getStatusAttribute($status)
-    // {
-    //     switch ($status) {
-    //         case 'active':
-    //             $status = 'فعال';
-    //             break;
-    //         case 'inactive':
-    //             $status = 'غیرفعال';
-    //             break;
-    //         default:
-    //             return $status;
-    //     }
-    //     return $status;
-    // }
-
     public function getCreatedAtAttribute($value)
     {
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
@@ -166,24 +133,12 @@ class User extends Authenticatable
         return $total_amount * ($this->resume->commission_rate / 100);
     }
 
-    
-
-    // public function scopeSearch(Builder $query, string $search): Builder
-    // {
-    //     return $query->where(function ($query) use ($search) {
-    //         $query->where('name', 'like', "%{$search}%")
-    //               ->orWhere('family', 'like', "%{$search}%")
-    //               ->orWhere('cellphone', 'like', "%{$search}%");
-    //     });
-    // }
 
     public function scopeSearch(Builder $query, string $search): Builder
     {
         return $query->where(function ($query) use ($search) {
-            // اگر مقدار جستجو عددی است و با "0" شروع نمی‌شود، شرط id را اضافه می‌کنیم
             if (substr($search, 0, 1) == '0') {
                 $query->where('cellphone', 'like', "%{$search}%");
-                // $query->orWhere('id', (int)$search);
             }else{
                 $query
                 ->where('id',$search)
@@ -192,14 +147,8 @@ class User extends Authenticatable
                 
             }
             
-            // همیشه روی نام، نام خانوادگی و شماره تماس جستجو شود
-            
         });
     }
-
-
-
-
 
     
 }

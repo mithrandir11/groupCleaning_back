@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('message');
-            $table->foreignId('role_id')->constrained(); // نقش هدف
-            $table->foreignId('sender_id')->constrained('users'); // ارسال کننده (مدیریت)
+            $table->foreignId('role_id')->constrained(); 
+            $table->foreignId('sender_id')->constrained('users'); 
             $table->timestamps();
         });
     }

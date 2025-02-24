@@ -10,22 +10,18 @@ use Illuminate\Http\Response;
 class MenuController extends Controller
 {
     public function index(){
-        // $menus = Menu::with('children')->whereNull('parent_id')->get();
         $menus = Menu::whereNull('parent_id')
-        ->with('children.children') // دریافت فرزندان به صورت بازگشتی
+        ->with('children.children')
         ->get();
         return Response::success(null, $menus);
     }
 
     public function show($path){
-       
-        $slugs = explode('/', $path); // مسیر را به آرایه تبدیل کن
-        $menu = Menu::where('slug', end($slugs))->with(['faqs','suggestedPages'])->firstOrFail(); // آخرین اسلاگ
+        $slugs = explode('/', $path);
+        $menu = Menu::where('slug', end($slugs))->with(['faqs','suggestedPages'])->firstOrFail(); 
         if (!$menu) {
             return Response::error('menu not found');
         }
-
         return Response::success(null, $menu);
-
     }
 }

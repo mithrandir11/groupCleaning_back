@@ -26,8 +26,6 @@ class Message extends Model
 
     public static function getMessageCount()
     {
-        // return Cache::remember('pending_orders_count', now()->addMinutes(5), function () {
-            return Message::where('read_at', null)->count();
-        // });
+        return Message::where('read_at', null)->count(); 
     }
 }

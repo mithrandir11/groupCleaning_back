@@ -12,8 +12,6 @@ class ResumeController extends Controller
 {
     public function store(Request $request)
     {
-        // return response()->json( $request->all() );
-       
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'family' => 'required|string|max:255',
@@ -29,14 +27,7 @@ class ResumeController extends Controller
             'personal_image' => 'required|image|mimes:jpeg,png|max:5120',
             'national_card_image' => 'required|image|mimes:jpeg,png|max:5120',
             'residence_document_image' => 'required|image|mimes:jpeg,png|max:5120',
-
-            // 'personal_image' => ['required'],
         ]);
-        
-        // return response()->json( $validated['personal_image']);
-
-        
-
 
         if(!empty($validated['personal_image'])){
             $path = $request->file('personal_image')->store('resume/personal_images', 'public');
@@ -52,11 +43,6 @@ class ResumeController extends Controller
             $path3 = $request->file('residence_document_image')->store('resume/residence_document_images', 'public');
             $validated['residence_document_image'] = url('storage/' . str_replace('public/', '', $path3));
         }
-        
-        // 'personal_photo' => $request->file('personal_photo')->store('personal_photos', 'public'),
-
-        // return response()->json( $validated);
-       
 
         try {
             $user = User::where('cellphone', $validated['cellphone'])->first();

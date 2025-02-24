@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Worker;
 
 use App\Http\Controllers\Controller;
 use App\Models\Report;
-use App\Models\WorkerPayment;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class WorkerFinancialController extends Controller

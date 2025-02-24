@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('state', 50); 
             $table->string('city', 50);
             $table->text('full_address');
-            
-            // $table->string('postal_code');
             $table->timestamps();
         });
     }

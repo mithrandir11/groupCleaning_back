@@ -16,7 +16,6 @@ class Payment extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        // return CalendarUtils::strftime('Y/m/d', strtotime($value));
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
     }
 

@@ -20,8 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Event::listen(OrderCompleted::class, CreateWorkerFee::class);
-
         Response::macro('success', function($message, $data, $pagination = null) {
             $response = [
                 'status' => 1,

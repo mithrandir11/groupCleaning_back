@@ -8,7 +8,7 @@ use App\Services\GhasedakSmsService;
 
 class OrderObserver
 {
-    // public function __construct(protected GhasedakSmsService $smsService) {}
+
 
     protected $smsService;
 
@@ -22,25 +22,15 @@ class OrderObserver
      */
     public function created(Order $order): void
     {
-        // $adminNumbers = User::with('roles')
-        // ->whereHas('roles', function ($query) {
-        //     $query->where('name', 'admin');
-        // })
-        // ->pluck('cellphone')
-        // ->toArray();
-
         $message = "سفارش جدید ثبت شد! \n کد سفارش: {$order->order_code}\n\nلغو 11";
-
-        
-
         log_activity('ثبت سفارش', "سفارش با شناسه {$order->order_code} ثبت شد.");
 
-        try {
-            $adminPhoneNumber = Setting::where('key', 'admin_phone_number')->value('value');
-            if($adminPhoneNumber) $this->smsService->sendSingleSms($adminPhoneNumber, $message);
-        } catch (\Exception $e) {
-            //throw $th;
-        }
+        // try {
+        //     $adminPhoneNumber = Setting::where('key', 'admin_phone_number')->value('value');
+        //     if($adminPhoneNumber) $this->smsService->sendSingleSms($adminPhoneNumber, $message);
+        // } catch (\Exception $e) {
+        //     //throw $th;
+        // }
     }
 
     /**

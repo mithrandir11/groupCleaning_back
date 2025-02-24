@@ -3,8 +3,8 @@
 @section('content')
 
 
-  <div class=" w-full  mx-auto  pt-12">
-    <section class="flex justify-center gap-8  ">
+  <div class=" w-full  mx-auto  lg:pt-12">
+    <section class="flex flex-wrap justify-center gap-8  ">
         <div class="max-w-md rounded-2xl w-full  self-start">
           <div class="lg:p-11 p-7 mx-auto">
 

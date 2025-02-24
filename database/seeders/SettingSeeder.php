@@ -15,7 +15,7 @@ class SettingSeeder extends Seeder
     {
         Setting::create([
             'key' => 'admin_phone_number',
-            'value' => '09941831687', // شماره پیش‌فرض
+            'value' => '09941831687', 
             'description' => 'وقتی سفارشی ثبت شود به این شماره پیامک ارسال میشود'
         ]);
     }

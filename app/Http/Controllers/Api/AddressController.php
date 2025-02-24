@@ -11,7 +11,7 @@ class AddressController extends Controller
 {
     public function getUserAddresses(Request $request){
         $addresses = Address::where('user_id', $request->user()->id)
-        ->select('id', 'full_address', 'state', 'city') // فیلدهایی که نیاز دارید
+        ->select('id', 'full_address', 'state', 'city')
         ->latest()
         ->get()
         ->unique('full_address');

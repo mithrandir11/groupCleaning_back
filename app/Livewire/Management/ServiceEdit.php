@@ -2,9 +2,7 @@
 
 namespace App\Livewire\Management;
 
-use App\Models\Role;
 use App\Models\Service;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -31,13 +29,11 @@ class ServiceEdit extends Component
         $this->slug = $service->slug;
         $this->previous_image = $service->image;
 
-        // تنظیم نوع خدمت
         if ($service->type) {
             $this->type['title'] = $service->type->title;
             $this->type['values'] = $service->type->values->pluck('title')->toArray();
         }
 
-        // تنظیم گزینه‌ها
         foreach ($service->options as $option) {
             $this->options[] = [
                 'title' => $option->title,
@@ -48,19 +44,6 @@ class ServiceEdit extends Component
         }
     }
 
-    // protected $rules = [
-    //     'title' => 'required|string|max:100',
-    //     'title_fa' => 'required|string|max:100',
-    //     // 'slug' => 'required|string|max:100|',
-    //     // 'slug' => 'required|string|max:100|unique:services,slug,' . auth()->user()->id,
-    //     'slug' => ['required','string','max:100', Rule::unique('services', 'slug')->ignore($this->serviceId)],
-    //     'type.title' => 'nullable|string|max:100',
-    //     'type.values.*' => 'nullable|string|max:100',
-    //     'options.*.title' => 'nullable|string|max:100',
-    //     'options.*.is_multiple' => 'boolean',
-    //     'options.*.is_required' => 'boolean',
-    //     'options.*.values.*' => 'nullable|string|max:100',
-    // ];
 
     public function addOption()
     {
@@ -97,14 +80,11 @@ class ServiceEdit extends Component
 
     public function updateService()
     {
-        // $this->validate();
-
         $this->validate(
             [
                 'title' => 'required|string|max:100',
                 'title_fa' => 'required|string|max:100',
                 'slug' => 'required|string|max:100|unique:services,slug,' . $this->serviceId,
-                // 'slug' => ['required','string','max:100', Rule::unique('services', 'slug')->ignore($this->serviceId)],
                 'type.title' => 'nullable|string|max:100',
                 'type.values.*' => 'nullable|string|max:100',
                 'options.*.title' => 'nullable|string|max:100',
@@ -121,8 +101,6 @@ class ServiceEdit extends Component
             $imageUrl = null; 
         }
         
-
-        // به‌روزرسانی خدمت
         $service = Service::find($this->serviceId);
         $service->update([
             'title' => $this->title,
@@ -131,11 +109,10 @@ class ServiceEdit extends Component
             'image' => $imageUrl ? $imageUrl : $service->image,
         ]);
 
-        // به‌روزرسانی نوع خدمت
         if ($service->type) {
             $type = $service->type;
             $type->update(['title' => $this->type['title']]);
-            $type->values()->delete(); // حذف مقادیر قدیمی
+            $type->values()->delete(); 
             foreach ($this->type['values'] as $value) {
                 if (!empty($value)) {
                     $type->values()->create(['title' => $value]);
@@ -152,7 +129,6 @@ class ServiceEdit extends Component
             }
         }
 
-        // به‌روزرسانی گزینه‌ها
         foreach ($this->options as $optionData) {
             if (!empty($optionData['title'])) {
                 $option = $service->options()->firstOrCreate(['title' => $optionData['title']]);
@@ -160,7 +136,7 @@ class ServiceEdit extends Component
                     'is_multiple' => $optionData['is_multiple'],
                     'is_required' => $optionData['is_required'],
                 ]);
-                $option->values()->delete(); // حذف مقادیر قدیمی
+                $option->values()->delete(); 
                 foreach ($optionData['values'] as $value) {
                     if (!empty($value)) {
                         $option->values()->create(['title' => $value]);

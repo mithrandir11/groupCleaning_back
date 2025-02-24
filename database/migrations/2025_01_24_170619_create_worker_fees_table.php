@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('worker_fees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->onDelete('cascade'); // سفارش
-            $table->foreignId('worker_id')->constrained('users')->onDelete('cascade'); // نیروی کار
-            $table->string('amount'); // مبلغ حق‌الزحمه
-            $table->string('penalty_amount')->nullable(); // مبلغ جریمه
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->foreignId('worker_id')->constrained('users')->onDelete('cascade'); 
+            $table->string('amount'); 
+            $table->string('penalty_amount')->nullable(); 
             $table->text('description')->nullable();
             $table->timestamps();
         });

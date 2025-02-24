@@ -25,10 +25,6 @@ class OrderController extends Controller
             'address' => 'required',
         ]);
 
-        // dd($validated);
-        // return Response::error($validated['selectedDateTime']['date']);
-       
-
         try {
             $fullAddress = $validated['address']['state'] . '-' . $validated['address']['city'] . '-' . $validated['address']['full_address'];
             $order = Order::create([
@@ -50,7 +46,6 @@ class OrderController extends Controller
 
     public function getUserOrders(Request $request)
     {
-        // $user = auth()->user();
         $orderCode = $request->query('order_code');
 
         $orders = Order::where('user_id', auth()->id())
@@ -58,8 +53,6 @@ class OrderController extends Controller
                 return $query->where('order_code', 'like', "%{$orderCode}%");
             })
             ->paginate(10);
-
-        // return response()->json(OrderResource::collection($orders));
 
         return Response::success(null, OrderResource::collection($orders) ,
             $pagination = [
@@ -71,22 +64,11 @@ class OrderController extends Controller
             'to' => $orders->lastItem(),
             ],
         );
-
-        // return Response::success(null, $orders );
-
-        // return response()->json($orders);
     }
 
 
 
     public function show($id){
-
-        // $orders = Order::where('user_id', auth()->id())
-        //     ->when($orderCode, function ($query, $orderCode) {
-        //         return $query->where('order_code', 'like', "%{$orderCode}%");
-        //     })
-        //     ->paginate(10);
-        
         $order = Order::where('id', $id)
             ->with('workers')
             ->first();

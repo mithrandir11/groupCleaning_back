@@ -17,7 +17,6 @@ class Menu extends Model
         });
     }
 
-    // تابع برای ایجاد مسیر کامل
     protected static function generateFullPath($menu)
     {
         $path = $menu->slug;
@@ -33,7 +32,6 @@ class Menu extends Model
     public function children()
     {
         return $this->hasMany(Menu::class, 'parent_id');
-        // return $this->hasMany(Menu::class, 'parent_id')->with('children');
     }
 
     public function parent()
@@ -42,15 +40,11 @@ class Menu extends Model
     }
 
 
-    
-
-
     public function faqs()
     {
         return $this->hasMany(Faq::class);
     }
 
-    // رابطه با صفحات پیشنهادی
     public function suggestedPages()
     {
         return $this->hasMany(SuggestedPage::class);

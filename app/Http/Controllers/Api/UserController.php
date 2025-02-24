@@ -14,19 +14,17 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'family' => 'required|string',
-            // 'email' => 'required|email|unique:users',
         ]);
 
-        // try {
-            Auth()->user()->update([
+        try {
+            auth()->user()->update([
                 'name' => $request->name,
                 'family' => $request->family,
-                // 'email' => $request->email
             ]);
 
             return Response::success(null, 'با موفقیت ذخیره شد');
-        // } catch (Exception $e) {
-        //     return Response::error($e->getMessage());
-        // }
+        } catch (Exception $e) {
+            return Response::error($e->getMessage());
+        }
     }
 }

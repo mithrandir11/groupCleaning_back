@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('footers', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // عنوان بخش
-            $table->text('text')->nullable(); // محتوای بخش (مثل توضیحات)
+            $table->string('title'); 
+            $table->text('text')->nullable(); 
             $table->timestamps();
         });
     }

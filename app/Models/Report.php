@@ -14,11 +14,6 @@ class Report extends Model
         return $this->belongsTo(User::class, 'worker_id');
     }
 
-    // public function getReportDateAttribute($value)
-    // {
-    //     return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
-    // }
-
     public function getUpdatedAtAttribute($value)
     {
         return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
@@ -58,9 +53,5 @@ class Report extends Model
         }
     }
 
-    // public function getStatusAttribute($value)
-    // {
-    //     return CalendarUtils::strftime('Y/m/d - H:i:s', strtotime($value));
-    // }
     
 }

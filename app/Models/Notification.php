@@ -17,7 +17,6 @@ class Notification extends Model
         return $this->belongsTo(User::class, 'sender_id');
     }
 
-    // دسترسی کاربران
     public function users(){
         return $this->role->users();
     }

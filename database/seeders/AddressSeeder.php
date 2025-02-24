@@ -18,8 +18,6 @@ class AddressSeeder extends Seeder
             'state' => 'تهران',
             'city' => 'زعفرانیه',
             'full_address' => 'تهران زعفرانیه خیابان مقدس اردبیلی پلاک 160',
-            // 'postal_code' => '3169188475',
-            
         ]);
     }
 }

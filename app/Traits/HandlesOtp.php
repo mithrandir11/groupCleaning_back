@@ -11,12 +11,8 @@ use Illuminate\Support\Facades\Session;
 
 trait HandlesOtp
 {
-    protected $roles; // نقش کاربر (admin یا worker)
+    protected $roles; 
 
-    // public function __construct()
-    // {
-    //     $this->loginTokenSecret = 'DKT324CDCojncd@cdjn%!!ghnjrgtn&&';
-    // }
 
     /**
      * فرستادن کد OTP
@@ -45,14 +41,13 @@ trait HandlesOtp
             'login_token' => $loginToken,
         ]);
 
-        // ذخیره login_token در Session
+       
         Session::put('login_token', $loginToken);
         Session::put('otp', $OTPCode);
 
-        // dd($user->hasAnyRole(['admin','operator']));
-        // try {
+      
+       try {
             // (new OtpService(new GhasedakSmsService))->sendOtp($user, $OTPCode);
-            // return redirect()->route('otp.verify')->with('success', 'کد OTP به شماره شما ارسال شد.');
             if ($user->hasAnyRole(['admin','operator'])) {
                 return redirect()->route('admin.verify.otp')->with('success', 'ورود موفق.');
             } elseif ($user->hasAnyRole('worker')) {
@@ -60,9 +55,9 @@ trait HandlesOtp
             } else {
                 return back()->withErrors(['error' => 'نقش کاربر معتبر نیست.']);
             }
-        // } catch (Exception $e) {
-        //     return back()->withErrors(['cellphone' => 'خطایی در ارسال کد OTP رخ داد.']);
-        // }
+        } catch (Exception $e) {
+            return back()->withErrors(['cellphone' => 'خطایی در ارسال کد OTP رخ داد.']);
+        }
     }
 
     /**
@@ -75,40 +70,26 @@ trait HandlesOtp
             'otp' => 'required|digits:6',
         ]);
 
-        // خواندن login_token از Session
         $loginToken = Session::get('login_token');
         if (!$loginToken) {
             return back()->withErrors(['otp' => 'لطفاً ابتدا کد تایید دریافت کنید.']);
         }
       
-
-        // یافتن کاربر بر اساس login_token
         $user = User::where('login_token', $loginToken)->first();
      
 
         if (!$user || !$user->hasAnyRole($this->roles)) {
             return back()->withErrors(['otp' => 'کاربر معتبری پیدا نشد.']);
         }
-        // dd($user->otp, $request->otp);
-       
-        // اعتبارسنجی کد OTP
-        if ($user->otp == $request->otp) {
-            
-            // ورود کاربر
-            Auth::login($user);
-            
 
-            // پاک کردن OTP و login_token بعد از ورود موفق
+        if ($user->otp == $request->otp) {
+            Auth::login($user);
             $user->update([
                 'otp' => null,
                 'login_token' => null,
             ]);
-            
-
-            // پاک کردن Session
             Session::forget('login_token');
 
-            // هدایت کاربر به پنل مورد نظر
             if ($user->hasAnyRole(['admin','operator'])) {
                 return redirect()->route('admin.dashboard')->with('success', 'ورود موفق.');
             } elseif ($user->hasAnyRole('worker')) {
@@ -126,24 +107,20 @@ trait HandlesOtp
      */
     public function resendOtp()
     {
-        // خواندن login_token از Session
         $loginToken = Session::get('login_token');
         if (!$loginToken) {
             return back()->withErrors(['otp' => 'لطفاً ابتدا کد تایید دریافت کنید.']);
         }
 
-        // یافتن کاربر بر اساس login_token
         $user = User::where('login_token', $loginToken)->first();
 
         if (!$user || !$user->hasAnyRole($this->roles)) {
             return back()->withErrors(['otp' => 'کاربر معتبری پیدا نشد.']);
         }
 
-        // تولید کد OTP جدید
         $OTPCode = mt_rand(100000, 999999);
         $user->update(['otp' => $OTPCode]);
 
-        // ارسال کد OTP جدید
         try {
             // (new OtpService(new GhasedakSmsService))->sendOtp($user, $OTPCode);
             return back()->with('success', 'کد تایید جدید به شماره شما ارسال شد.');

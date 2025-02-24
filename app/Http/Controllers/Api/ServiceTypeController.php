@@ -11,9 +11,7 @@ use Illuminate\Http\Response;
 class ServiceTypeController extends Controller
 {
     public function findByServiceId($service_id){
-        $service_types = ServiceType::where('service_id', $service_id)
-            ->first();
-        // dd($service_types->first());
+        $service_types = ServiceType::where('service_id', $service_id)->first();
 
         if (!$service_types->first()) {
             return Response::error('نوع های خدمات برای این خدمت یافت نشد !');

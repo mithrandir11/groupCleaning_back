@@ -14,7 +14,7 @@ class OrderResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
+       
         $data = [
             "order_code" => $this->order_code,
             "id" => $this->id,
@@ -32,13 +32,7 @@ class OrderResource extends JsonResource
             "address" => $this->address,
             "total_amount" => number_format($this->total_amount),
             "created_at" => $this->created_at,
-            
-            
         ];
-
-        // if($this->total_amount){
-        //     $data["total_amount"] = number_format($this->total_amount).' '.'تومان';
-        // }
 
         return $data;
     }

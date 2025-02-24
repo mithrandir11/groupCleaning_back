@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('slug', 100)->unique(); 
             $table->string('image', 100)->nullable();
             $table->text('text');
-            // $table->string('summary');
-
             $table->timestamps();
 
             $table->index('is_visible');

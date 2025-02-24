@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
-
             $table->unique(['user_id']);
             $table->index(['user_id']);
         });

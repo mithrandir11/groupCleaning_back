@@ -10,21 +10,4 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
-    // public function getNameAttribute($name)
-    // {
-    //     switch ($name) {
-    //         case 'admin':
-    //             return 'ادمین';
-    //         case 'operator':
-    //             return 'اپراتور';
-    //         case 'customer':
-    //             return 'مشتری';
-    //         case 'worker':
-    //             return 'نیروی کار';
-    //         default:
-    //             return $name;
-    //     }
-    //     return $status;
-    // }
 }
